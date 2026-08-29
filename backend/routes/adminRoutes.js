@@ -3,6 +3,7 @@ const router = express.Router();
 const { protect, requireRole } = require('../middleware/auth');
 const {
   getAllRequests,
+  getRequestById,
   getSummary,
   approveRequest,
   rejectRequest,
@@ -12,9 +13,11 @@ const {
 router.use(protect, requireRole('admin', 'faculty'));
 
 router.get('/requests', getAllRequests);
+router.get('/requests/:id', getRequestById);
 router.get('/summary', getSummary);
 router.patch('/requests/:id/review', markUnderReview);
 router.patch('/requests/:id/approve', approveRequest);
 router.patch('/requests/:id/reject', rejectRequest);
 
 module.exports = router;
+

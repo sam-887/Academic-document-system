@@ -1,6 +1,7 @@
 const Request = require('../models/Request');
 const Student = require('../models/Student');
 const { nextRequestId } = require('../utils/generateId');
+const Notification = require('../models/Notification');
 
 exports.createRequest = async (req, res, next) => {
   try {
@@ -29,7 +30,26 @@ exports.createRequest = async (req, res, next) => {
       status: 'PENDING',
     });
 
-    res.status(201).json(request);
+    try {
+      const User = require('../models/User');
+      const admins = await User.find({ role: { $in: ['admin', 'faculty'] } }).select('_id');
+      if (admins.length) {
+        await Notification.insertMany(admins.map((admin) => ({
+          userId: admin._id,
+          title: 'New document request',
+          message: 'New request ' + request.requestId + ' - ' + request.documentType,
+          type: 'request',
+          requestId: request._id
+        })));
+      }
+    } catch (notificationError) {
+      console.error('Admin notification failed:', notificationError.message);
+    }
+
+    res.status(201).json({
+      requestId: request.requestId,
+      request
+    });
   } catch (err) {
     next(err);
   }
@@ -107,3 +127,7 @@ exports.getDocumentForRequest = async (req, res, next) => {
     next(err);
   }
 };
+
+
+
+

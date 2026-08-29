@@ -1,58 +1,128 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import api from '../../api/axios';
-import StatusBadge from '../../components/StatusBadge';
+import React, { useEffect, useState } from "react";
+import api from "../../api/axios";
+import StatusBadge from "../../components/StatusBadge";
 
 export default function Dashboard() {
-  const [summary, setSummary] = useState(null);
+  const [summary, setSummary] = useState({
+    total: 0,
+    pending: 0,
+    approved: 0,
+    rejected: 0
+  });
+
+  const [recent, setRecent] = useState([]);
 
   useEffect(() => {
-    api.get('/requests/dashboard/summary').then((res) => setSummary(res.data));
+    api.get("/requests/dashboard/summary")
+      .then((res) => {
+        setSummary(res.data || {});
+        setRecent((res.data?.recent || []).slice(0, 3));
+      })
+      .catch((err) => {
+        console.error("Failed to load dashboard:", err);
+      });
   }, []);
 
-  if (!summary) return <div className="p-8 text-slate-500">Loading...</div>;
-
-  const cards = [
-    { label: 'Total', value: summary.total, color: 'bg-slate-100 text-slate-800' },
-    { label: 'Pending', value: summary.pending, color: 'bg-amber-100 text-amber-800' },
-    { label: 'Approved / Completed', value: summary.approved, color: 'bg-emerald-100 text-emerald-800' },
-    { label: 'Rejected', value: summary.rejected, color: 'bg-red-100 text-red-800' },
-  ];
-
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Student Dashboard</h1>
-        <Link to="/student/request" className="bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium px-4 py-2 rounded-md">
-          + New Request
-        </Link>
+    <div className="max-w-6xl mx-auto p-6">
+
+      <h1 className="text-3xl font-bold text-slate-800 mb-2">
+        Student Dashboard
+      </h1>
+
+      <p className="text-slate-500 mb-8">
+        Welcome back. Track your academic document requests here.
+      </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+
+        <div className="bg-slate-100 rounded-2xl p-5">
+          <p className="text-3xl font-bold text-slate-800">
+            {summary.total || 0}
+          </p>
+          <p className="text-sm text-slate-600 mt-1">
+            Total
+          </p>
+        </div>
+
+        <div className="bg-amber-100 rounded-2xl p-5">
+          <p className="text-3xl font-bold text-amber-700">
+            {summary.pending || 0}
+          </p>
+          <p className="text-sm text-amber-700 mt-1">
+            Pending
+          </p>
+        </div>
+
+        <div className="bg-emerald-100 rounded-2xl p-5">
+          <p className="text-3xl font-bold text-emerald-700">
+            {summary.approved || 0}
+          </p>
+          <p className="text-sm text-emerald-700 mt-1">
+            Approved / Completed
+          </p>
+        </div>
+
+        <div className="bg-red-100 rounded-2xl p-5">
+          <p className="text-3xl font-bold text-red-700">
+            {summary.rejected || 0}
+          </p>
+          <p className="text-sm text-red-700 mt-1">
+            Rejected
+          </p>
+        </div>
+
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        {cards.map((c) => (
-          <div key={c.label} className={`rounded-xl p-4 ${c.color}`}>
-            <p className="text-2xl font-bold">{c.value}</p>
-            <p className="text-sm">{c.label}</p>
+      <div className="bg-white border rounded-2xl p-6">
+
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-xl font-semibold text-slate-800">
+            Recent Requests
+          </h2>
+
+          <a
+            href="/student/requests"
+            className="text-sm text-blue-600 hover:underline"
+          >
+            View All
+          </a>
+        </div>
+
+        {recent.length === 0 ? (
+          <p className="text-slate-500">
+            No recent requests.
+          </p>
+        ) : (
+          <div className="space-y-3">
+            {recent.map((request) => (
+              <div
+                key={request._id || request.requestId}
+                className="flex items-center justify-between border-b last:border-b-0 pb-3 last:pb-0"
+              >
+                <div>
+                  <p className="font-medium text-slate-800">
+                    {request.documentType || "Document Request"}
+                  </p>
+                  <p className="text-xs text-slate-400">
+                    {request.requestId || request._id}
+                  </p>
+                </div>
+
+                <StatusBadge status={request.status} />
+              </div>
+            ))}
           </div>
-        ))}
+        )}
+
       </div>
 
-      <h2 className="font-semibold mb-3">Recent Requests</h2>
-      <div className="bg-white border border-slate-200 rounded-xl divide-y">
-        {summary.recent.length === 0 && <p className="p-4 text-sm text-slate-500">No requests yet.</p>}
-        {summary.recent.map((r) => (
-          <Link key={r._id} to={`/student/requests/${r.requestId}`} className="flex items-center justify-between p-4 hover:bg-slate-50">
-            <div>
-              <p className="font-medium text-sm">{r.requestId}</p>
-              <p className="text-xs text-slate-500">{r.documentType}</p>
-            </div>
-            <StatusBadge status={r.status} />
-          </Link>
-        ))}
-      </div>
-      <div className="mt-4">
-        <Link to="/student/requests" className="text-sm text-brand-600">View all requests →</Link>
-      </div>
     </div>
   );
 }
+
+
+
+
+
+

@@ -9,9 +9,17 @@ exports.getAllRequests = async (req, res, next) => {
   try {
     const { status } = req.query;
     const filter = status ? { status } : {};
+
     const requests = await Request.find(filter)
-      .populate({ path: 'student', populate: { path: 'user', select: 'name email' } })
+      .populate({
+        path: 'student',
+        populate: {
+          path: 'user',
+          select: 'name email'
+        }
+      })
       .sort({ createdAt: -1 });
+
     res.json(requests);
   } catch (err) {
     next(err);
@@ -21,17 +29,34 @@ exports.getAllRequests = async (req, res, next) => {
 exports.getSummary = async (req, res, next) => {
   try {
     const [pending, approved, rejected, total] = await Promise.all([
-      Request.countDocuments({ status: { $in: ['PENDING', 'UNDER_REVIEW'] } }),
-      Request.countDocuments({ status: { $in: ['APPROVED', 'GENERATING', 'COMPLETED'] } }),
-      Request.countDocuments({ status: 'REJECTED' }),
-      Request.countDocuments({}),
+      Request.countDocuments({
+        status: { $in: ['PENDING', 'UNDER_REVIEW'] }
+      }),
+      Request.countDocuments({
+        status: { $in: ['APPROVED', 'GENERATING', 'COMPLETED'] }
+      }),
+      Request.countDocuments({
+        status: 'REJECTED'
+      }),
+      Request.countDocuments({})
     ]);
 
     const byType = await Request.aggregate([
-      { $group: { _id: '$documentType', count: { $sum: 1 } } },
+      {
+        $group: {
+          _id: '$documentType',
+          count: { $sum: 1 }
+        }
+      }
     ]);
 
-    res.json({ pending, approved, rejected, total, byType });
+    res.json({
+      pending,
+      approved,
+      rejected,
+      total,
+      byType
+    });
   } catch (err) {
     next(err);
   }
@@ -39,14 +64,24 @@ exports.getSummary = async (req, res, next) => {
 
 exports.approveRequest = async (req, res, next) => {
   try {
-    const request = await Request.findOne({ requestId: req.params.id }).populate({
+    const request = await Request.findOne({
+      requestId: req.params.id
+    }).populate({
       path: 'student',
-      populate: { path: 'user' },
+      populate: {
+        path: 'user'
+      }
     });
-    if (!request) return res.status(404).json({ message: 'Request not found' });
+
+    if (!request) {
+      return res.status(404).json({
+        message: 'Request not found'
+      });
+    }
 
     request.status = 'GENERATING';
     request.reviewedBy = req.user._id;
+
     await request.save();
 
     const documentId = await nextDocumentId();
@@ -57,20 +92,23 @@ exports.approveRequest = async (req, res, next) => {
       requestDoc: request,
       student: request.student,
       user: request.student.user,
-      verificationToken,
+      verificationToken
     });
 
     const document = await Document.create({
       documentId,
       request: request._id,
       filePath: `/generated/${documentId}.pdf`,
-      verificationToken,
+      verificationToken
     });
+request.status = 'COMPLETED';
 
-    request.status = 'COMPLETED';
     await request.save();
 
-    res.json({ request, document });
+    res.json({
+      request,
+      document
+    });
   } catch (err) {
     next(err);
   }
@@ -79,14 +117,27 @@ exports.approveRequest = async (req, res, next) => {
 exports.rejectRequest = async (req, res, next) => {
   try {
     const { reason } = req.body;
-    if (!reason) return res.status(400).json({ message: 'Rejection reason is required' });
 
-    const request = await Request.findOne({ requestId: req.params.id });
-    if (!request) return res.status(404).json({ message: 'Request not found' });
+    if (!reason) {
+      return res.status(400).json({
+        message: 'Rejection reason is required'
+      });
+    }
+
+    const request = await Request.findOne({
+      requestId: req.params.id
+    });
+
+    if (!request) {
+      return res.status(404).json({
+        message: 'Request not found'
+      });
+    }
 
     request.status = 'REJECTED';
     request.remarks = reason;
     request.reviewedBy = req.user._id;
+
     await request.save();
 
     res.json(request);
@@ -97,13 +148,51 @@ exports.rejectRequest = async (req, res, next) => {
 
 exports.markUnderReview = async (req, res, next) => {
   try {
-    const request = await Request.findOne({ requestId: req.params.id });
-    if (!request) return res.status(404).json({ message: 'Request not found' });
+    const request = await Request.findOne({
+      requestId: req.params.id
+    });
+
+    if (!request) {
+      return res.status(404).json({
+        message: 'Request not found'
+      });
+    }
+
     request.status = 'UNDER_REVIEW';
     request.reviewedBy = req.user._id;
+
     await request.save();
+
     res.json(request);
   } catch (err) {
     next(err);
   }
 };
+
+exports.getRequestById = async (req, res, next) => {
+  try {
+    const request = await Request.findOne({
+      requestId: req.params.id
+    }).populate({
+      path: 'student',
+      populate: {
+        path: 'user',
+        select: 'name email'
+      }
+    });
+
+    if (!request) {
+      return res.status(404).json({
+        message: 'Request not found'
+      });
+    }
+
+    res.json(request);
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+
+

@@ -1,30 +1,52 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const location = useLocation();
+
+  const links = [
+    { name: "Dashboard", path: "/dashboard" },
+    { name: "Notifications", path: "/notifications" },
+    { name: "Messages", path: "/messages" },
+    { name: "Analytics", path: "/analytics" }
+  ];
 
   return (
-    <nav className="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between">
-      <Link to="/" className="font-bold text-brand-700 text-lg">EEC Admin Portal</Link>
-      <div className="flex items-center gap-4 text-sm">
-        {user && <Link to="/dashboard" className="hover:text-brand-600">Dashboard</Link>}
-        {user ? (
-          <>
-            <span className="text-slate-500">{user.name} ({user.role})</span>
-            <button
-              onClick={() => { logout(); navigate('/login'); }}
-              className="px-3 py-1.5 rounded-md bg-slate-900 text-white hover:bg-slate-700"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <Link to="/login" className="px-3 py-1.5 rounded-md bg-brand-600 text-white hover:bg-brand-700">Login</Link>
-        )}
+    <nav className="bg-white border-b px-8 py-4 flex items-center justify-between">
+      <div className="text-xl font-bold text-red-800">
+        EEC Admin Portal
+      </div>
+
+      <div className="flex items-center gap-6">
+        {links.map((link) => (
+          <Link
+            key={link.path}
+            to={link.path}
+            className={
+              location.pathname === link.path
+                ? "text-blue-700 font-semibold"
+                : "text-slate-700 hover:text-blue-700"
+            }
+          >
+            {link.name}
+          </Link>
+        ))}
+
+        <span className="text-slate-500">
+          Admin (admin)
+        </span>
+
+        <button
+          className="bg-slate-900 text-white px-4 py-2 rounded-lg"
+          onClick={() => {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+          }}
+        >
+          Logout
+        </button>
       </div>
     </nav>
   );
 }
+

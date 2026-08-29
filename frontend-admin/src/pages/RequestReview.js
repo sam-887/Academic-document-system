@@ -14,7 +14,7 @@ export default function RequestReview() {
   const [doc, setDoc] = useState(null);
 
   const load = async () => {
-    const res = await api.get(`/requests/${id}`);
+    const res = await api.get(`/admin/requests/${id}`);
     setRequest(res.data);
     setDraft(res.data.aiRecommendationDraft || '');
     if (res.data.status === 'COMPLETED') {
@@ -181,3 +181,4 @@ export default function RequestReview() {
     </div>
   );
 }
+
