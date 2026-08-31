@@ -178,9 +178,9 @@ export default function RequestForm() {
                       setFormData({});
                     }}
                     className={[
-                      'group relative rounded-2xl border-2 p-5 text-left transition-all duration-200',
+                      'request-doc-option group relative rounded-2xl border-2 p-5 text-left transition-all duration-200',
                       selected
-                        ? 'border-blue-600 bg-blue-50 shadow-md'
+                        ? 'is-selected border-blue-600 bg-blue-50 shadow-md'
                         : 'border-slate-200 bg-white hover:-translate-y-1 hover:border-blue-300 hover:shadow-md',
                     ].join(' ')}
                   >
@@ -202,11 +202,11 @@ export default function RequestForm() {
                       {type.icon}
                     </div>
 
-                    <h3 className="font-bold text-slate-900">
+                    <h3 className={`font-bold ${selected ? "text-slate-900" : "text-slate-900"}`}>
                       {type.label}
                     </h3>
 
-                    <p className="mt-2 text-xs leading-5 text-slate-500">
+                    <p className={`mt-2 text-xs leading-5 ${selected ? "text-slate-600" : "text-slate-500"}`}>
                       {type.description}
                     </p>
 
@@ -420,3 +420,5 @@ export default function RequestForm() {
     </div>
   );
 }
+
+

@@ -1,3 +1,199 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* =========================================================
+   EEC LIGHT MODE POLISH
+   Dark mode is intentionally untouched.
+   ========================================================= */
+
+body:not(.eec-dark-mode) {
+  color: #172033;
+  background: #f5f7fb;
+}
+
+body:not(.eec-dark-mode) h1,
+body:not(.eec-dark-mode) h2,
+body:not(.eec-dark-mode) h3,
+body:not(.eec-dark-mode) h4,
+body:not(.eec-dark-mode) h5,
+body:not(.eec-dark-mode) h6 {
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-navbar {
+  background: rgba(255,255,255,.94) !important;
+  color: #172033 !important;
+  border-color: #e5e9f2 !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-link {
+  color: #64748b !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-link:hover {
+  color: #172033 !important;
+  background: #f1f5f9 !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-link.active {
+  color: #b1123f !important;
+  background: #fff1f4 !important;
+  border-color: #f3c4d1 !important;
+}
+
+body:not(.eec-dark-mode) .text-white {
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) .text-slate-100,
+body:not(.eec-dark-mode) .text-slate-200,
+body:not(.eec-dark-mode) .text-slate-300,
+body:not(.eec-dark-mode) .text-gray-100,
+body:not(.eec-dark-mode) .text-gray-200,
+body:not(.eec-dark-mode) .text-gray-300 {
+  color: #475569 !important;
+}
+
+body:not(.eec-dark-mode) .text-slate-400,
+body:not(.eec-dark-mode) .text-slate-500,
+body:not(.eec-dark-mode) .text-gray-400,
+body:not(.eec-dark-mode) .text-gray-500 {
+  color: #64748b !important;
+}
+
+body:not(.eec-dark-mode) input,
+body:not(.eec-dark-mode) textarea,
+body:not(.eec-dark-mode) select {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #dbe1ea !important;
+}
+
+body:not(.eec-dark-mode) input::placeholder,
+body:not(.eec-dark-mode) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+body:not(.eec-dark-mode) th {
+  color: #64748b !important;
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) td {
+  color: #334155 !important;
+  border-color: #e5e7eb !important;
+}
+
+body:not(.eec-dark-mode) .bg-green-100,
+body:not(.eec-dark-mode) .bg-emerald-100 {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+}
+
+body:not(.eec-dark-mode) .bg-amber-100 {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+}
+
+body:not(.eec-dark-mode) .bg-red-100 {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+}
+/* =========================================================
+   EEC LIGHT MODE POLISH
+   Dark mode is intentionally untouched.
+   ========================================================= */
+
+body:not(.eec-dark-mode) {
+  color: #172033;
+  background: #f5f7fb;
+}
+
+body:not(.eec-dark-mode) h1,
+body:not(.eec-dark-mode) h2,
+body:not(.eec-dark-mode) h3,
+body:not(.eec-dark-mode) h4,
+body:not(.eec-dark-mode) h5,
+body:not(.eec-dark-mode) h6 {
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-navbar {
+  background: rgba(255,255,255,.94) !important;
+  color: #172033 !important;
+  border-color: #e5e9f2 !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-link {
+  color: #64748b !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-link:hover {
+  color: #172033 !important;
+  background: #f1f5f9 !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-link.active {
+  color: #b1123f !important;
+  background: #fff1f4 !important;
+  border-color: #f3c4d1 !important;
+}
+
+body:not(.eec-dark-mode) .text-white {
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) .text-slate-100,
+body:not(.eec-dark-mode) .text-slate-200,
+body:not(.eec-dark-mode) .text-slate-300,
+body:not(.eec-dark-mode) .text-gray-100,
+body:not(.eec-dark-mode) .text-gray-200,
+body:not(.eec-dark-mode) .text-gray-300 {
+  color: #475569 !important;
+}
+
+body:not(.eec-dark-mode) .text-slate-400,
+body:not(.eec-dark-mode) .text-slate-500,
+body:not(.eec-dark-mode) .text-gray-400,
+body:not(.eec-dark-mode) .text-gray-500 {
+  color: #64748b !important;
+}
+
+body:not(.eec-dark-mode) input,
+body:not(.eec-dark-mode) textarea,
+body:not(.eec-dark-mode) select {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #dbe1ea !important;
+}
+
+body:not(.eec-dark-mode) input::placeholder,
+body:not(.eec-dark-mode) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+body:not(.eec-dark-mode) th {
+  color: #64748b !important;
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) td {
+  color: #334155 !important;
+  border-color: #e5e7eb !important;
+}
+
+body:not(.eec-dark-mode) .bg-green-100,
+body:not(.eec-dark-mode) .bg-emerald-100 {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+}
+
+body:not(.eec-dark-mode) .bg-amber-100 {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+}
+
+body:not(.eec-dark-mode) .bg-red-100 {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+}

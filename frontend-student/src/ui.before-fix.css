@@ -1,0 +1,608 @@
+﻿/* ================================
+   EEC STUDENT PORTAL - UI UPGRADE
+   UI ONLY - NO FUNCTIONAL CHANGES
+================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f6f8fc;
+  color: #172033;
+}
+
+/* Navbar */
+
+nav {
+  background: rgba(255,255,255,.94) !important;
+  border-bottom: 1px solid #e8ecf3 !important;
+  box-shadow: 0 2px 12px rgba(15,23,42,.04) !important;
+  backdrop-filter: blur(14px);
+}
+
+nav a {
+  transition: all .2s ease !important;
+}
+
+nav a:hover {
+  color: #2563eb !important;
+}
+
+/* Main page */
+
+main {
+  min-height: calc(100vh - 70px);
+}
+
+.max-w-6xl,
+.max-w-5xl {
+  position: relative;
+}
+
+/* Cards */
+
+.bg-white {
+  border-color: #e7ebf2 !important;
+}
+
+.rounded-2xl {
+  border-radius: 18px !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 8px 30px rgba(15,23,42,.055) !important;
+}
+
+/* Buttons */
+
+button,
+a {
+  transition: all .2s ease;
+}
+
+button:hover,
+.bg-blue-600:hover {
+  transform: translateY(-1px);
+}
+
+/* Inputs */
+
+input,
+select,
+textarea {
+  border-color: #dfe4ec !important;
+  background: #fff !important;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59,130,246,.12) !important;
+  outline: none !important;
+}
+
+/* Dashboard cards */
+
+.grid > div {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.grid > div:hover {
+  transform: translateY(-2px);
+}
+
+/* Status */
+
+.bg-green-100 {
+  background: #ecfdf3 !important;
+}
+
+.text-green-700 {
+  color: #15803d !important;
+}
+
+/* Login page */
+
+.min-h-screen {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(59,130,246,.10), transparent 28%),
+    radial-gradient(circle at 85% 80%, rgba(99,102,241,.08), transparent 30%),
+    #f7f9fc !important;
+}
+
+/* File upload */
+
+.border-dashed {
+  border-color: #cfd7e6 !important;
+  background: #fafcff;
+  transition: all .2s ease;
+}
+
+.border-dashed:hover {
+  border-color: #60a5fa !important;
+  background: #f5f9ff;
+}
+
+/* Headings */
+
+h1 {
+  letter-spacing: -.025em;
+}
+
+h2,
+h3 {
+  letter-spacing: -.015em;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  nav {
+    position: relative !important;
+  }
+
+  .p-6 {
+    padding: 1rem !important;
+  }
+
+  h1 {
+    font-size: 1.7rem !important;
+  }
+}
+
+/* =========================================
+   PROFESSIONAL DASHBOARD ENHANCEMENTS
+   Keeps existing UI animations
+   ========================================= */
+
+body {
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255, 166, 92, 0.08), transparent 28%),
+    radial-gradient(circle at 85% 20%, rgba(87, 126, 255, 0.07), transparent 30%),
+    #eef3f8;
+}
+
+/* Professional cards */
+.bg-white {
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-color: rgba(220, 228, 238, 0.85) !important;
+}
+
+/* Keep movement alive */
+.bg-white:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 18px 45px rgba(25, 42, 70, 0.10) !important;
+}
+
+/* Smooth interactive elements */
+button,
+a,
+input,
+select,
+textarea,
+.bg-white {
+  transition:
+    transform 0.25s cubic-bezier(.2,.8,.2,1),
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+/* Primary actions */
+.bg-blue-600 {
+  background: linear-gradient(
+    135deg,
+    #ff7438 0%,
+    #ffad4d 100%
+  ) !important;
+
+  box-shadow:
+    0 8px 20px rgba(255, 122, 61, 0.20);
+}
+
+.bg-blue-600:hover {
+  transform: translateY(-2px) scale(1.01);
+
+  box-shadow:
+    0 12px 28px rgba(255, 122, 61, 0.28);
+}
+
+/* Sidebar / navigation feel */
+nav {
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* Navigation links */
+nav a {
+  position: relative;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+nav a:hover {
+  transform: translateX(3px);
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+  background: rgba(255,255,255,0.82) !important;
+  border-color: #e2e8f0 !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  transform: translateY(-1px);
+  border-color: #ff9a5b !important;
+  box-shadow:
+    0 0 0 4px rgba(255, 139, 73, 0.11),
+    0 8px 20px rgba(30, 50, 80, 0.06) !important;
+}
+
+/* Dashed upload area */
+.border-dashed {
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.border-dashed:hover {
+  border-color: #ff9858 !important;
+  background: rgba(255, 247, 240, 0.8) !important;
+  transform: translateY(-2px);
+}
+
+/* Status badges */
+.bg-green-100 {
+  box-shadow: 0 4px 12px rgba(34,197,94,0.10);
+}
+
+/* Headings */
+h1,
+h2 {
+  letter-spacing: -0.035em;
+}
+
+/* Page entrance animation */
+.max-w-6xl,
+.max-w-5xl {
+  animation: dashboardEnter 0.55s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes dashboardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card entrance */
+.grid > div {
+  animation: cardEnter 0.5s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.grid > div:nth-child(1) { animation-delay: .03s; }
+.grid > div:nth-child(2) { animation-delay: .07s; }
+.grid > div:nth-child(3) { animation-delay: .11s; }
+.grid > div:nth-child(4) { animation-delay: .15s; }
+.grid > div:nth-child(5) { animation-delay: .19s; }
+.grid > div:nth-child(6) { animation-delay: .23s; }
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+
+/* ==========================================
+   EEC STUDENT PORTAL - SAFE UI ENHANCEMENT
+   ========================================== */
+
+:root {
+  --eec-navy: #10272b;
+  --eec-orange: #f47b45;
+  --eec-amber: #f6b44b;
+  --eec-blue: #5277e8;
+  --eec-purple: #8968d8;
+  --eec-green: #35ad78;
+  --eec-bg: #eef3f8;
+  --eec-text: #172033;
+  --eec-muted: #718096;
+}
+
+/* Background only */
+body {
+  background:
+    radial-gradient(
+      circle at 8% 5%,
+      rgba(244,123,69,.10),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 92% 8%,
+      rgba(82,119,232,.09),
+      transparent 26%
+    ),
+    var(--eec-bg);
+  color: var(--eec-text);
+}
+
+/* Navigation */
+nav {
+  background: linear-gradient(
+    180deg,
+    #10272b 0%,
+    #142f34 100%
+  );
+  box-shadow: 8px 0 30px rgba(16,39,43,.12);
+}
+
+/* Navigation hover - don't change its structure */
+nav a {
+  transition:
+    background .25s ease,
+    transform .25s ease,
+    color .25s ease;
+}
+
+nav a:hover {
+  background: rgba(255,255,255,.065);
+  transform: translateX(3px);
+}
+
+/* Cards - only visual treatment */
+main .bg-white {
+  background: rgba(255,255,255,.94);
+  border-color: rgba(218,226,237,.8);
+  box-shadow:
+    0 8px 25px rgba(25,43,67,.055);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Card hover */
+main .bg-white:hover {
+  box-shadow:
+    0 16px 38px rgba(25,43,67,.09);
+}
+
+/* Keep original Tailwind colours intact.
+   Only add gentle depth to existing blue buttons. */
+
+main button.bg-blue-600,
+main a.bg-blue-600 {
+  box-shadow:
+    0 7px 18px rgba(37,99,235,.16);
+}
+
+main button.bg-blue-600:hover,
+main a.bg-blue-600:hover {
+  box-shadow:
+    0 11px 25px rgba(37,99,235,.23);
+}
+
+/* Inputs */
+main input,
+main select,
+main textarea {
+  background-color: rgba(255,255,255,.88);
+  border-color: #dfe6ef;
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease;
+}
+
+main input:focus,
+main select:focus,
+main textarea:focus {
+  border-color: #f0a06c;
+  box-shadow:
+    0 0 0 4px rgba(244,123,69,.09);
+}
+
+/* Upload area */
+main .border-dashed {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(248,250,255,.88),
+      rgba(255,249,244,.88)
+    );
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+main .border-dashed:hover {
+  background:
+    linear-gradient(
+      145deg,
+      #f4f7ff,
+      #fff8f2
+    );
+  border-color: #f2a06c;
+  box-shadow:
+    0 10px 28px rgba(244,123,69,.07);
+}
+
+/* Soft accent surfaces */
+main .bg-blue-50 {
+  background-color: #eef4ff;
+}
+
+main .bg-green-100 {
+  background-color: #eaf8f1;
+}
+
+main .bg-yellow-100 {
+  background-color: #fff7df;
+}
+
+main .bg-red-100 {
+  background-color: #fff0f2;
+}
+
+/* Typography */
+main h1 {
+  color: var(--eec-text);
+  letter-spacing: -.035em;
+}
+
+main h2 {
+  color: #202b3d;
+  letter-spacing: -.025em;
+}
+
+main h3 {
+  color: #263247;
+}
+
+/* Page entrance - doesn't replace existing animation */
+@keyframes eecPageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  animation:
+    eecPageEnter .45s cubic-bezier(.2,.8,.2,1);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  main,
+  main *,
+  nav,
+  nav * {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+
+/* ==========================================
+   EEC GLOBAL BACKGROUND - STUDENT PORTAL
+   ========================================== */
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+  background: #eef3f8 !important;
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at 8% 8%,
+      rgba(244,123,69,.055),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 8%,
+      rgba(82,119,232,.065),
+      transparent 28%
+    ),
+    #eef3f8 !important;
+}
+
+/* React application shell */
+#root {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 8% 8%,
+      rgba(244,123,69,.055),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 8%,
+      rgba(82,119,232,.065),
+      transparent 28%
+    ),
+    #eef3f8 !important;
+}
+
+/* Page-level background containers */
+#root main,
+#root main > div,
+#root main > section {
+  background-color: transparent !important;
+}
+
+/* Common Tailwind page backgrounds */
+#root main .bg-slate-50,
+#root main .bg-gray-50,
+#root main .bg-zinc-50,
+#root main .bg-neutral-50 {
+  background-color: transparent !important;
+}
+
+/* Keep actual cards white */
+#root main .bg-white {
+  background-color: rgba(255,255,255,.94) !important;
+}
+
+/* Keep navigation visually separate */
+#root nav {
+  background: #10272b;
+}
+
+/* Continuous page height */
+#root main {
+  min-height: calc(100vh - 70px);
+}
+
+/* Remove accidental horizontal background boundaries */
+#root main > div:first-child {
+  background-color: transparent !important;
+}
+

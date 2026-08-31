@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = sessionStorage.getItem(TOKEN_KEY);
 
     if (!token) {
       setLoading(false);
@@ -26,11 +26,11 @@ export function AuthProvider({ children }) {
         if (res.data.user?.role === 'student') {
           setUser(res.data.user);
         } else {
-          localStorage.removeItem(TOKEN_KEY);
+          sessionStorage.removeItem(TOKEN_KEY);
         }
       })
       .catch(() => {
-        localStorage.removeItem(TOKEN_KEY);
+        sessionStorage.removeItem(TOKEN_KEY);
         setUser(null);
       })
       .finally(() => setLoading(false));
@@ -52,7 +52,7 @@ export function AuthProvider({ children }) {
       };
     }
 
-    localStorage.setItem(TOKEN_KEY, res.data.token);
+    sessionStorage.setItem(TOKEN_KEY, res.data.token);
     setUser(res.data.user);
 
     return res.data.user;
@@ -71,14 +71,14 @@ export function AuthProvider({ children }) {
       };
     }
 
-    localStorage.setItem(TOKEN_KEY, res.data.token);
+    sessionStorage.setItem(TOKEN_KEY, res.data.token);
     setUser(res.data.user);
 
     return res.data.user;
   };
 
   const logout = () => {
-    localStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(TOKEN_KEY);
     setUser(null);
   };
 
@@ -94,3 +94,4 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   return useContext(AuthContext);
 }
+
