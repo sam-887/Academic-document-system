@@ -1,0 +1,323 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* =========================================================
+   EEC LIGHT MODE POLISH
+   Dark mode is intentionally untouched.
+   ========================================================= */
+
+body:not(.eec-dark-mode) {
+  color: #172033;
+  background: #f5f7fb;
+}
+
+/* Main text */
+body:not(.eec-dark-mode) p,
+body:not(.eec-dark-mode) span,
+body:not(.eec-dark-mode) label,
+body:not(.eec-dark-mode) small {
+  color: inherit;
+}
+
+/* Headings */
+body:not(.eec-dark-mode) h1,
+body:not(.eec-dark-mode) h2,
+body:not(.eec-dark-mode) h3,
+body:not(.eec-dark-mode) h4,
+body:not(.eec-dark-mode) h5,
+body:not(.eec-dark-mode) h6 {
+  color: #172033 !important;
+}
+
+/* Navbar */
+body:not(.eec-dark-mode) .student-pro-navbar,
+body:not(.eec-dark-mode) .admin-pro-navbar {
+  background: rgba(255,255,255,.94) !important;
+  color: #172033 !important;
+  border-color: #e5e9f2 !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-link,
+body:not(.eec-dark-mode) .admin-pro-link {
+  color: #64748b !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-link:hover,
+body:not(.eec-dark-mode) .admin-pro-link:hover {
+  color: #172033 !important;
+  background: #f1f5f9 !important;
+}
+
+/* Selected navigation */
+body:not(.eec-dark-mode) .student-pro-link.active,
+body:not(.eec-dark-mode) .admin-pro-link.active {
+  color: #b1123f !important;
+  background: #fff1f4 !important;
+  border-color: #f3c4d1 !important;
+}
+
+/* Cards / sections */
+body:not(.eec-dark-mode) .card,
+body:not(.eec-dark-mode) .glass-card,
+body:not(.eec-dark-mode) .panel,
+body:not(.eec-dark-mode) .section-card,
+body:not(.eec-dark-mode) .content-card {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #e4e8f0 !important;
+}
+
+/* Common Tailwind-style dark text accidentally remaining */
+body:not(.eec-dark-mode) .text-white {
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) .text-slate-100,
+body:not(.eec-dark-mode) .text-slate-200,
+body:not(.eec-dark-mode) .text-slate-300,
+body:not(.eec-dark-mode) .text-gray-100,
+body:not(.eec-dark-mode) .text-gray-200,
+body:not(.eec-dark-mode) .text-gray-300 {
+  color: #475569 !important;
+}
+
+/* Secondary text */
+body:not(.eec-dark-mode) .text-slate-400,
+body:not(.eec-dark-mode) .text-slate-500,
+body:not(.eec-dark-mode) .text-gray-400,
+body:not(.eec-dark-mode) .text-gray-500 {
+  color: #64748b !important;
+}
+
+/* Inputs */
+body:not(.eec-dark-mode) input,
+body:not(.eec-dark-mode) textarea,
+body:not(.eec-dark-mode) select {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #dbe1ea !important;
+}
+
+body:not(.eec-dark-mode) input::placeholder,
+body:not(.eec-dark-mode) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Tables */
+body:not(.eec-dark-mode) th {
+  color: #64748b !important;
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) td {
+  color: #334155 !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Profile dropdown */
+body:not(.eec-dark-mode) .student-pro-settings,
+body:not(.eec-dark-mode) .admin-pro-settings {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 20px 50px rgba(15,23,42,.16) !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-settings strong,
+body:not(.eec-dark-mode) .admin-pro-settings strong {
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-settings small,
+body:not(.eec-dark-mode) .admin-pro-settings small {
+  color: #64748b !important;
+}
+
+/* Keep status colours strong in light mode */
+body:not(.eec-dark-mode) .bg-green-100,
+body:not(.eec-dark-mode) .bg-emerald-100 {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+}
+
+body:not(.eec-dark-mode) .bg-amber-100 {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+}
+
+body:not(.eec-dark-mode) .bg-red-100 {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+}
+
+/* Buttons remain readable */
+body:not(.eec-dark-mode) button {
+  color: inherit;
+}
+
+/* Links */
+body:not(.eec-dark-mode) a {
+  color: inherit;
+}
+
+/* Do NOT alter anything when dark mode is active */
+/* =========================================================
+   EEC LIGHT MODE POLISH
+   Dark mode is intentionally untouched.
+   ========================================================= */
+
+body:not(.eec-dark-mode) {
+  color: #172033;
+  background: #f5f7fb;
+}
+
+/* Main text */
+body:not(.eec-dark-mode) p,
+body:not(.eec-dark-mode) span,
+body:not(.eec-dark-mode) label,
+body:not(.eec-dark-mode) small {
+  color: inherit;
+}
+
+/* Headings */
+body:not(.eec-dark-mode) h1,
+body:not(.eec-dark-mode) h2,
+body:not(.eec-dark-mode) h3,
+body:not(.eec-dark-mode) h4,
+body:not(.eec-dark-mode) h5,
+body:not(.eec-dark-mode) h6 {
+  color: #172033 !important;
+}
+
+/* Navbar */
+body:not(.eec-dark-mode) .student-pro-navbar,
+body:not(.eec-dark-mode) .admin-pro-navbar {
+  background: rgba(255,255,255,.94) !important;
+  color: #172033 !important;
+  border-color: #e5e9f2 !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-link,
+body:not(.eec-dark-mode) .admin-pro-link {
+  color: #64748b !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-link:hover,
+body:not(.eec-dark-mode) .admin-pro-link:hover {
+  color: #172033 !important;
+  background: #f1f5f9 !important;
+}
+
+/* Selected navigation */
+body:not(.eec-dark-mode) .student-pro-link.active,
+body:not(.eec-dark-mode) .admin-pro-link.active {
+  color: #b1123f !important;
+  background: #fff1f4 !important;
+  border-color: #f3c4d1 !important;
+}
+
+/* Cards / sections */
+body:not(.eec-dark-mode) .card,
+body:not(.eec-dark-mode) .glass-card,
+body:not(.eec-dark-mode) .panel,
+body:not(.eec-dark-mode) .section-card,
+body:not(.eec-dark-mode) .content-card {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #e4e8f0 !important;
+}
+
+/* Common Tailwind-style dark text accidentally remaining */
+body:not(.eec-dark-mode) .text-white {
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) .text-slate-100,
+body:not(.eec-dark-mode) .text-slate-200,
+body:not(.eec-dark-mode) .text-slate-300,
+body:not(.eec-dark-mode) .text-gray-100,
+body:not(.eec-dark-mode) .text-gray-200,
+body:not(.eec-dark-mode) .text-gray-300 {
+  color: #475569 !important;
+}
+
+/* Secondary text */
+body:not(.eec-dark-mode) .text-slate-400,
+body:not(.eec-dark-mode) .text-slate-500,
+body:not(.eec-dark-mode) .text-gray-400,
+body:not(.eec-dark-mode) .text-gray-500 {
+  color: #64748b !important;
+}
+
+/* Inputs */
+body:not(.eec-dark-mode) input,
+body:not(.eec-dark-mode) textarea,
+body:not(.eec-dark-mode) select {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #dbe1ea !important;
+}
+
+body:not(.eec-dark-mode) input::placeholder,
+body:not(.eec-dark-mode) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Tables */
+body:not(.eec-dark-mode) th {
+  color: #64748b !important;
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) td {
+  color: #334155 !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Profile dropdown */
+body:not(.eec-dark-mode) .student-pro-settings,
+body:not(.eec-dark-mode) .admin-pro-settings {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 20px 50px rgba(15,23,42,.16) !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-settings strong,
+body:not(.eec-dark-mode) .admin-pro-settings strong {
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) .student-pro-settings small,
+body:not(.eec-dark-mode) .admin-pro-settings small {
+  color: #64748b !important;
+}
+
+/* Keep status colours strong in light mode */
+body:not(.eec-dark-mode) .bg-green-100,
+body:not(.eec-dark-mode) .bg-emerald-100 {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+}
+
+body:not(.eec-dark-mode) .bg-amber-100 {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+}
+
+body:not(.eec-dark-mode) .bg-red-100 {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+}
+
+/* Buttons remain readable */
+body:not(.eec-dark-mode) button {
+  color: inherit;
+}
+
+/* Links */
+body:not(.eec-dark-mode) a {
+  color: inherit;
+}
+
+/* Do NOT alter anything when dark mode is active */

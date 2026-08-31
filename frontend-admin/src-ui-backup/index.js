@@ -1,7 +1,5 @@
 ﻿import './ui.css';
-import './ui.css';
 import React from 'react';
-import './ui.css';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -12,7 +10,4 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-
-import './ui.css';
 

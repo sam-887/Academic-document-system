@@ -1,0 +1,225 @@
+﻿import React, { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import {
+  Settings,
+  Moon,
+  Sun,
+  LogOut,
+  ChevronDown,
+  LayoutDashboard,
+  Bell,
+  MessageSquare,
+  BarChart3
+} from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+
+export default function Navbar() {
+  const location = useLocation();
+  const { user, logout } = useAuth();
+
+  const [open, setOpen] = useState(false);
+  const [dark, setDark] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
+
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  }, [dark]);
+
+  useEffect(() => {
+    const close = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, []);
+
+  const links = [
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+      icon: LayoutDashboard
+    },
+    {
+      name: "Notifications",
+      path: "/notifications",
+      icon: Bell
+    },
+    {
+      name: "Messages",
+      path: "/messages",
+      icon: MessageSquare
+    },
+    {
+      name: "Analytics",
+      path: "/analytics",
+      icon: BarChart3
+    }
+  ];
+
+  const name = user?.name || user?.email || "Admin";
+  const role = user?.role || "admin";
+  const initial = name.charAt(0).toUpperCase();
+
+  return (
+    <nav className="sticky top-0 z-50 border-b border-white/60 bg-white/70 backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/70">
+
+      <div className="px-8 py-3">
+
+        <div className="flex items-center justify-between gap-6">
+
+          <Link
+            to="/dashboard"
+            className="text-xl font-bold text-red-800 dark:text-red-300 whitespace-nowrap"
+          >
+            EEC Admin Portal
+          </Link>
+
+          <div className="flex items-center gap-2">
+
+            {links.map(({ name: label, path, icon: Icon }) => (
+              <Link
+                key={path}
+                to={path}
+                className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
+                  location.pathname === path
+                    ? "bg-red-100/80 text-red-700 shadow-sm dark:bg-red-500/20 dark:text-red-300"
+                    : "text-slate-600 hover:bg-white/70 hover:text-red-700 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-red-300"
+                }`}
+              >
+                <Icon size={16} />
+                {label}
+              </Link>
+            ))}
+
+            <div
+              ref={menuRef}
+              className="relative ml-3 pl-3 border-l border-slate-200/70 dark:border-white/10"
+            >
+
+              <button
+                onClick={() => setOpen((v) => !v)}
+                className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-white/70 dark:hover:bg-white/10 transition-all duration-300"
+              >
+
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-red-500 to-rose-700 text-white flex items-center justify-center font-semibold shadow-md">
+                  {initial}
+                </div>
+
+                <div className="hidden lg:block text-left">
+                  <div className="text-sm font-semibold text-slate-800 dark:text-white max-w-[120px] truncate">
+                    {name}
+                  </div>
+
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 capitalize">
+                    {role}
+                  </div>
+                </div>
+
+                <ChevronDown
+                  size={15}
+                  className={`text-slate-500 transition-transform duration-300 ${
+                    open ? "rotate-180" : ""
+                  }`}
+                />
+
+              </button>
+
+              {open && (
+                <div className="absolute right-0 top-[52px] w-72 rounded-2xl border border-white/70 dark:border-white/10 bg-white/80 dark:bg-slate-900/85 backdrop-blur-2xl shadow-2xl p-2 animate-[settingsPop_.25s_cubic-bezier(.16,1,.3,1)]">
+
+                  <div className="px-3 py-3 rounded-xl bg-white/60 dark:bg-white/5 mb-2">
+
+                    <div className="flex items-center gap-3">
+
+                      <div className="w-11 h-11 rounded-full bg-gradient-to-br from-red-500 to-rose-700 text-white flex items-center justify-center font-bold">
+                        {initial}
+                      </div>
+
+                      <div className="min-w-0">
+                        <p className="font-semibold text-slate-800 dark:text-white truncate">
+                          {name}
+                        </p>
+
+                        <p className="text-xs text-slate-500 dark:text-slate-400 capitalize">
+                          {role}
+                        </p>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                    Settings
+                  </div>
+
+                  <button
+                    onClick={() => setDark((v) => !v)}
+                    className="w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm text-slate-700 dark:text-slate-200 hover:bg-white/70 dark:hover:bg-white/10 transition"
+                  >
+
+                    <span className="flex items-center gap-3">
+                      {dark ? <Moon size={18} /> : <Sun size={18} />}
+                      Dark mode
+                    </span>
+
+                    <span
+                      className={`w-10 h-5 rounded-full p-0.5 transition ${
+                        dark ? "bg-red-600" : "bg-slate-300"
+                      }`}
+                    >
+                      <span
+                        className={`block w-4 h-4 bg-white rounded-full shadow transition-transform ${
+                          dark ? "translate-x-5" : ""
+                        }`}
+                      />
+                    </span>
+
+                  </button>
+
+                  <button
+                    onClick={logout}
+                    className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 transition"
+                  >
+                    <LogOut size={18} />
+                    Logout
+                  </button>
+
+                </div>
+              )}
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <style>
+        {`
+          @keyframes settingsPop {
+            from {
+              opacity: 0;
+              transform: translateY(-8px) scale(.94);
+              filter: blur(6px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+              filter: blur(0);
+            }
+          }
+        `}
+      </style>
+
+    </nav>
+  );
+}

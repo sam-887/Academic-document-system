@@ -1,0 +1,311 @@
+﻿/* =========================================================
+   EEC ADMIN PORTAL
+   PREMIUM RED / BURGUNDY / PURPLE THEME
+   UI ONLY - NO FUNCTIONALITY CHANGES
+   ========================================================= */
+
+:root {
+  --admin-red: #fe4540;
+  --admin-coral: #f65b52;
+  --admin-burgundy: #c72c41;
+  --admin-deep-red: #b01336;
+  --admin-wine: #510a32;
+  --admin-purple: #2d142c;
+  --admin-soft: #f5e6e8;
+  --admin-white: #ffffff;
+}
+
+/* ---------- PAGE ---------- */
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(254, 69, 64, 0.18),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(81, 10, 50, 0.16),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #f8edef 0%,
+      #eef2f8 48%,
+      #eee8ef 100%
+    ) !important;
+}
+
+/* ---------- MAIN WORKSPACE ---------- */
+
+#root main {
+  min-height: calc(100vh - 70px);
+
+  background:
+    radial-gradient(
+      circle at 5% 10%,
+      rgba(254, 69, 64, 0.10),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 95% 15%,
+      rgba(81, 10, 50, 0.10),
+      transparent 28%
+    ),
+    transparent !important;
+}
+
+/* ---------- CARDS ---------- */
+
+#root .bg-white {
+  background: rgba(255, 255, 255, 0.90) !important;
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(255, 255, 255, 0.80);
+
+  box-shadow:
+    0 12px 35px rgba(45, 20, 44, 0.08),
+    0 3px 10px rgba(81, 10, 50, 0.04);
+}
+
+/* Card animations */
+
+#root main .shadow-sm,
+#root main .rounded-2xl {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+#root main .shadow-sm:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 45px rgba(81, 10, 50, 0.14),
+    0 5px 15px rgba(254, 69, 64, 0.06);
+}
+
+/* ---------- PRIMARY BUTTONS ---------- */
+
+#root .bg-blue-600 {
+  background:
+    linear-gradient(
+      135deg,
+      #fe4540 0%,
+      #c72c41 50%,
+      #b01336 100%
+    ) !important;
+
+  box-shadow:
+    0 8px 22px rgba(199, 44, 65, 0.28);
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
+}
+
+#root .bg-blue-600:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.04);
+
+  box-shadow:
+    0 12px 28px rgba(176, 19, 54, 0.35);
+}
+
+/* ---------- BLUE TEXT BECOMES ADMIN RED ---------- */
+
+#root .text-blue-600 {
+  color: #b01336 !important;
+}
+
+#root .text-blue-700 {
+  color: #8e1738 !important;
+}
+
+/* ---------- RED ADMIN ACTIONS ---------- */
+
+#root .bg-red-600 {
+  background:
+    linear-gradient(
+      135deg,
+      #fe4540,
+      #c72c41
+    ) !important;
+
+  box-shadow:
+    0 8px 20px rgba(199, 44, 65, 0.25);
+}
+
+#root .bg-red-600:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #f83e39,
+      #b01336
+    ) !important;
+}
+
+/* ---------- INPUTS ---------- */
+
+#root input,
+#root textarea,
+#root select {
+  background: rgba(255, 255, 255, 0.86);
+
+  border-color: #e1cbd2;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+#root input:focus,
+#root textarea:focus,
+#root select:focus {
+  background: #ffffff;
+
+  border-color: #c72c41;
+
+  box-shadow:
+    0 0 0 4px rgba(199, 44, 65, 0.10);
+}
+
+/* ---------- NOTIFICATION ---------- */
+
+#root .bg-blue-100 {
+  background: #f8dfe5 !important;
+}
+
+#root .text-blue-700 {
+  color: #a7193b !important;
+}
+
+/* ---------- SUCCESS ---------- */
+
+#root .bg-green-100 {
+  background: #e8f5ed !important;
+}
+
+#root .text-green-700 {
+  color: #16834b !important;
+}
+
+/* ---------- WARNING ---------- */
+
+#root .bg-yellow-100 {
+  background: #fff2df !important;
+}
+
+/* ---------- UPLOAD AREA ---------- */
+
+#root .border-dashed {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.88),
+      rgba(250, 236, 239, 0.82)
+    );
+
+  border-color: #d8b9c3 !important;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+#root .border-dashed:hover {
+  border-color: #c72c41 !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 245, 246, 0.98),
+      rgba(245, 230, 232, 0.96)
+    );
+
+  transform: translateY(-2px);
+}
+
+/* ---------- LINKS ---------- */
+
+#root a {
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* ---------- HEADINGS ---------- */
+
+#root h1 {
+  letter-spacing: -0.03em;
+}
+
+/* ---------- ICON BACKGROUNDS ---------- */
+
+#root .bg-blue-50 {
+  background: #f8e4e7 !important;
+}
+
+#root .text-blue-500 {
+  color: #c72c41 !important;
+}
+
+/* ---------- SOFT WINE ELEMENTS ---------- */
+
+#root .bg-slate-100 {
+  background: #f1e5e9 !important;
+}
+
+#root .text-slate-600 {
+  color: #5e4552 !important;
+}
+
+/* ---------- SMOOTH UI ---------- */
+
+#root * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Keep existing animations working */
+#root [class*="animate-"] {
+  animation-duration: inherit;
+}
+
+/* ---------- SCROLLBAR ---------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5e6e8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    #fe4540,
+    #510a32
+  );
+
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b01336;
+}

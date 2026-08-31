@@ -1,0 +1,5265 @@
+﻿/* =========================================================
+   EEC ADMIN - PREMIUM SMOOTH UI
+   ========================================================= */
+
+:root {
+  --admin-red: #c91f3b;
+  --admin-red-dark: #8f1230;
+  --admin-pink: #f8dce4;
+  --admin-purple: #35152f;
+  --admin-bg: #f7eef2;
+}
+
+/* Page background */
+body {
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(201, 31, 59, 0.10),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(110, 35, 95, 0.10),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #faf5f7 0%,
+      #f5edf1 45%,
+      #f9f4f6 100%
+    );
+}
+
+/* =========================================================
+   PAGE ENTRANCE
+   ========================================================= */
+
+#root {
+  animation: adminPageEnter 0.8s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes adminPageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   REAL CARDS
+   ========================================================= */
+
+[class*="rounded-2xl"][class*="shadow"],
+[class*="rounded-xl"][class*="shadow"] {
+  position: relative !important;
+
+  animation:
+    adminCardIn 0.9s cubic-bezier(.16,1,.3,1) both !important;
+
+  transition:
+    transform 0.45s cubic-bezier(.16,1,.3,1),
+    box-shadow 0.45s cubic-bezier(.16,1,.3,1),
+    border-color 0.3s ease !important;
+
+  will-change: transform;
+}
+
+/* Stagger */
+[class*="rounded-2xl"][class*="shadow"]:nth-child(1) {
+  animation-delay: 0.05s !important;
+}
+
+[class*="rounded-2xl"][class*="shadow"]:nth-child(2) {
+  animation-delay: 0.12s !important;
+}
+
+[class*="rounded-2xl"][class*="shadow"]:nth-child(3) {
+  animation-delay: 0.19s !important;
+}
+
+[class*="rounded-2xl"][class*="shadow"]:nth-child(4) {
+  animation-delay: 0.26s !important;
+}
+
+[class*="rounded-2xl"][class*="shadow"]:nth-child(5) {
+  animation-delay: 0.33s !important;
+}
+
+[class*="rounded-2xl"][class*="shadow"]:nth-child(6) {
+  animation-delay: 0.40s !important;
+}
+
+/* Entrance */
+@keyframes adminCardIn {
+  0% {
+    opacity: 0;
+    transform: translateY(45px) scale(.92) !important;
+    filter: blur(7px);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateY(-7px) scale(1.02) !important;
+    filter: blur(0);
+  }
+
+  75% {
+    transform: translateY(3px) scale(.995) !important;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) !important;
+    filter: blur(0);
+  }
+}
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+[class*="rounded-2xl"][class*="shadow"]:hover,
+[class*="rounded-xl"][class*="shadow"]:hover {
+  transform: translateY(-9px) scale(1.015) !important;
+
+  box-shadow:
+    0 28px 65px rgba(72, 18, 55, .16),
+    0 10px 25px rgba(72, 18, 55, .08) !important;
+}
+
+/* =========================================================
+   CARD LIGHT
+   ========================================================= */
+
+[class*="rounded-2xl"][class*="shadow"]::after,
+[class*="rounded-xl"][class*="shadow"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255,255,255,.38),
+      transparent 35%,
+      transparent 65%,
+      rgba(255,255,255,.16)
+    );
+
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+
+[class*="rounded-2xl"][class*="shadow"]:hover::after,
+[class*="rounded-xl"][class*="shadow"]:hover::after {
+  opacity: 1;
+}
+
+/* =========================================================
+   STAT NUMBERS
+   ========================================================= */
+
+[class*="text-3xl"],
+[class*="text-4xl"] {
+  animation: adminNumber .8s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes adminNumber {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(.75);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+  transition:
+    transform .3s cubic-bezier(.16,1,.3,1),
+    box-shadow .3s ease,
+    background .3s ease !important;
+}
+
+button:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 28px rgba(60,20,50,.15) !important;
+}
+
+button:active {
+  transform: scale(.96) !important;
+}
+
+/* =========================================================
+   LINKS / NAVIGATION
+   ========================================================= */
+
+a {
+  transition:
+    color .25s ease,
+    transform .25s ease,
+    opacity .25s ease !important;
+}
+
+nav a:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   SMOOTH SCROLL
+   ========================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* =========================================================
+   EEC ADMIN - GLASSMORPHISM OVERRIDE
+   Keeps existing animations
+   ========================================================= */
+
+:root {
+  --glass-white: rgba(255, 255, 255, 0.62);
+  --glass-white-soft: rgba(255, 255, 255, 0.42);
+  --glass-border: rgba(255, 255, 255, 0.72);
+  --glass-shadow: rgba(48, 20, 42, 0.10);
+}
+
+/* ---------- GLOBAL BACKGROUND ---------- */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(
+      900px circle at 8% 8%,
+      rgba(255, 110, 135, 0.13),
+      transparent 60%
+    ),
+    radial-gradient(
+      850px circle at 92% 15%,
+      rgba(130, 85, 180, 0.11),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px circle at 50% 100%,
+      rgba(245, 150, 175, 0.10),
+      transparent 60%
+    ),
+    #f4f0f3 !important;
+
+  background-attachment: fixed !important;
+}
+
+/* ---------- REMOVE PATCHY SECTION BACKGROUNDS ---------- */
+
+main,
+main > div,
+main section {
+  background: transparent !important;
+}
+
+/* ---------- NAVBAR GLASS ---------- */
+
+nav,
+header {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(22px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.75) !important;
+
+  box-shadow:
+    0 8px 30px rgba(50, 20, 45, 0.06) !important;
+
+  position: relative;
+  z-index: 20;
+}
+
+/* ---------- ALL MAJOR CARDS ---------- */
+
+[class*="rounded-2xl"][class*="shadow"],
+[class*="rounded-xl"][class*="shadow"] {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.78),
+      rgba(255, 255, 255, 0.52)
+    ) !important;
+
+  backdrop-filter: blur(22px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.78) !important;
+
+  box-shadow:
+    0 15px 45px rgba(55, 25, 50, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+
+  overflow: hidden;
+}
+
+/* ---------- GLASS HOVER ---------- */
+
+[class*="rounded-2xl"][class*="shadow"]:hover,
+[class*="rounded-xl"][class*="shadow"]:hover {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.88),
+      rgba(255, 255, 255, 0.62)
+    ) !important;
+
+  box-shadow:
+    0 28px 65px rgba(55, 25, 50, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+/* ---------- GLASS INNER HIGHLIGHT ---------- */
+
+[class*="rounded-2xl"][class*="shadow"]::after,
+[class*="rounded-xl"][class*="shadow"]::after {
+
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      125deg,
+      rgba(255,255,255,0.34) 0%,
+      transparent 28%,
+      transparent 72%,
+      rgba(255,255,255,0.12) 100%
+    );
+
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.7;
+}
+
+/* ---------- SMALL STAT BLOCKS ---------- */
+
+[class*="bg-red-"],
+[class*="bg-green-"],
+[class*="bg-yellow-"],
+[class*="bg-purple-"],
+[class*="bg-blue-"] {
+
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+}
+
+/* ---------- INPUTS ---------- */
+
+input,
+select,
+textarea {
+
+  background: rgba(255, 255, 255, 0.58) !important;
+
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+
+  border-color: rgba(255, 255, 255, 0.75) !important;
+
+  box-shadow:
+    inset 0 1px 2px rgba(40, 20, 40, 0.025),
+    0 5px 20px rgba(50, 20, 45, 0.035) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+
+  background: rgba(255, 255, 255, 0.76) !important;
+
+  box-shadow:
+    0 0 0 3px rgba(201, 31, 59, 0.08),
+    0 10px 30px rgba(50, 20, 45, 0.07) !important;
+}
+
+/* ---------- BUTTON GLASS ---------- */
+
+button {
+
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+
+  border: 1px solid rgba(255,255,255,0.25) !important;
+}
+
+/* ---------- RED ADMIN ACCENT ---------- */
+
+button.bg-red-600,
+button[class*="bg-red-"] {
+
+  background:
+    linear-gradient(
+      135deg,
+      #d92b49,
+      #b7193c
+    ) !important;
+
+  box-shadow:
+    0 10px 25px rgba(185, 25, 60, 0.20) !important;
+}
+
+button.bg-red-600:hover,
+button[class*="bg-red-"]:hover {
+
+  box-shadow:
+    0 16px 35px rgba(185, 25, 60, 0.28) !important;
+}
+
+/* ---------- STATUS COLORS: SOFT GLASS ---------- */
+
+[class*="bg-green-100"] {
+  background: rgba(34, 197, 94, 0.13) !important;
+}
+
+[class*="bg-red-100"] {
+  background: rgba(239, 68, 68, 0.12) !important;
+}
+
+[class*="bg-yellow-100"] {
+  background: rgba(234, 179, 8, 0.14) !important;
+}
+
+[class*="bg-blue-100"] {
+  background: rgba(59, 130, 246, 0.12) !important;
+}
+
+[class*="bg-purple-100"] {
+  background: rgba(168, 85, 247, 0.12) !important;
+}
+
+/* ---------- SMOOTH PAGE ---------- */
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- SCROLLBAR ---------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(80, 35, 65, 0.20);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(80, 35, 65, 0.32);
+}
+
+/* ---------- KEEP MOTION ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  [class*="rounded-2xl"][class*="shadow"],
+  [class*="rounded-xl"][class*="shadow"] {
+    transform-style: preserve-3d;
+  }
+
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 768px) {
+
+  body {
+    background:
+      radial-gradient(
+        500px circle at 50% 0%,
+        rgba(255, 110, 135, 0.12),
+        transparent 70%
+      ),
+      #f4f0f3 !important;
+  }
+
+  [class*="rounded-2xl"][class*="shadow"],
+  [class*="rounded-xl"][class*="shadow"] {
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+}
+
+
+/* =========================================================
+   EEC ADMIN - GLASS UI VISUAL FIX
+   ========================================================= */
+
+:root {
+  --admin-bg: #f1f3f8;
+  --admin-surface: rgba(255,255,255,.84);
+  --admin-text: #172033;
+  --admin-muted: #64748b;
+  --admin-red: #d61f45;
+}
+
+/* Admin background */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(circle at 5% 10%, rgba(214,31,69,.11), transparent 27%),
+    radial-gradient(circle at 95% 10%, rgba(99,102,241,.09), transparent 28%),
+    radial-gradient(circle at 50% 100%, rgba(214,31,69,.06), transparent 30%),
+    var(--admin-bg) !important;
+
+  color: var(--admin-text);
+}
+
+/* Header */
+
+nav,
+header {
+  position: relative;
+  z-index: 1000;
+
+  background: rgba(255,255,255,.90) !important;
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  border-bottom: 1px solid rgba(15,23,42,.08) !important;
+
+  box-shadow:
+    0 8px 30px rgba(15,23,42,.065) !important;
+}
+
+/* EEC Admin Portal */
+
+nav a:first-child,
+header a:first-child {
+  color: #9f1239 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-weight: 800 !important;
+}
+
+/* Navigation */
+
+nav a,
+header a,
+nav button,
+header button {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+
+nav a:hover,
+header a:hover {
+  color: #be123c !important;
+}
+
+nav a[class*="active"],
+header a[class*="active"],
+nav a[aria-current="page"],
+header a[aria-current="page"] {
+  color: #be123c !important;
+}
+
+/* Cards */
+
+.bg-white,
+[class*="bg-white"] {
+  background: rgba(255,255,255,.84) !important;
+
+  border-color: rgba(15,23,42,.08) !important;
+
+  box-shadow:
+    0 14px 38px rgba(15,23,42,.07),
+    inset 0 1px 0 rgba(255,255,255,.95);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.bg-white:hover,
+[class*="bg-white"]:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 22px 55px rgba(15,23,42,.11),
+    inset 0 1px 0 rgba(255,255,255,1);
+
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease;
+}
+
+/* Text */
+
+.text-slate-800,
+.text-slate-900 {
+  color: #172033 !important;
+}
+
+.text-slate-700 {
+  color: #334155 !important;
+}
+
+.text-slate-600,
+.text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Admin red buttons */
+
+.bg-red-600 {
+  background: linear-gradient(
+    135deg,
+    #e11d48,
+    #be123c
+  ) !important;
+
+  box-shadow:
+    0 9px 25px rgba(225,29,72,.23);
+}
+
+.bg-red-600:hover {
+  background: linear-gradient(
+    135deg,
+    #be123c,
+    #9f1239
+  ) !important;
+
+  box-shadow:
+    0 14px 32px rgba(225,29,72,.30);
+}
+
+/* Settings */
+
+.absolute {
+  z-index: 2000;
+}
+
+[class*="absolute"][class*="right-"] {
+  background: rgba(255,255,255,.95) !important;
+
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
+
+  border: 1px solid rgba(15,23,42,.09) !important;
+
+  box-shadow:
+    0 25px 70px rgba(15,23,42,.16) !important;
+
+  border-radius: 18px !important;
+}
+
+/* Inputs */
+
+input,
+select,
+textarea {
+  background: rgba(255,255,255,.80) !important;
+
+  border-color: rgba(15,23,42,.10) !important;
+
+  color: #172033 !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+
+  border-color: rgba(190,18,60,.40) !important;
+
+  box-shadow:
+    0 0 0 4px rgba(190,18,60,.10) !important;
+}
+
+/* Analytics */
+
+.grid > div {
+  transition:
+    transform .38s cubic-bezier(.2,.8,.2,1),
+    box-shadow .38s ease;
+}
+
+.grid > div:hover {
+  transform: translateY(-4px);
+}
+
+/* Entrance */
+
+@keyframes adminFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main > div {
+  animation:
+    adminFadeUp .55s cubic-bezier(.2,.8,.2,1) both;
+}
+
+/* Buttons */
+
+button {
+  transition:
+    transform .25s cubic-bezier(.2,.8,.2,1),
+    box-shadow .25s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(71,85,105,.25);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(190,18,60,.45);
+}
+
+@media (max-width: 900px) {
+
+  nav,
+  header {
+    min-height: 64px;
+  }
+
+  nav a,
+  header a {
+    font-size: 14px;
+  }
+
+}
+
+/* ===== EEC ADMIN LIGHT GLASS THEME OVERRIDE ===== */
+
+:root {
+  --eec-red: #b3133f;
+  --eec-red-soft: #d62955;
+  --eec-bg: #f5f7fb;
+  --eec-text: #172033;
+  --eec-muted: #68758a;
+  --eec-card: rgba(255,255,255,.82);
+  --eec-border: rgba(255,255,255,.9);
+}
+
+/* Prevent dark global backgrounds */
+html,
+body,
+#root {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(214,41,85,.08), transparent 28%),
+    radial-gradient(circle at 92% 12%, rgba(79,116,255,.09), transparent 30%),
+    linear-gradient(135deg, #f8f9fc 0%, #f2f5fa 50%, #f8f7fa 100%) !important;
+  color: var(--eec-text) !important;
+}
+
+/* Main application surface */
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Keep content readable */
+main,
+section,
+.app,
+.page,
+[class*="page"],
+[class*="content"] {
+  color: var(--eec-text);
+}
+
+/* Glass header/navbar */
+nav,
+header,
+[class*="navbar"],
+[class*="Navbar"],
+[class*="header"],
+[class*="Header"] {
+  background: rgba(255,255,255,.78) !important;
+  backdrop-filter: blur(22px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
+  border-bottom: 1px solid rgba(255,255,255,.95) !important;
+  box-shadow: 0 8px 30px rgba(31,41,55,.06) !important;
+}
+
+/* Navbar links */
+nav a,
+header a,
+nav button,
+header button {
+  color: #596579 !important;
+  transition:
+    color .25s ease,
+    background .3s ease,
+    transform .3s cubic-bezier(.22,1,.36,1),
+    box-shadow .3s ease !important;
+}
+
+nav a:hover,
+header a:hover,
+nav button:hover,
+header button:hover {
+  color: var(--eec-red) !important;
+  transform: translateY(-2px);
+}
+
+/* Active navigation */
+nav a.active,
+header a.active,
+nav [aria-current="page"],
+header [aria-current="page"] {
+  color: var(--eec-red) !important;
+  background: rgba(255,255,255,.92) !important;
+  box-shadow:
+    0 8px 22px rgba(179,19,63,.10),
+    inset 0 0 0 1px rgba(179,19,63,.05) !important;
+}
+
+/* Cards / panels */
+.card,
+[class*="card"],
+[class*="Card"],
+[class*="panel"],
+[class*="Panel"] {
+  background: var(--eec-card) !important;
+  border: 1px solid var(--eec-border) !important;
+  box-shadow:
+    0 12px 35px rgba(31,41,55,.07),
+    0 2px 8px rgba(31,41,55,.035) !important;
+  backdrop-filter: blur(18px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(140%) !important;
+  transition:
+    transform .35s cubic-bezier(.22,1,.36,1),
+    box-shadow .35s ease,
+    border-color .35s ease !important;
+}
+
+/* Smooth card animation */
+.card:hover,
+[class*="card"]:hover,
+[class*="Card"]:hover,
+[class*="panel"]:hover,
+[class*="Panel"]:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 45px rgba(31,41,55,.10),
+    0 5px 15px rgba(179,19,63,.05) !important;
+}
+
+/* Buttons */
+button,
+[role="button"] {
+  transition:
+    transform .25s cubic-bezier(.22,1,.36,1),
+    box-shadow .25s ease,
+    background .25s ease !important;
+}
+
+button:hover,
+[role="button"]:hover {
+  transform: translateY(-2px);
+}
+
+/* Primary red buttons */
+button[class*="bg-red"],
+button[class*="bg-rose"],
+button[class*="bg-pink"],
+.bg-red-600,
+.bg-rose-600,
+.bg-pink-600 {
+  background: linear-gradient(135deg, #b3133f, #d62955) !important;
+  box-shadow: 0 8px 22px rgba(179,19,63,.18) !important;
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+  background: rgba(255,255,255,.82) !important;
+  color: var(--eec-text) !important;
+  border-color: rgba(148,163,184,.25) !important;
+  backdrop-filter: blur(12px);
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    background .25s ease !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  background: rgba(255,255,255,.96) !important;
+  border-color: rgba(179,19,63,.35) !important;
+  box-shadow: 0 0 0 4px rgba(179,19,63,.08) !important;
+  outline: none !important;
+}
+
+/* Dropdown/profile/settings glass */
+[class*="dropdown"],
+[class*="Dropdown"],
+[class*="menu"],
+[class*="Menu"] {
+  background: rgba(255,255,255,.92) !important;
+  backdrop-filter: blur(22px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
+  border: 1px solid rgba(255,255,255,.95) !important;
+  box-shadow: 0 18px 50px rgba(31,41,55,.12) !important;
+}
+
+/* Red accent text */
+.text-red-600,
+.text-rose-600,
+.text-pink-600 {
+  color: var(--eec-red) !important;
+}
+
+/* Smooth page appearance */
+main,
+.page,
+.app {
+  animation: eecPageIn .55s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes eecPageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Prevent accidental dark overlays */
+.bg-gray-900,
+.bg-slate-900,
+.bg-zinc-900,
+.bg-neutral-900 {
+  background-color: rgba(255,255,255,.82) !important;
+}
+
+/* Better readable muted text */
+.text-gray-500,
+.text-gray-600,
+.text-slate-500,
+.text-slate-600,
+.text-zinc-500,
+.text-zinc-600 {
+  color: var(--eec-muted) !important;
+}
+
+/* =========================================================
+   EEC ADMIN NAVBAR - ISOLATED UI
+   Does not modify page functionality
+   ========================================================= */
+
+.eec-admin-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 76px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  box-sizing: border-box;
+
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  border-bottom: 1px solid rgba(148,163,184,.16);
+  box-shadow: 0 8px 30px rgba(15,23,42,.055);
+
+  transition:
+    background .35s ease,
+    box-shadow .35s ease;
+}
+
+.eec-admin-brand a {
+  text-decoration: none;
+  color: #a5123b;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -.025em;
+  white-space: nowrap;
+}
+
+.eec-admin-nav {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.eec-admin-nav-link {
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 15px;
+
+  border-radius: 13px;
+  text-decoration: none;
+
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    color .25s ease,
+    background .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.eec-admin-nav-link:hover {
+  color: #a5123b;
+  background: rgba(165,18,59,.055);
+  transform: translateY(-1px);
+}
+
+.eec-admin-nav-link.active {
+  color: #a5123b;
+  background: rgba(255,255,255,.96);
+  box-shadow:
+    0 7px 20px rgba(15,23,42,.075),
+    inset 0 0 0 1px rgba(148,163,184,.12);
+}
+
+.eec-admin-profile-wrapper {
+  position: relative;
+  margin-left: 10px;
+}
+
+.eec-admin-profile {
+  height: 50px;
+  min-width: 132px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 5px 11px 5px 6px;
+
+  border: 1px solid rgba(148,163,184,.16);
+  border-radius: 15px;
+
+  background: rgba(255,255,255,.78);
+  color: #1e293b;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 18px rgba(15,23,42,.045);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.eec-admin-profile:hover,
+.eec-admin-profile.open {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 10px 26px rgba(15,23,42,.09);
+}
+
+.eec-admin-avatar {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg,#ef3340,#c9184a);
+  color: white;
+
+  font-size: 15px;
+  font-weight: 800;
+
+  box-shadow: 0 5px 13px rgba(201,24,74,.22);
+}
+
+.eec-admin-avatar.large {
+  width: 42px;
+  height: 42px;
+  flex-basis: 42px;
+}
+
+.eec-admin-profile-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+  flex: 1;
+}
+
+.eec-admin-profile-text strong {
+  color: #1e293b;
+  font-size: 13px;
+}
+
+.eec-admin-profile-text small {
+  color: #94a3b8;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.eec-admin-profile svg {
+  color: #64748b;
+  transition: transform .25s ease;
+}
+
+.eec-admin-profile svg.rotate {
+  transform: rotate(180deg);
+}
+
+/* Settings popup */
+
+.eec-admin-settings {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+
+  width: 285px;
+  padding: 14px;
+
+  border: 1px solid rgba(148,163,184,.18);
+  border-radius: 20px;
+
+  background: rgba(255,255,255,.91);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  box-shadow:
+    0 24px 60px rgba(15,23,42,.15),
+    0 3px 12px rgba(15,23,42,.05);
+
+  animation: eecSettingsIn .25s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes eecSettingsIn {
+  from {
+    opacity: 0;
+    transform: translateY(-7px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.eec-admin-settings-user {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 8px;
+  margin-bottom: 16px;
+
+  border-radius: 14px;
+  background: rgba(248,250,252,.82);
+}
+
+.eec-admin-settings-user div {
+  display: flex;
+  flex-direction: column;
+}
+
+.eec-admin-settings-user strong {
+  color: #1e293b;
+  font-size: 14px;
+}
+
+.eec-admin-settings-user span {
+  color: #94a3b8;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.eec-admin-settings-title {
+  padding: 0 8px 8px;
+
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.eec-admin-setting-row {
+  width: 100%;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 0;
+  border-radius: 12px;
+
+  padding: 0 9px;
+
+  background: transparent;
+  color: #475569;
+
+  cursor: pointer;
+  font-size: 13px;
+
+  transition: background .2s ease;
+}
+
+.eec-admin-setting-row:hover {
+  background: rgba(148,163,184,.08);
+}
+
+.eec-admin-setting-left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.eec-admin-setting-left svg {
+  color: #64748b;
+}
+
+.eec-admin-switch {
+  width: 39px;
+  height: 22px;
+
+  padding: 2px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 20px;
+  background: #cbd5e1;
+
+  transition: background .25s ease;
+}
+
+.eec-admin-switch span {
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+  background: white;
+
+  box-shadow: 0 1px 4px rgba(15,23,42,.18);
+
+  transition: transform .25s ease;
+}
+
+.eec-admin-switch.on {
+  background: #c9184a;
+}
+
+.eec-admin-switch.on span {
+  transform: translateX(17px);
+}
+
+.eec-admin-logout {
+  width: 100%;
+  height: 43px;
+
+  margin-top: 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: linear-gradient(135deg,#c9184a,#a5123b);
+  color: white;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(165,18,59,.18);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.eec-admin-logout:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 11px 25px rgba(165,18,59,.25);
+}
+
+/* Admin dark mode */
+
+html.dark .eec-admin-navbar {
+  background: rgba(18,18,25,.88);
+  border-bottom-color: rgba(255,255,255,.08);
+  box-shadow: 0 8px 30px rgba(0,0,0,.2);
+}
+
+html.dark .eec-admin-nav-link {
+  color: #a8b0c0;
+}
+
+html.dark .eec-admin-nav-link:hover {
+  color: #ff5b78;
+  background: rgba(255,91,120,.08);
+}
+
+html.dark .eec-admin-nav-link.active {
+  color: #ff5b78;
+  background: rgba(255,255,255,.07);
+}
+
+html.dark .eec-admin-profile {
+  background: rgba(255,255,255,.07);
+  color: #f8fafc;
+  border-color: rgba(255,255,255,.09);
+}
+
+html.dark .eec-admin-profile:hover,
+html.dark .eec-admin-profile.open {
+  background: rgba(255,255,255,.11);
+}
+
+html.dark .eec-admin-profile-text strong,
+html.dark .eec-admin-settings-user strong {
+  color: #f8fafc;
+}
+
+html.dark .eec-admin-settings {
+  background: rgba(25,25,34,.94);
+  border-color: rgba(255,255,255,.09);
+  box-shadow: 0 24px 60px rgba(0,0,0,.35);
+}
+
+html.dark .eec-admin-settings-user {
+  background: rgba(255,255,255,.055);
+}
+
+html.dark .eec-admin-setting-row {
+  color: #cbd5e1;
+}
+
+html.dark .eec-admin-setting-row:hover {
+  background: rgba(255,255,255,.06);
+}
+
+/* Mobile */
+
+@media (max-width: 900px) {
+  .eec-admin-navbar {
+    height: auto;
+    min-height: 70px;
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .eec-admin-brand a {
+    font-size: 17px;
+  }
+
+  .eec-admin-nav {
+    gap: 3px;
+  }
+
+  .eec-admin-nav-link {
+    padding: 0 9px;
+  }
+
+  .eec-admin-nav-link span {
+    display: none;
+  }
+
+  .eec-admin-profile {
+    min-width: 48px;
+    width: 48px;
+    padding: 5px;
+  }
+
+  .eec-admin-profile-text,
+  .eec-admin-profile > svg {
+    display: none;
+  }
+}
+/* ===== LIGHT ACTIVE NAV FIX ===== */
+.nav-link.active,
+.nav-item.active,
+nav a.active,
+.navbar a.active,
+.nav-link[aria-current="page"],
+a[aria-current="page"] {
+  background: linear-gradient(135deg, #ffe8ed 0%, #ffdce4 100%) !important;
+  color: #b5163d !important;
+  border: 1px solid rgba(181, 22, 61, 0.14) !important;
+  box-shadow: 0 6px 18px rgba(181, 22, 61, 0.12) !important;
+}
+
+.nav-link.active svg,
+.nav-item.active svg,
+nav a.active svg,
+.navbar a.active svg,
+.nav-link[aria-current="page"] svg {
+  color: #b5163d !important;
+  stroke: #b5163d !important;
+}
+
+.nav-link:not(.active),
+.nav-item:not(.active) a,
+nav a:not(.active) {
+  color: #52627a !important;
+  background: transparent !important;
+}
+
+.nav-link:hover,
+.nav-item a:hover,
+nav a:hover {
+  color: #b5163d !important;
+  background: rgba(255, 232, 237, 0.75) !important;
+}
+
+.navbar,
+nav,
+header {
+  background: rgba(255, 255, 255, 0.88) !important;
+  color: #17233c !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+.navbar-brand,
+.logo,
+.brand,
+header .brand {
+  color: #a81238 !important;
+}
+
+.profile-button,
+.profile-menu-button,
+.user-menu,
+.account-button {
+  background: rgba(255, 255, 255, 0.82) !important;
+  color: #17233c !important;
+  border: 1px solid rgba(30, 50, 90, 0.08) !important;
+}
+
+.nav-link.active *,
+.nav-item.active *,
+nav a.active * {
+  color: #b5163d !important;
+}
+
+/* =========================================================
+   EEC ADMIN — DARK MODE
+   BASED ON EXISTING ADMIN PALETTE
+   LIGHT MODE UNTOUCHED
+   ========================================================= */
+
+body.eec-dark-mode {
+  background:#111827 !important;
+  color:#e8edf5 !important;
+}
+
+body.eec-dark-mode #root {
+  background:#111827 !important;
+}
+
+/* Existing ADMIN glass navbar language */
+body.eec-dark-mode nav {
+  background:rgba(23,32,51,.94) !important;
+  border-bottom:1px solid rgba(229,233,240,.12) !important;
+  box-shadow:0 2px 18px rgba(15,23,42,.22) !important;
+  backdrop-filter:blur(14px) !important;
+}
+
+/* Admin blue accent */
+body.eec-dark-mode nav a:hover {
+  color:#60a5fa !important;
+}
+
+/* Main admin surfaces */
+body.eec-dark-mode .bg-white {
+  background:#1b2639 !important;
+  border-color:rgba(229,233,240,.12) !important;
+}
+
+body.eec-dark-mode .bg-gray-50,
+body.eec-dark-mode .bg-slate-50 {
+  background:#151f31 !important;
+}
+
+body.eec-dark-mode .bg-gray-100,
+body.eec-dark-mode .bg-slate-100 {
+  background:#202c40 !important;
+}
+
+/* Existing admin text palette adapted darker */
+body.eec-dark-mode .text-slate-900,
+body.eec-dark-mode .text-slate-800,
+body.eec-dark-mode .text-slate-700,
+body.eec-dark-mode .text-gray-900,
+body.eec-dark-mode .text-gray-800,
+body.eec-dark-mode .text-gray-700 {
+  color:#e8edf5 !important;
+}
+
+body.eec-dark-mode .text-slate-600,
+body.eec-dark-mode .text-slate-500,
+body.eec-dark-mode .text-gray-600,
+body.eec-dark-mode .text-gray-500 {
+  color:#a8b3c5 !important;
+}
+
+/* Existing soft admin borders */
+body.eec-dark-mode .border-slate-100,
+body.eec-dark-mode .border-slate-200,
+body.eec-dark-mode .border-gray-100,
+body.eec-dark-mode .border-gray-200 {
+  border-color:rgba(229,233,240,.12) !important;
+}
+
+/* Existing admin input styling adapted */
+body.eec-dark-mode input,
+body.eec-dark-mode select,
+body.eec-dark-mode textarea {
+  background:#172033 !important;
+  color:#e8edf5 !important;
+  border-color:#354258 !important;
+}
+
+body.eec-dark-mode input:focus,
+body.eec-dark-mode select:focus,
+body.eec-dark-mode textarea:focus {
+  border-color:#3b82f6 !important;
+  box-shadow:0 0 0 3px rgba(59,130,246,.14) !important;
+}
+
+/* Admin cards retain the original soft-card feel */
+body.eec-dark-mode .shadow-sm {
+  box-shadow:0 8px 30px rgba(0,0,0,.20) !important;
+}
+
+/* Existing admin hover animation stays */
+body.eec-dark-mode .grid > div:hover {
+  transform:translateY(-2px);
+}
+
+/* Tables */
+body.eec-dark-mode table {
+  background:#1b2639 !important;
+}
+
+body.eec-dark-mode th {
+  background:#202c40 !important;
+  color:#aeb9ca !important;
+}
+
+body.eec-dark-mode td {
+  background:transparent !important;
+  color:#dce4ef !important;
+  border-color:rgba(229,233,240,.10) !important;
+}
+
+/* Upload area */
+body.eec-dark-mode .border-dashed {
+  background:#172033 !important;
+  border-color:#354258 !important;
+}
+
+body.eec-dark-mode .border-dashed:hover {
+  background:#1d2a40 !important;
+  border-color:#60a5fa !important;
+}
+
+/* Preserve admin blue buttons */
+body.eec-dark-mode .bg-blue-600 {
+  background:#2563eb !important;
+  color:#fff !important;
+}
+
+body.eec-dark-mode .bg-blue-600:hover {
+  background:#3b82f6 !important;
+}
+
+/* Soft status colors */
+body.eec-dark-mode .bg-green-100 {
+  background:#183a2b !important;
+}
+
+body.eec-dark-mode .text-green-700 {
+  color:#5ee59a !important;
+}
+
+/* Smooth theme transition */
+body.eec-dark-mode nav,
+body.eec-dark-mode .bg-white,
+body.eec-dark-mode .bg-gray-50,
+body.eec-dark-mode .bg-slate-50,
+body.eec-dark-mode input,
+body.eec-dark-mode select,
+body.eec-dark-mode textarea {
+  transition:
+    background-color .25s ease,
+    color .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease !important;
+}
+
+
+/* =========================================================
+   NEW EEC ADMIN NAVBAR
+   ========================================================= */
+
+.eec-admin-navbar {
+  position:sticky;
+  top:0;
+  z-index:1000;
+  width:100%;
+  background:rgba(255,255,255,.88);
+  border-bottom:1px solid #e5e9f0;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.eec-admin-nav-inner {
+  max-width:1500px;
+  min-height:76px;
+  margin:auto;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+
+/* BRAND */
+
+.eec-admin-brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  min-width:250px;
+  color:#172033;
+}
+
+.eec-admin-logo {
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.5px;
+  color:white;
+  background:linear-gradient(135deg,#2563eb,#4f46e5);
+  box-shadow:0 7px 20px rgba(37,99,235,.24);
+}
+
+.eec-admin-brand-text {
+  display:flex;
+  flex-direction:column;
+  line-height:1.15;
+}
+
+.eec-admin-brand-text strong {
+  font-size:14px;
+  font-weight:800;
+}
+
+.eec-admin-brand-text span {
+  margin-top:4px;
+  font-size:11px;
+  color:#718096;
+}
+
+/* NAVIGATION */
+
+.eec-admin-nav-links {
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+
+.eec-admin-nav-link {
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 13px;
+  border-radius:11px;
+  text-decoration:none;
+  color:#64748b;
+  font-size:13px;
+  font-weight:600;
+  transition:
+    color .25s ease,
+    background .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.eec-admin-nav-link:hover {
+  color:#2563eb;
+  background:#f5f7fb;
+  transform:translateY(-1px);
+}
+
+.eec-admin-nav-link.active {
+  color:#2563eb;
+  background:#eef4ff;
+  box-shadow:
+    inset 0 0 0 1px rgba(37,99,235,.08),
+    0 5px 16px rgba(37,99,235,.08);
+}
+
+.eec-admin-nav-link.active::after {
+  content:"";
+  position:absolute;
+  left:18px;
+  right:18px;
+  bottom:-18px;
+  height:2px;
+  border-radius:10px;
+  background:#2563eb;
+}
+
+/* ACCOUNT */
+
+.eec-admin-account {
+  position:relative;
+}
+
+.eec-admin-profile {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:7px 10px 7px 7px;
+  border:1px solid #e5e9f0;
+  border-radius:14px;
+  background:#fff;
+  cursor:pointer;
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease;
+}
+
+.eec-admin-profile:hover,
+.eec-admin-profile.open {
+  border-color:#cbd5e1;
+  box-shadow:0 7px 20px rgba(15,23,42,.08);
+  transform:translateY(-1px);
+}
+
+.eec-admin-avatar {
+  width:34px;
+  height:34px;
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:11px;
+  background:linear-gradient(135deg,#2563eb,#6366f1);
+  color:white;
+  font-size:13px;
+  font-weight:800;
+}
+
+.eec-admin-avatar.large {
+  width:43px;
+  height:43px;
+  border-radius:13px;
+}
+
+.eec-admin-profile-info {
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+  line-height:1.15;
+}
+
+.eec-admin-profile-info strong {
+  color:#172033;
+  font-size:12px;
+}
+
+.eec-admin-profile-info small {
+  margin-top:4px;
+  color:#718096;
+  font-size:10px;
+}
+
+.eec-admin-chevron {
+  color:#94a3b8;
+  transition:transform .25s ease;
+}
+
+.eec-admin-chevron.rotate {
+  transform:rotate(180deg);
+}
+
+/* SETTINGS */
+
+.eec-admin-settings {
+  position:absolute;
+  right:0;
+  top:calc(100% + 10px);
+  width:270px;
+  padding:14px;
+  border:1px solid #e5e9f0;
+  border-radius:18px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 20px 50px rgba(15,23,42,.14);
+  backdrop-filter:blur(20px);
+  animation:eecAdminMenuIn .22s ease;
+}
+
+@keyframes eecAdminMenuIn {
+  from {
+    opacity:0;
+    transform:translateY(-7px) scale(.98);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.eec-admin-settings-profile {
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:6px 4px 12px;
+}
+
+.eec-admin-settings-profile strong {
+  display:block;
+  color:#172033;
+  font-size:13px;
+}
+
+.eec-admin-settings-profile small {
+  display:block;
+  margin-top:4px;
+  color:#718096;
+  font-size:10px;
+}
+
+.eec-admin-settings-divider {
+  height:1px;
+  background:#e5e9f0;
+  margin:2px 0 12px;
+}
+
+.eec-admin-settings-title {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:0 4px 8px;
+  color:#94a3b8;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.9px;
+}
+
+.eec-admin-setting-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 8px;
+  border-radius:12px;
+  background:#f8fafc;
+}
+
+.eec-admin-setting-label {
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.eec-admin-setting-icon {
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:9px;
+  color:#2563eb;
+  background:#eef4ff;
+}
+
+.eec-admin-setting-label strong {
+  display:block;
+  color:#172033;
+  font-size:12px;
+}
+
+.eec-admin-setting-label small {
+  display:block;
+  margin-top:3px;
+  color:#718096;
+  font-size:9px;
+}
+
+/* SWITCH */
+
+.eec-admin-switch {
+  width:38px;
+  height:21px;
+  padding:2px;
+  border:0;
+  border-radius:999px;
+  background:#cbd5e1;
+  cursor:pointer;
+  transition:background .25s ease;
+}
+
+.eec-admin-switch span {
+  display:block;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 2px 5px rgba(0,0,0,.15);
+  transition:transform .25s ease;
+}
+
+.eec-admin-switch.on {
+  background:#2563eb;
+}
+
+.eec-admin-switch.on span {
+  transform:translateX(17px);
+}
+
+/* LOGOUT */
+
+.eec-admin-logout {
+  width:100%;
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:10px;
+  border:0;
+  border-radius:11px;
+  color:#dc2626;
+  background:transparent;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:700;
+  transition:background .2s ease;
+}
+
+.eec-admin-logout:hover {
+  background:#fef2f2;
+}
+
+/* DARK MODE — SAME ADMIN UI, DARK SURFACES */
+
+body.eec-dark-mode .eec-admin-navbar {
+  background:rgba(23,32,51,.90);
+  border-color:rgba(229,233,240,.12);
+}
+
+body.eec-dark-mode .eec-admin-brand {
+  color:#f1f5f9;
+}
+
+body.eec-dark-mode .eec-admin-brand-text span {
+  color:#94a3b8;
+}
+
+body.eec-dark-mode .eec-admin-nav-link {
+  color:#94a3b8;
+}
+
+body.eec-dark-mode .eec-admin-nav-link:hover {
+  color:#93c5fd;
+  background:rgba(255,255,255,.05);
+}
+
+body.eec-dark-mode .eec-admin-nav-link.active {
+  color:#93c5fd;
+  background:rgba(37,99,235,.16);
+}
+
+body.eec-dark-mode .eec-admin-nav-link.active::after {
+  background:#3b82f6;
+}
+
+body.eec-dark-mode .eec-admin-profile {
+  background:rgba(255,255,255,.05);
+  border-color:rgba(229,233,240,.12);
+}
+
+body.eec-dark-mode .eec-admin-profile-info strong {
+  color:#f1f5f9;
+}
+
+body.eec-dark-mode .eec-admin-profile-info small {
+  color:#94a3b8;
+}
+
+body.eec-dark-mode .eec-admin-settings {
+  background:rgba(23,32,51,.97);
+  border-color:rgba(229,233,240,.12);
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+
+body.eec-dark-mode .eec-admin-settings-profile strong,
+body.eec-dark-mode .eec-admin-setting-label strong {
+  color:#f1f5f9;
+}
+
+body.eec-dark-mode .eec-admin-settings-profile small,
+body.eec-dark-mode .eec-admin-setting-label small {
+  color:#94a3b8;
+}
+
+body.eec-dark-mode .eec-admin-settings-divider {
+  background:rgba(229,233,240,.12);
+}
+
+body.eec-dark-mode .eec-admin-setting-row {
+  background:rgba(255,255,255,.045);
+}
+
+body.eec-dark-mode .eec-admin-setting-icon {
+  background:rgba(37,99,235,.14);
+  color:#60a5fa;
+}
+
+body.eec-dark-mode .eec-admin-logout:hover {
+  background:rgba(239,68,68,.10);
+}
+
+@media (max-width:1100px) {
+  .eec-admin-nav-inner {
+    gap:12px;
+    padding:0 16px;
+  }
+
+  .eec-admin-brand {
+    min-width:auto;
+  }
+
+  .eec-admin-brand-text span {
+    display:none;
+  }
+
+  .eec-admin-nav-link span {
+    display:none;
+  }
+}
+
+/* =========================================================
+   EEC ADMIN FINAL NAVBAR
+   Existing admin routes preserved:
+   Dashboard / Notifications / Messages / Analytics
+   ========================================================= */
+
+.eec-final-admin-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  background: rgba(255,255,255,.90);
+  border-bottom: 1px solid #e5e9f0;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 4px 18px rgba(23,32,51,.05);
+}
+
+.eec-final-admin-nav-inner {
+  width: 100%;
+  min-height: 72px;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  box-sizing: border-box;
+}
+
+/* BRAND */
+
+.eec-final-admin-brand {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: #172033;
+}
+
+.eec-final-admin-logo {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .5px;
+  background: linear-gradient(135deg,#2563eb,#4f46e5);
+  box-shadow: 0 7px 18px rgba(37,99,235,.22);
+}
+
+.eec-final-admin-brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.eec-final-admin-brand-copy strong {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.eec-final-admin-brand-copy small {
+  margin-top: 4px;
+  color: #718096;
+  font-size: 9px;
+}
+
+/* LINKS */
+
+.eec-final-admin-links {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.eec-final-admin-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 13px;
+  border-radius: 11px;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 650;
+  transition:
+    color .25s ease,
+    background .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.eec-final-admin-link:hover {
+  color: #2563eb;
+  background: #f5f7fb;
+  transform: translateY(-1px);
+}
+
+.eec-final-admin-link.active {
+  color: #2563eb;
+  background: #eef4ff;
+  box-shadow:
+    inset 0 0 0 1px rgba(37,99,235,.08),
+    0 5px 16px rgba(37,99,235,.08);
+}
+
+.eec-final-admin-link.active::after {
+  content: "";
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  bottom: -17px;
+  height: 2px;
+  border-radius: 10px;
+  background: #2563eb;
+}
+
+/* PROFILE */
+
+.eec-final-admin-account {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.eec-final-admin-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 9px 6px 6px;
+  border: 1px solid #e5e9f0;
+  border-radius: 14px;
+  background: #fff;
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.eec-final-admin-profile:hover,
+.eec-final-admin-profile.open {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 22px rgba(23,32,51,.08);
+}
+
+.eec-final-admin-avatar {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(135deg,#2563eb,#6366f1);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.eec-final-admin-avatar.large {
+  width: 42px;
+  height: 42px;
+}
+
+.eec-final-admin-profile-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.1;
+}
+
+.eec-final-admin-profile-text strong {
+  color: #172033;
+  font-size: 11px;
+}
+
+.eec-final-admin-profile-text small {
+  margin-top: 4px;
+  color: #718096;
+  font-size: 9px;
+}
+
+.eec-final-admin-chevron {
+  color: #94a3b8;
+  transition: transform .25s ease;
+}
+
+.eec-final-admin-chevron.rotated {
+  transform: rotate(180deg);
+}
+
+/* MENU */
+
+.eec-final-admin-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 9px);
+  width: 260px;
+  padding: 13px;
+  border: 1px solid #e5e9f0;
+  border-radius: 17px;
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 20px 55px rgba(23,32,51,.15);
+  backdrop-filter: blur(20px);
+  animation: eecAdminProfileOpen .20s ease;
+}
+
+@keyframes eecAdminProfileOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.eec-final-admin-menu-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 3px 12px;
+}
+
+.eec-final-admin-menu-user strong {
+  display: block;
+  color: #172033;
+  font-size: 12px;
+}
+
+.eec-final-admin-menu-user small {
+  display: block;
+  margin-top: 4px;
+  color: #718096;
+  font-size: 9px;
+}
+
+.eec-final-admin-menu-divider {
+  height: 1px;
+  background: #e5e9f0;
+  margin-bottom: 11px;
+}
+
+.eec-final-admin-menu-heading {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 4px 8px;
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .8px;
+}
+
+.eec-final-admin-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px;
+  border-radius: 11px;
+  background: #f7f9fc;
+}
+
+.eec-final-admin-setting-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eec-final-admin-setting-icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  color: #2563eb;
+  background: #eef4ff;
+}
+
+.eec-final-admin-setting strong {
+  display: block;
+  color: #172033;
+  font-size: 11px;
+}
+
+.eec-final-admin-setting small {
+  display: block;
+  margin-top: 3px;
+  color: #718096;
+  font-size: 8px;
+}
+
+/* SWITCH */
+
+.eec-final-admin-switch {
+  width: 37px;
+  height: 21px;
+  padding: 2px;
+  border: 0;
+  border-radius: 999px;
+  background: #cbd5e1;
+  cursor: pointer;
+}
+
+.eec-final-admin-switch span {
+  display: block;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,.15);
+  transition: transform .25s ease;
+}
+
+.eec-final-admin-switch.on {
+  background: #2563eb;
+}
+
+.eec-final-admin-switch.on span {
+  transform: translateX(16px);
+}
+
+/* LOGOUT */
+
+.eec-final-admin-logout {
+  width: 100%;
+  margin-top: 9px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 0;
+  border-radius: 10px;
+  color: #dc2626;
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.eec-final-admin-logout:hover {
+  background: #fef2f2;
+}
+
+/* DARK MODE */
+
+body.eec-dark-mode .eec-final-admin-navbar {
+  background: rgba(23,32,51,.92);
+  border-color: rgba(229,233,240,.12);
+  box-shadow: 0 4px 22px rgba(0,0,0,.20);
+}
+
+body.eec-dark-mode .eec-final-admin-brand {
+  color: #d8f8ff;
+}
+
+body.eec-dark-mode .eec-final-admin-brand-copy small {
+  color: #5ab8cc;
+}
+
+body.eec-dark-mode .eec-final-admin-link {
+  color: #8aa1b5;
+}
+
+body.eec-dark-mode .eec-final-admin-link:hover {
+  color: #00d4ff;
+  background: rgba(0,212,255,.06);
+}
+
+body.eec-dark-mode .eec-final-admin-link.active {
+  color: #00d4ff;
+  background: rgba(0,212,255,.09);
+  box-shadow: inset 0 0 0 1px rgba(0,212,255,.10);
+}
+
+body.eec-dark-mode .eec-final-admin-link.active::after {
+  background: #00d4ff;
+  box-shadow: 0 0 9px rgba(0,212,255,.55);
+}
+
+body.eec-dark-mode .eec-final-admin-profile {
+  background: rgba(255,255,255,.045);
+  border-color: rgba(229,233,240,.12);
+}
+
+body.eec-dark-mode .eec-final-admin-profile-text strong,
+body.eec-dark-mode .eec-final-admin-menu-user strong,
+body.eec-dark-mode .eec-final-admin-setting strong {
+  color: #d8f8ff;
+}
+
+body.eec-dark-mode .eec-final-admin-profile-text small,
+body.eec-dark-mode .eec-final-admin-menu-user small,
+body.eec-dark-mode .eec-final-admin-setting small {
+  color: #5ab8cc;
+}
+
+body.eec-dark-mode .eec-final-admin-menu {
+  background: rgba(1,15,24,.97);
+  border-color: #0d3347;
+  box-shadow: 0 20px 55px rgba(0,0,0,.42);
+}
+
+body.eec-dark-mode .eec-final-admin-menu-divider {
+  background: #0d3347;
+}
+
+body.eec-dark-mode .eec-final-admin-setting {
+  background: rgba(0,212,255,.045);
+}
+
+body.eec-dark-mode .eec-final-admin-setting-icon {
+  color: #00d4ff;
+  background: rgba(0,212,255,.08);
+}
+
+body.eec-dark-mode .eec-final-admin-logout:hover {
+  background: rgba(255,51,85,.09);
+}
+
+@media (max-width: 950px) {
+  .eec-final-admin-nav-inner {
+    padding: 0 14px;
+    gap: 10px;
+  }
+
+  .eec-final-admin-brand-copy small,
+  .eec-final-admin-link span,
+  .eec-final-admin-profile-text {
+    display: none;
+  }
+
+  .eec-final-admin-brand {
+    margin-right: auto;
+  }
+
+  .eec-final-admin-links {
+    flex: 0 0 auto;
+  }
+}
+
+/* =========================================================
+   EEC ADMIN FINAL NAVBAR
+   Existing admin routes preserved:
+   Dashboard / Notifications / Messages / Analytics
+   ========================================================= */
+
+.eec-final-admin-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  background: rgba(255,255,255,.90);
+  border-bottom: 1px solid #e5e9f0;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 4px 18px rgba(23,32,51,.05);
+}
+
+.eec-final-admin-nav-inner {
+  width: 100%;
+  min-height: 72px;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  box-sizing: border-box;
+}
+
+/* BRAND */
+
+.eec-final-admin-brand {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: #172033;
+}
+
+.eec-final-admin-logo {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .5px;
+  background: linear-gradient(135deg,#2563eb,#4f46e5);
+  box-shadow: 0 7px 18px rgba(37,99,235,.22);
+}
+
+.eec-final-admin-brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.eec-final-admin-brand-copy strong {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.eec-final-admin-brand-copy small {
+  margin-top: 4px;
+  color: #718096;
+  font-size: 9px;
+}
+
+/* LINKS */
+
+.eec-final-admin-links {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.eec-final-admin-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 13px;
+  border-radius: 11px;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 650;
+  transition:
+    color .25s ease,
+    background .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.eec-final-admin-link:hover {
+  color: #2563eb;
+  background: #f5f7fb;
+  transform: translateY(-1px);
+}
+
+.eec-final-admin-link.active {
+  color: #2563eb;
+  background: #eef4ff;
+  box-shadow:
+    inset 0 0 0 1px rgba(37,99,235,.08),
+    0 5px 16px rgba(37,99,235,.08);
+}
+
+.eec-final-admin-link.active::after {
+  content: "";
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  bottom: -17px;
+  height: 2px;
+  border-radius: 10px;
+  background: #2563eb;
+}
+
+/* PROFILE */
+
+.eec-final-admin-account {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.eec-final-admin-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 9px 6px 6px;
+  border: 1px solid #e5e9f0;
+  border-radius: 14px;
+  background: #fff;
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.eec-final-admin-profile:hover,
+.eec-final-admin-profile.open {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 22px rgba(23,32,51,.08);
+}
+
+.eec-final-admin-avatar {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(135deg,#2563eb,#6366f1);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.eec-final-admin-avatar.large {
+  width: 42px;
+  height: 42px;
+}
+
+.eec-final-admin-profile-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.1;
+}
+
+.eec-final-admin-profile-text strong {
+  color: #172033;
+  font-size: 11px;
+}
+
+.eec-final-admin-profile-text small {
+  margin-top: 4px;
+  color: #718096;
+  font-size: 9px;
+}
+
+.eec-final-admin-chevron {
+  color: #94a3b8;
+  transition: transform .25s ease;
+}
+
+.eec-final-admin-chevron.rotated {
+  transform: rotate(180deg);
+}
+
+/* MENU */
+
+.eec-final-admin-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 9px);
+  width: 260px;
+  padding: 13px;
+  border: 1px solid #e5e9f0;
+  border-radius: 17px;
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 20px 55px rgba(23,32,51,.15);
+  backdrop-filter: blur(20px);
+  animation: eecAdminProfileOpen .20s ease;
+}
+
+@keyframes eecAdminProfileOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.eec-final-admin-menu-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 3px 12px;
+}
+
+.eec-final-admin-menu-user strong {
+  display: block;
+  color: #172033;
+  font-size: 12px;
+}
+
+.eec-final-admin-menu-user small {
+  display: block;
+  margin-top: 4px;
+  color: #718096;
+  font-size: 9px;
+}
+
+.eec-final-admin-menu-divider {
+  height: 1px;
+  background: #e5e9f0;
+  margin-bottom: 11px;
+}
+
+.eec-final-admin-menu-heading {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 4px 8px;
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .8px;
+}
+
+.eec-final-admin-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px;
+  border-radius: 11px;
+  background: #f7f9fc;
+}
+
+.eec-final-admin-setting-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eec-final-admin-setting-icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  color: #2563eb;
+  background: #eef4ff;
+}
+
+.eec-final-admin-setting strong {
+  display: block;
+  color: #172033;
+  font-size: 11px;
+}
+
+.eec-final-admin-setting small {
+  display: block;
+  margin-top: 3px;
+  color: #718096;
+  font-size: 8px;
+}
+
+/* SWITCH */
+
+.eec-final-admin-switch {
+  width: 37px;
+  height: 21px;
+  padding: 2px;
+  border: 0;
+  border-radius: 999px;
+  background: #cbd5e1;
+  cursor: pointer;
+}
+
+.eec-final-admin-switch span {
+  display: block;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,.15);
+  transition: transform .25s ease;
+}
+
+.eec-final-admin-switch.on {
+  background: #2563eb;
+}
+
+.eec-final-admin-switch.on span {
+  transform: translateX(16px);
+}
+
+/* LOGOUT */
+
+.eec-final-admin-logout {
+  width: 100%;
+  margin-top: 9px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 0;
+  border-radius: 10px;
+  color: #dc2626;
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.eec-final-admin-logout:hover {
+  background: #fef2f2;
+}
+
+/* DARK MODE */
+
+body.eec-dark-mode .eec-final-admin-navbar {
+  background: rgba(23,32,51,.92);
+  border-color: rgba(229,233,240,.12);
+  box-shadow: 0 4px 22px rgba(0,0,0,.20);
+}
+
+body.eec-dark-mode .eec-final-admin-brand {
+  color: #d8f8ff;
+}
+
+body.eec-dark-mode .eec-final-admin-brand-copy small {
+  color: #5ab8cc;
+}
+
+body.eec-dark-mode .eec-final-admin-link {
+  color: #8aa1b5;
+}
+
+body.eec-dark-mode .eec-final-admin-link:hover {
+  color: #00d4ff;
+  background: rgba(0,212,255,.06);
+}
+
+body.eec-dark-mode .eec-final-admin-link.active {
+  color: #00d4ff;
+  background: rgba(0,212,255,.09);
+  box-shadow: inset 0 0 0 1px rgba(0,212,255,.10);
+}
+
+body.eec-dark-mode .eec-final-admin-link.active::after {
+  background: #00d4ff;
+  box-shadow: 0 0 9px rgba(0,212,255,.55);
+}
+
+body.eec-dark-mode .eec-final-admin-profile {
+  background: rgba(255,255,255,.045);
+  border-color: rgba(229,233,240,.12);
+}
+
+body.eec-dark-mode .eec-final-admin-profile-text strong,
+body.eec-dark-mode .eec-final-admin-menu-user strong,
+body.eec-dark-mode .eec-final-admin-setting strong {
+  color: #d8f8ff;
+}
+
+body.eec-dark-mode .eec-final-admin-profile-text small,
+body.eec-dark-mode .eec-final-admin-menu-user small,
+body.eec-dark-mode .eec-final-admin-setting small {
+  color: #5ab8cc;
+}
+
+body.eec-dark-mode .eec-final-admin-menu {
+  background: rgba(1,15,24,.97);
+  border-color: #0d3347;
+  box-shadow: 0 20px 55px rgba(0,0,0,.42);
+}
+
+body.eec-dark-mode .eec-final-admin-menu-divider {
+  background: #0d3347;
+}
+
+body.eec-dark-mode .eec-final-admin-setting {
+  background: rgba(0,212,255,.045);
+}
+
+body.eec-dark-mode .eec-final-admin-setting-icon {
+  color: #00d4ff;
+  background: rgba(0,212,255,.08);
+}
+
+body.eec-dark-mode .eec-final-admin-logout:hover {
+  background: rgba(255,51,85,.09);
+}
+
+@media (max-width: 950px) {
+  .eec-final-admin-nav-inner {
+    padding: 0 14px;
+    gap: 10px;
+  }
+
+  .eec-final-admin-brand-copy small,
+  .eec-final-admin-link span,
+  .eec-final-admin-profile-text {
+    display: none;
+  }
+
+  .eec-final-admin-brand {
+    margin-right: auto;
+  }
+
+  .eec-final-admin-links {
+    flex: 0 0 auto;
+  }
+}
+
+/* =========================================================
+   EEC PREMIUM UI — DARK GRAPHITE / NEON SYSTEM
+   UI ONLY — routes, APIs and functionality untouched
+   ========================================================= */
+
+:root {
+  --eec-bg: #080b12;
+  --eec-bg-2: #0d111c;
+  --eec-surface: #111722;
+  --eec-surface-2: #171e2b;
+  --eec-surface-3: #1c2534;
+  --eec-border: rgba(255,255,255,.075);
+  --eec-border-strong: rgba(255,255,255,.13);
+
+  --eec-text: #f5f7fb;
+  --eec-text-2: #c5ccda;
+  --eec-muted: #8993a6;
+
+  --eec-blue: #4f8cff;
+  --eec-blue-2: #6b5cff;
+  --eec-purple: #9b5cff;
+  --eec-pink: #ff3d9a;
+  --eec-orange: #ff7a18;
+
+  --eec-green: #21e6a1;
+  --eec-gold: #ffc94a;
+  --eec-red: #ff4d67;
+
+  --eec-radius: 20px;
+  --eec-shadow:
+    0 18px 55px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.025);
+
+  --eec-glow-blue: 0 0 28px rgba(79,140,255,.16);
+  --eec-glow-pink: 0 0 28px rgba(255,61,154,.15);
+}
+
+/* =========================================================
+   GLOBAL DARK MODE
+   ========================================================= */
+
+body.eec-dark-mode {
+  background:
+    radial-gradient(
+      circle at 15% 5%,
+      rgba(79,140,255,.11),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(155,92,255,.08),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      var(--eec-bg),
+      var(--eec-bg-2)
+    ) !important;
+
+  color: var(--eec-text) !important;
+}
+
+body.eec-dark-mode,
+body.eec-dark-mode #root {
+  min-height: 100vh;
+}
+
+body.eec-dark-mode main,
+body.eec-dark-mode .page,
+body.eec-dark-mode .container {
+  color: var(--eec-text);
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+body.eec-dark-mode nav {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20,27,40,.96),
+      rgba(11,15,24,.96)
+    ) !important;
+
+  border-color: var(--eec-border) !important;
+
+  box-shadow:
+    0 12px 40px rgba(0,0,0,.22),
+    inset 0 -1px 0 rgba(255,255,255,.025);
+
+  backdrop-filter: blur(20px);
+}
+
+body.eec-dark-mode nav a {
+  color: var(--eec-text-2) !important;
+}
+
+body.eec-dark-mode nav a:hover {
+  color: #fff !important;
+}
+
+body.eec-dark-mode nav a.active,
+body.eec-dark-mode nav a[aria-current="page"] {
+  color: #fff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.22),
+      rgba(107,92,255,.18)
+    ) !important;
+
+  border: 1px solid rgba(79,140,255,.25);
+
+  box-shadow:
+    0 8px 25px rgba(79,140,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* =========================================================
+   GENERAL SURFACES
+   ========================================================= */
+
+body.eec-dark-mode .bg-white {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25,32,45,.98),
+      rgba(15,21,31,.98)
+    ) !important;
+
+  color: var(--eec-text) !important;
+}
+
+body.eec-dark-mode .bg-slate-50,
+body.eec-dark-mode .bg-gray-50,
+body.eec-dark-mode .bg-gray-100,
+body.eec-dark-mode .bg-slate-100 {
+  background: var(--eec-surface) !important;
+}
+
+body.eec-dark-mode .bg-slate-900,
+body.eec-dark-mode .bg-gray-900 {
+  background: #080b12 !important;
+}
+
+body.eec-dark-mode .border,
+body.eec-dark-mode .border-gray-100,
+body.eec-dark-mode .border-gray-200,
+body.eec-dark-mode .border-slate-100,
+body.eec-dark-mode .border-slate-200 {
+  border-color: var(--eec-border) !important;
+}
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+body.eec-dark-mode .text-gray-900,
+body.eec-dark-mode .text-gray-800,
+body.eec-dark-mode .text-slate-900,
+body.eec-dark-mode .text-slate-800 {
+  color: var(--eec-text) !important;
+}
+
+body.eec-dark-mode .text-gray-700,
+body.eec-dark-mode .text-slate-700 {
+  color: var(--eec-text-2) !important;
+}
+
+body.eec-dark-mode .text-gray-600,
+body.eec-dark-mode .text-gray-500,
+body.eec-dark-mode .text-slate-600,
+body.eec-dark-mode .text-slate-500 {
+  color: var(--eec-muted) !important;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+body.eec-dark-mode .rounded-xl,
+body.eec-dark-mode .rounded-2xl,
+body.eec-dark-mode .rounded-3xl,
+body.eec-dark-mode .document-card {
+  border-radius: var(--eec-radius) !important;
+}
+
+body.eec-dark-mode .shadow,
+body.eec-dark-mode .shadow-sm,
+body.eec-dark-mode .shadow-md,
+body.eec-dark-mode .shadow-lg,
+body.eec-dark-mode .shadow-xl {
+  box-shadow: var(--eec-shadow) !important;
+}
+
+body.eec-dark-mode .bg-white.border,
+body.eec-dark-mode .document-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25,32,45,.98),
+      rgba(14,19,29,.98)
+    ) !important;
+
+  border: 1px solid var(--eec-border) !important;
+
+  box-shadow: var(--eec-shadow) !important;
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+body.eec-dark-mode .bg-white.border:hover,
+body.eec-dark-mode .document-card:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(79,140,255,.22) !important;
+
+  box-shadow:
+    0 22px 65px rgba(0,0,0,.34),
+    0 0 28px rgba(79,140,255,.06) !important;
+}
+
+/* =========================================================
+   INPUTS / SELECTS / TEXTAREAS
+   ========================================================= */
+
+body.eec-dark-mode input,
+body.eec-dark-mode select,
+body.eec-dark-mode textarea {
+  background:
+    rgba(9,13,21,.9) !important;
+
+  color: var(--eec-text) !important;
+
+  border:
+    1px solid var(--eec-border-strong) !important;
+
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,.22);
+}
+
+body.eec-dark-mode input::placeholder,
+body.eec-dark-mode textarea::placeholder {
+  color: #687386 !important;
+}
+
+body.eec-dark-mode input:focus,
+body.eec-dark-mode select:focus,
+body.eec-dark-mode textarea:focus {
+  border-color:
+    rgba(79,140,255,.7) !important;
+
+  box-shadow:
+    0 0 0 4px rgba(79,140,255,.10),
+    0 0 25px rgba(79,140,255,.08) !important;
+}
+
+/* =========================================================
+   TABLES / REQUEST LISTS
+   ========================================================= */
+
+body.eec-dark-mode table {
+  color: var(--eec-text) !important;
+}
+
+body.eec-dark-mode thead {
+  background:
+    rgba(255,255,255,.035) !important;
+}
+
+body.eec-dark-mode th {
+  color: #9da8ba !important;
+}
+
+body.eec-dark-mode td {
+  color: var(--eec-text-2) !important;
+  border-color: var(--eec-border) !important;
+}
+
+body.eec-dark-mode tbody tr {
+  background: transparent !important;
+}
+
+body.eec-dark-mode tbody tr:hover {
+  background:
+    rgba(79,140,255,.045) !important;
+}
+
+/* =========================================================
+   STATUS COLORS — ONLY STATUS BADGES
+   ========================================================= */
+
+body.eec-dark-mode
+[class*="bg-green-100"],
+body.eec-dark-mode
+[class*="bg-emerald-100"] {
+  background:
+    rgba(33,230,161,.16) !important;
+
+  color:
+    #21e6a1 !important;
+
+  border:
+    1px solid rgba(33,230,161,.28) !important;
+
+  box-shadow:
+    0 0 18px rgba(33,230,161,.10);
+}
+
+body.eec-dark-mode
+[class*="bg-amber-100"],
+body.eec-dark-mode
+[class*="bg-yellow-100"] {
+  background:
+    rgba(255,201,74,.16) !important;
+
+  color:
+    #ffc94a !important;
+
+  border:
+    1px solid rgba(255,201,74,.28) !important;
+
+  box-shadow:
+    0 0 18px rgba(255,201,74,.09);
+}
+
+body.eec-dark-mode
+[class*="bg-red-100"],
+body.eec-dark-mode
+[class*="bg-rose-100"] {
+  background:
+    rgba(255,77,103,.15) !important;
+
+  color:
+    #ff5b73 !important;
+
+  border:
+    1px solid rgba(255,77,103,.28) !important;
+
+  box-shadow:
+    0 0 18px rgba(255,77,103,.09);
+}
+
+/* =========================================================
+   BLUE / PRIMARY
+   ========================================================= */
+
+body.eec-dark-mode .bg-blue-600,
+body.eec-dark-mode .bg-blue-500 {
+  background:
+    linear-gradient(
+      135deg,
+      #3d7cff,
+      #6b5cff
+    ) !important;
+
+  color: white !important;
+
+  box-shadow:
+    0 8px 25px rgba(79,140,255,.22);
+}
+
+body.eec-dark-mode .bg-blue-600:hover,
+body.eec-dark-mode .bg-blue-500:hover {
+  filter: brightness(1.08);
+  box-shadow:
+    0 10px 30px rgba(79,140,255,.30);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+body.eec-dark-mode button {
+  color: inherit;
+}
+
+body.eec-dark-mode button:hover {
+  transform: translateY(-1px);
+}
+
+body.eec-dark-mode button:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   FILE UPLOAD / DROP ZONES
+   ========================================================= */
+
+body.eec-dark-mode
+input[type="file"] {
+  background:
+    linear-gradient(
+      145deg,
+      #151c29,
+      #0e141e
+    ) !important;
+
+  color: var(--eec-text-2) !important;
+
+  border:
+    1px dashed rgba(255,255,255,.15) !important;
+}
+
+body.eec-dark-mode
+[class*="border-dashed"] {
+  background:
+    rgba(255,255,255,.018) !important;
+
+  border-color:
+    rgba(255,255,255,.12) !important;
+}
+
+body.eec-dark-mode
+[class*="border-dashed"]:hover {
+  background:
+    rgba(79,140,255,.045) !important;
+
+  border-color:
+    rgba(79,140,255,.38) !important;
+}
+
+/* =========================================================
+   CHAT / MESSAGE BUBBLES
+   ========================================================= */
+
+body.eec-dark-mode .message-bubble {
+  background:
+    var(--eec-surface-2) !important;
+
+  color:
+    var(--eec-text) !important;
+
+  border:
+    1px solid var(--eec-border) !important;
+}
+
+/* =========================================================
+   TIMELINES
+   ========================================================= */
+
+body.eec-dark-mode .request-timeline::before {
+  background:
+    rgba(255,255,255,.10) !important;
+}
+
+/* =========================================================
+   MODALS / DROPDOWNS
+   ========================================================= */
+
+body.eec-dark-mode [role="dialog"],
+body.eec-dark-mode [role="menu"] {
+  background:
+    linear-gradient(
+      145deg,
+      #1a2230,
+      #101620
+    ) !important;
+
+  color:
+    var(--eec-text) !important;
+
+  border:
+    1px solid var(--eec-border-strong) !important;
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.45) !important;
+}
+
+/* =========================================================
+   PROFILE / SETTINGS PANELS
+   ========================================================= */
+
+body.eec-dark-mode
+[class*="settings"],
+body.eec-dark-mode
+[class*="profile-menu"],
+body.eec-dark-mode
+[class*="dropdown"] {
+  color: var(--eec-text);
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+body.eec-dark-mode ::-webkit-scrollbar-track {
+  background: #080b12;
+}
+
+body.eec-dark-mode ::-webkit-scrollbar-thumb {
+  background:
+    #30394a;
+}
+
+body.eec-dark-mode ::-webkit-scrollbar-thumb:hover {
+  background:
+    #47536a;
+}
+
+/* =========================================================
+   LIGHT MODE — PRESERVE EXISTING DESIGN
+   ========================================================= */
+
+body:not(.eec-dark-mode) {
+  color-scheme: light;
+}
+
+body.eec-dark-mode {
+  color-scheme: dark;
+}
+
+/* =========================================================
+   SMOOTH THEME TRANSITION
+   ========================================================= */
+
+body,
+body * {
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    color .18s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  body * {
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   EEC FINAL LIGHT THEME
+   Dark mode is intentionally excluded.
+   ============================================================ */
+
+body:not(.eec-dark-mode) {
+  --light-bg: #f6f8fc;
+  --light-surface: #ffffff;
+  --light-surface-soft: #f8fafc;
+  --light-border: #e2e8f0;
+  --light-border-strong: #cbd5e1;
+  --light-text: #0f172a;
+  --light-text-2: #334155;
+  --light-muted: #64748b;
+  --light-primary: #2563eb;
+  --light-primary-soft: #eff6ff;
+
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(37,99,235,.045),
+      transparent 30%
+    ),
+    var(--light-bg) !important;
+
+  color: var(--light-text) !important;
+}
+
+/* ---------- PAGE ---------- */
+
+body:not(.eec-dark-mode) main,
+body:not(.eec-dark-mode) .page,
+body:not(.eec-dark-mode) .container {
+  color: var(--light-text);
+}
+
+/* ---------- HEADERS ---------- */
+
+body:not(.eec-dark-mode) h1,
+body:not(.eec-dark-mode) h2,
+body:not(.eec-dark-mode) h3,
+body:not(.eec-dark-mode) h4,
+body:not(.eec-dark-mode) h5,
+body:not(.eec-dark-mode) h6 {
+  color: var(--light-text) !important;
+}
+
+body:not(.eec-dark-mode) p {
+  color: var(--light-text-2);
+}
+
+/* ---------- NAVIGATION ---------- */
+
+body:not(.eec-dark-mode) nav {
+  background: rgba(255,255,255,.96) !important;
+  color: var(--light-text) !important;
+  border-color: var(--light-border) !important;
+}
+
+body:not(.eec-dark-mode) nav a {
+  color: var(--light-muted) !important;
+}
+
+body:not(.eec-dark-mode) nav a:hover {
+  color: var(--light-text) !important;
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) nav a.active,
+body:not(.eec-dark-mode) nav a[aria-current="page"] {
+  color: var(--light-primary) !important;
+  background: var(--light-primary-soft) !important;
+  border-color: #dbeafe !important;
+}
+
+/* Navigation SVG icons only */
+body:not(.eec-dark-mode) nav a svg {
+  color: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* ---------- CARDS ---------- */
+
+body:not(.eec-dark-mode) .bg-white,
+body:not(.eec-dark-mode) .document-card {
+  background: var(--light-surface) !important;
+  color: var(--light-text) !important;
+}
+
+body:not(.eec-dark-mode) .bg-white.border,
+body:not(.eec-dark-mode) .document-card {
+  border-color: var(--light-border) !important;
+  box-shadow: 0 8px 30px rgba(15,23,42,.06) !important;
+}
+
+body:not(.eec-dark-mode) .bg-white.border:hover,
+body:not(.eec-dark-mode) .document-card:hover {
+  border-color: #d5dce7 !important;
+  box-shadow: 0 14px 38px rgba(15,23,42,.10) !important;
+}
+
+/* ---------- COMMON LIGHT SURFACES ---------- */
+
+body:not(.eec-dark-mode) .bg-slate-50,
+body:not(.eec-dark-mode) .bg-gray-50 {
+  background: var(--light-surface-soft) !important;
+}
+
+body:not(.eec-dark-mode) .bg-slate-100,
+body:not(.eec-dark-mode) .bg-gray-100 {
+  background: #f1f5f9 !important;
+}
+
+/* ---------- TEXT COLORS ---------- */
+
+body:not(.eec-dark-mode) .text-slate-900,
+body:not(.eec-dark-mode) .text-slate-800,
+body:not(.eec-dark-mode) .text-gray-900,
+body:not(.eec-dark-mode) .text-gray-800 {
+  color: var(--light-text) !important;
+}
+
+body:not(.eec-dark-mode) .text-slate-700,
+body:not(.eec-dark-mode) .text-gray-700 {
+  color: var(--light-text-2) !important;
+}
+
+body:not(.eec-dark-mode) .text-slate-600,
+body:not(.eec-dark-mode) .text-gray-600,
+body:not(.eec-dark-mode) .text-slate-500,
+body:not(.eec-dark-mode) .text-gray-500 {
+  color: var(--light-muted) !important;
+}
+
+/* Fix accidental pale text on normal surfaces.
+   Do NOT globally override text-white because buttons may need it. */
+
+body:not(.eec-dark-mode) .bg-white .text-white,
+body:not(.eec-dark-mode) .bg-slate-50 .text-white,
+body:not(.eec-dark-mode) .bg-gray-50 .text-white {
+  color: var(--light-text) !important;
+}
+
+/* ---------- BORDERS ---------- */
+
+body:not(.eec-dark-mode) .border,
+body:not(.eec-dark-mode) .border-gray-100,
+body:not(.eec-dark-mode) .border-gray-200,
+body:not(.eec-dark-mode) .border-slate-100,
+body:not(.eec-dark-mode) .border-slate-200 {
+  border-color: var(--light-border) !important;
+}
+
+/* ---------- INPUTS ---------- */
+
+body:not(.eec-dark-mode) input,
+body:not(.eec-dark-mode) select,
+body:not(.eec-dark-mode) textarea {
+  background: #ffffff !important;
+  color: var(--light-text) !important;
+  border-color: var(--light-border-strong) !important;
+}
+
+body:not(.eec-dark-mode) input::placeholder,
+body:not(.eec-dark-mode) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+body:not(.eec-dark-mode) input:focus,
+body:not(.eec-dark-mode) select:focus,
+body:not(.eec-dark-mode) textarea:focus {
+  border-color: rgba(37,99,235,.65) !important;
+  box-shadow: 0 0 0 4px rgba(37,99,235,.10) !important;
+}
+
+/* File upload */
+body:not(.eec-dark-mode) input[type="file"] {
+  background: #ffffff !important;
+  color: var(--light-text-2) !important;
+  border-color: var(--light-border-strong) !important;
+}
+
+/* ---------- TABLES ---------- */
+
+body:not(.eec-dark-mode) table {
+  color: var(--light-text);
+}
+
+body:not(.eec-dark-mode) thead {
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) th {
+  color: #475569 !important;
+}
+
+body:not(.eec-dark-mode) td {
+  color: var(--light-text-2) !important;
+  border-color: var(--light-border) !important;
+}
+
+body:not(.eec-dark-mode) tbody tr:hover {
+  background: #f8fafc !important;
+}
+
+/* ---------- MESSAGE UI ---------- */
+
+body:not(.eec-dark-mode) .message-bubble {
+  background: #ffffff !important;
+  color: var(--light-text-2) !important;
+  border: 1px solid var(--light-border) !important;
+  box-shadow: 0 2px 8px rgba(15,23,42,.04) !important;
+}
+
+body:not(.eec-dark-mode) .message-bubble svg {
+  color: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* ---------- NOTIFICATIONS ---------- */
+
+body:not(.eec-dark-mode) [class*="notification"] {
+  color: var(--light-text);
+}
+
+body:not(.eec-dark-mode) [class*="notification"] svg {
+  color: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* ---------- REQUESTS ---------- */
+
+body:not(.eec-dark-mode) [class*="request"] {
+  color: var(--light-text-2);
+}
+
+body:not(.eec-dark-mode) .request-timeline::before {
+  background: #cbd5e1 !important;
+}
+
+/* ---------- ICONS ON NORMAL SURFACES ---------- */
+
+body:not(.eec-dark-mode) .bg-white svg,
+body:not(.eec-dark-mode) .bg-slate-50 svg,
+body:not(.eec-dark-mode) .bg-gray-50 svg {
+  color: #475569;
+}
+
+body:not(.eec-dark-mode) .bg-white svg[stroke],
+body:not(.eec-dark-mode) .bg-slate-50 svg[stroke],
+body:not(.eec-dark-mode) .bg-gray-50 svg[stroke] {
+  stroke: currentColor !important;
+}
+
+/* ---------- FILTERS ---------- */
+
+body:not(.eec-dark-mode) .ui-filter-label {
+  color: var(--light-muted) !important;
+}
+
+body:not(.eec-dark-mode) .ui-filter-bar select {
+  background: #ffffff !important;
+  color: var(--light-text) !important;
+  border-color: var(--light-border-strong) !important;
+}
+
+/* ---------- DASHBOARD STAT CARDS ---------- */
+
+body:not(.eec-dark-mode) .grid > div[class*="border"],
+body:not(.eec-dark-mode) .grid > a[class*="border"] {
+  background: #ffffff !important;
+  color: var(--light-text) !important;
+  border-color: var(--light-border) !important;
+}
+
+/* ---------- STATUS BADGES ---------- */
+
+body:not(.eec-dark-mode) .bg-green-100,
+body:not(.eec-dark-mode) .bg-emerald-100 {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+  border-color: #bbf7d0 !important;
+}
+
+body:not(.eec-dark-mode) .bg-amber-100,
+body:not(.eec-dark-mode) .bg-yellow-100 {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fde68a !important;
+}
+
+body:not(.eec-dark-mode) .bg-red-100,
+body:not(.eec-dark-mode) .bg-rose-100 {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+  border-color: #fecaca !important;
+}
+
+/* ---------- MODALS / DROPDOWNS ---------- */
+
+body:not(.eec-dark-mode) [role="dialog"],
+body:not(.eec-dark-mode) [role="menu"] {
+  background: #ffffff !important;
+  color: var(--light-text) !important;
+  border-color: var(--light-border) !important;
+  box-shadow: 0 20px 60px rgba(15,23,42,.14) !important;
+}
+
+/* ---------- DROPDOWN TEXT ---------- */
+
+body:not(.eec-dark-mode) [role="menu"] strong,
+body:not(.eec-dark-mode) [role="menu"] span,
+body:not(.eec-dark-mode) [role="dialog"] strong,
+body:not(.eec-dark-mode) [role="dialog"] span {
+  color: inherit;
+}
+
+/* ---------- LINKS ---------- */
+
+body:not(.eec-dark-mode) main a {
+  color: var(--light-primary);
+}
+
+body:not(.eec-dark-mode) main a:hover {
+  color: #1d4ed8;
+}
+
+/* ---------- SCROLLBAR ---------- */
+
+body:not(.eec-dark-mode) ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+body:not(.eec-dark-mode) ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+body:not(.eec-dark-mode) ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ---------- NEVER AFFECT DARK MODE ---------- */
+
+/* ============================================================
+   ADMIN — FINAL LIGHT MODE COMPONENT FIX
+   STUDENT PORTAL IS NOT TOUCHED.
+   DARK MODE IS NOT TOUCHED.
+   ============================================================ */
+
+body:not(.eec-dark-mode) {
+
+  /* ---------- GLOBAL ADMIN CONTENT ---------- */
+
+  color: #0f172a !important;
+}
+
+body:not(.eec-dark-mode) main,
+body:not(.eec-dark-mode) main > div,
+body:not(.eec-dark-mode) section,
+body:not(.eec-dark-mode) article {
+  color: #0f172a;
+}
+
+/* ---------- ALL HEADERS ---------- */
+
+body:not(.eec-dark-mode) main h1,
+body:not(.eec-dark-mode) main h2,
+body:not(.eec-dark-mode) main h3,
+body:not(.eec-dark-mode) main h4,
+body:not(.eec-dark-mode) main h5,
+body:not(.eec-dark-mode) main h6 {
+  color: #0f172a !important;
+  opacity: 1 !important;
+}
+
+/* ---------- SUBHEADERS / DESCRIPTIONS ---------- */
+
+body:not(.eec-dark-mode) main .text-gray-500,
+body:not(.eec-dark-mode) main .text-gray-600,
+body:not(.eec-dark-mode) main .text-slate-500,
+body:not(.eec-dark-mode) main .text-slate-600 {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+/* ---------- ADMIN NAVBAR ---------- */
+
+body:not(.eec-dark-mode) .admin-pro-navbar {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+body:not(.eec-dark-mode) .admin-pro-navbar * {
+  opacity: 1;
+}
+
+body:not(.eec-dark-mode) .admin-pro-navbar a {
+  color: #64748b !important;
+}
+
+body:not(.eec-dark-mode) .admin-pro-navbar a:hover {
+  color: #0f172a !important;
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) .admin-pro-navbar a.active {
+  color: #2563eb !important;
+  background: #eff6ff !important;
+  border-color: #dbeafe !important;
+}
+
+body:not(.eec-dark-mode) .admin-pro-navbar svg {
+  stroke: currentColor !important;
+  color: currentColor !important;
+}
+
+/* ---------- NORMAL SVG ICONS ---------- */
+
+body:not(.eec-dark-mode) main svg {
+  opacity: 1 !important;
+  color: #475569;
+}
+
+body:not(.eec-dark-mode) main svg[stroke],
+body:not(.eec-dark-mode) main svg *[stroke] {
+  stroke: currentColor !important;
+}
+
+/* Don't make filled icons disappear */
+body:not(.eec-dark-mode) main svg[fill],
+body:not(.eec-dark-mode) main svg *[fill] {
+  fill: currentColor;
+}
+
+/* ---------- CARDS ---------- */
+
+body:not(.eec-dark-mode) main .bg-white {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+body:not(.eec-dark-mode) main .bg-white h1,
+body:not(.eec-dark-mode) main .bg-white h2,
+body:not(.eec-dark-mode) main .bg-white h3,
+body:not(.eec-dark-mode) main .bg-white h4,
+body:not(.eec-dark-mode) main .bg-white h5,
+body:not(.eec-dark-mode) main .bg-white h6 {
+  color: #0f172a !important;
+}
+
+body:not(.eec-dark-mode) main .bg-white p {
+  color: #334155 !important;
+}
+
+/* ---------- CARD ICON CONTAINERS ---------- */
+
+body:not(.eec-dark-mode) main .bg-blue-50 svg {
+  color: #2563eb !important;
+  stroke: currentColor !important;
+}
+
+body:not(.eec-dark-mode) main .bg-purple-50 svg {
+  color: #7c3aed !important;
+  stroke: currentColor !important;
+}
+
+body:not(.eec-dark-mode) main .bg-green-50 svg {
+  color: #16a34a !important;
+  stroke: currentColor !important;
+}
+
+body:not(.eec-dark-mode) main .bg-orange-50 svg {
+  color: #ea580c !important;
+  stroke: currentColor !important;
+}
+
+/* ---------- BUTTONS ---------- */
+
+body:not(.eec-dark-mode) main button {
+  opacity: 1 !important;
+}
+
+body:not(.eec-dark-mode) main button svg {
+  color: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* ---------- BLUE BUTTONS KEEP WHITE ---------- */
+
+body:not(.eec-dark-mode) main .bg-blue-600,
+body:not(.eec-dark-mode) main .bg-blue-500 {
+  color: #ffffff !important;
+}
+
+body:not(.eec-dark-mode) main .bg-blue-600 *,
+body:not(.eec-dark-mode) main .bg-blue-500 * {
+  color: #ffffff !important;
+}
+
+body:not(.eec-dark-mode) main .bg-blue-600 svg,
+body:not(.eec-dark-mode) main .bg-blue-500 svg {
+  stroke: #ffffff !important;
+}
+
+/* ---------- INPUTS ---------- */
+
+body:not(.eec-dark-mode) main input,
+body:not(.eec-dark-mode) main select,
+body:not(.eec-dark-mode) main textarea {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+
+body:not(.eec-dark-mode) main input::placeholder,
+body:not(.eec-dark-mode) main textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+body:not(.eec-dark-mode) main select option {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* ---------- FORM LABELS ---------- */
+
+body:not(.eec-dark-mode) main label {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+
+/* ---------- TABLE ---------- */
+
+body:not(.eec-dark-mode) main table {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+body:not(.eec-dark-mode) main thead {
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) main th {
+  color: #475569 !important;
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) main td {
+  color: #334155 !important;
+  background: #ffffff !important;
+}
+
+body:not(.eec-dark-mode) main tr {
+  border-color: #e2e8f0 !important;
+}
+
+body:not(.eec-dark-mode) main tbody tr:hover td {
+  background: #f8fafc !important;
+}
+
+/* ---------- MESSAGE PAGE ---------- */
+
+body:not(.eec-dark-mode) main [class*="message"] {
+  color: #334155;
+}
+
+body:not(.eec-dark-mode) main [class*="message"] svg {
+  color: #475569 !important;
+  stroke: currentColor !important;
+}
+
+/* ---------- NOTIFICATION PAGE ---------- */
+
+body:not(.eec-dark-mode) main [class*="notification"] {
+  color: #334155;
+}
+
+body:not(.eec-dark-mode) main [class*="notification"] svg {
+  color: #475569 !important;
+  stroke: currentColor !important;
+}
+
+/* ---------- ANALYTICS ---------- */
+
+body:not(.eec-dark-mode) main [class*="chart"],
+body:not(.eec-dark-mode) main [class*="analytics"] {
+  color: #0f172a;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] svg {
+  color: #475569 !important;
+}
+
+/* ---------- PROFILE / SETTINGS ---------- */
+
+body:not(.eec-dark-mode) .admin-pro-settings,
+body:not(.eec-dark-mode) .admin-pro-profile-menu,
+body:not(.eec-dark-mode) .admin-pro-dropdown {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+body:not(.eec-dark-mode) .admin-pro-settings strong,
+body:not(.eec-dark-mode) .admin-pro-profile-menu strong,
+body:not(.eec-dark-mode) .admin-pro-dropdown strong {
+  color: #0f172a !important;
+}
+
+body:not(.eec-dark-mode) .admin-pro-settings small,
+body:not(.eec-dark-mode) .admin-pro-profile-menu small,
+body:not(.eec-dark-mode) .admin-pro-dropdown small {
+  color: #64748b !important;
+}
+
+/* ---------- DROPDOWN / MODAL ---------- */
+
+body:not(.eec-dark-mode) [role="menu"],
+body:not(.eec-dark-mode) [role="dialog"] {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+body:not(.eec-dark-mode) [role="menu"] svg,
+body:not(.eec-dark-mode) [role="dialog"] svg {
+  color: #475569 !important;
+  stroke: currentColor !important;
+}
+
+/* ---------- STATUS BADGES ---------- */
+
+body:not(.eec-dark-mode) .bg-green-100,
+body:not(.eec-dark-mode) .bg-emerald-100 {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+  border-color: #bbf7d0 !important;
+}
+
+body:not(.eec-dark-mode) .bg-amber-100,
+body:not(.eec-dark-mode) .bg-yellow-100 {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fde68a !important;
+}
+
+body:not(.eec-dark-mode) .bg-red-100,
+body:not(.eec-dark-mode) .bg-rose-100 {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+  border-color: #fecaca !important;
+}
+
+/* ---------- UPLOAD AREAS ---------- */
+
+body:not(.eec-dark-mode) main [class*="border-dashed"] {
+  background: #ffffff !important;
+  color: #334155 !important;
+  border-color: #cbd5e1 !important;
+}
+
+body:not(.eec-dark-mode) main [class*="border-dashed"] svg {
+  color: #64748b !important;
+  stroke: currentColor !important;
+}
+
+/* ---------- CHECKBOXES ---------- */
+
+body:not(.eec-dark-mode) input[type="checkbox"] {
+  accent-color: #2563eb;
+}
+
+/* ---------- LINKS ---------- */
+
+body:not(.eec-dark-mode) main a {
+  opacity: 1 !important;
+}
+
+/* ---------- REMOVE FADED LIGHT-MODE CONTENT ---------- */
+
+body:not(.eec-dark-mode) main .opacity-50,
+body:not(.eec-dark-mode) main .opacity-60,
+body:not(.eec-dark-mode) main .opacity-70 {
+  opacity: 1 !important;
+}
+
+/* ============================================================
+   END ADMIN LIGHT MODE FIX
+   ============================================================ */
+
+/* ============================================================
+   ADMIN ANALYTICS — LIGHT MODE FINAL POLISH
+   Dark mode completely untouched.
+   ============================================================ */
+
+body:not(.eec-dark-mode) main [class*="analytics"],
+body:not(.eec-dark-mode) main [class*="Analytics"] {
+  color: #0f172a !important;
+}
+
+/* Analytics cards */
+body:not(.eec-dark-mode) main [class*="analytics"] .bg-white,
+body:not(.eec-dark-mode) main [class*="Analytics"] .bg-white {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 24px rgba(15,23,42,.06) !important;
+}
+
+/* Card headings */
+body:not(.eec-dark-mode) main [class*="analytics"] h1,
+body:not(.eec-dark-mode) main [class*="analytics"] h2,
+body:not(.eec-dark-mode) main [class*="analytics"] h3,
+body:not(.eec-dark-mode) main [class*="analytics"] h4,
+body:not(.eec-dark-mode) main [class*="Analytics"] h1,
+body:not(.eec-dark-mode) main [class*="Analytics"] h2,
+body:not(.eec-dark-mode) main [class*="Analytics"] h3,
+body:not(.eec-dark-mode) main [class*="Analytics"] h4 {
+  color: #0f172a !important;
+}
+
+/* Card descriptions / labels */
+body:not(.eec-dark-mode) main [class*="analytics"] p,
+body:not(.eec-dark-mode) main [class*="analytics"] span,
+body:not(.eec-dark-mode) main [class*="Analytics"] p,
+body:not(.eec-dark-mode) main [class*="Analytics"] span {
+  color: #475569 !important;
+}
+
+/* Big analytics numbers */
+body:not(.eec-dark-mode) main [class*="analytics"] .text-2xl,
+body:not(.eec-dark-mode) main [class*="analytics"] .text-3xl,
+body:not(.eec-dark-mode) main [class*="analytics"] .text-4xl,
+body:not(.eec-dark-mode) main [class*="Analytics"] .text-2xl,
+body:not(.eec-dark-mode) main [class*="Analytics"] .text-3xl,
+body:not(.eec-dark-mode) main [class*="Analytics"] .text-4xl {
+  color: #0f172a !important;
+}
+
+/* ---------- ICON CONTAINERS ---------- */
+
+body:not(.eec-dark-mode) main [class*="analytics"] .bg-blue-50,
+body:not(.eec-dark-mode) main [class*="Analytics"] .bg-blue-50 {
+  background: #eff6ff !important;
+  color: #2563eb !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .bg-green-50,
+body:not(.eec-dark-mode) main [class*="Analytics"] .bg-green-50 {
+  background: #f0fdf4 !important;
+  color: #16a34a !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .bg-amber-50,
+body:not(.eec-dark-mode) main [class*="Analytics"] .bg-amber-50 {
+  background: #fffbeb !important;
+  color: #d97706 !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .bg-red-50,
+body:not(.eec-dark-mode) main [class*="Analytics"] .bg-red-50 {
+  background: #fef2f2 !important;
+  color: #dc2626 !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .bg-purple-50,
+body:not(.eec-dark-mode) main [class*="Analytics"] .bg-purple-50 {
+  background: #faf5ff !important;
+  color: #7c3aed !important;
+}
+
+/* ---------- ANALYTICS SVG ICONS ---------- */
+
+body:not(.eec-dark-mode) main [class*="analytics"] svg,
+body:not(.eec-dark-mode) main [class*="Analytics"] svg {
+  opacity: 1 !important;
+  stroke: currentColor !important;
+}
+
+/* Prevent global SVG rules from making icons washed out */
+body:not(.eec-dark-mode) main [class*="analytics"] .text-blue-600 svg,
+body:not(.eec-dark-mode) main [class*="Analytics"] .text-blue-600 svg {
+  color: #2563eb !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .text-green-600 svg,
+body:not(.eec-dark-mode) main [class*="Analytics"] .text-green-600 svg {
+  color: #16a34a !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .text-amber-600 svg,
+body:not(.eec-dark-mode) main [class*="Analytics"] .text-amber-600 svg {
+  color: #d97706 !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .text-red-600 svg,
+body:not(.eec-dark-mode) main [class*="Analytics"] .text-red-600 svg {
+  color: #dc2626 !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .text-purple-600 svg,
+body:not(.eec-dark-mode) main [class*="Analytics"] .text-purple-600 svg {
+  color: #7c3aed !important;
+}
+
+/* ---------- CHART / GRAPH AREA ---------- */
+
+body:not(.eec-dark-mode) main [class*="analytics"] .recharts-wrapper,
+body:not(.eec-dark-mode) main [class*="Analytics"] .recharts-wrapper {
+  background: #ffffff !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .recharts-cartesian-axis-tick-value,
+body:not(.eec-dark-mode) main [class*="Analytics"] .recharts-cartesian-axis-tick-value {
+  fill: #64748b !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .recharts-cartesian-axis-line,
+body:not(.eec-dark-mode) main [class*="Analytics"] .recharts-cartesian-axis-line {
+  stroke: #cbd5e1 !important;
+}
+
+body:not(.eec-dark-mode) main [class*="analytics"] .recharts-cartesian-grid line,
+body:not(.eec-dark-mode) main [class*="Analytics"] .recharts-cartesian-grid line {
+  stroke: #e2e8f0 !important;
+}
+
+/* ---------- ANALYTICS DIVIDERS ---------- */
+
+body:not(.eec-dark-mode) main [class*="analytics"] hr,
+body:not(.eec-dark-mode) main [class*="Analytics"] hr {
+  border-color: #e2e8f0 !important;
+}
+
+/* ---------- HOVER ---------- */
+
+body:not(.eec-dark-mode) main [class*="analytics"] .bg-white:hover,
+body:not(.eec-dark-mode) main [class*="Analytics"] .bg-white:hover {
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 12px 32px rgba(15,23,42,.09) !important;
+}
+
+/* ============================================================
+   END ANALYTICS LIGHT MODE
+   ============================================================ */
+
+/* ================================================================
+   EEC ADMIN — FINAL LIGHT MODE COMPATIBILITY LAYER
+   ================================================================
+   IMPORTANT:
+   - LIGHT MODE ONLY
+   - DARK MODE COMPLETELY UNTOUCHED
+   - BACKEND UNTOUCHED
+   - ROUTES / FUNCTIONALITY UNTOUCHED
+   ================================================================ */
+
+body:not(.eec-dark-mode) {
+  --eec-light-bg: #f6f8fc;
+  --eec-light-card: #ffffff;
+  --eec-light-soft: #f8fafc;
+  --eec-light-border: #e2e8f0;
+  --eec-light-border-2: #cbd5e1;
+  --eec-light-heading: #0f172a;
+  --eec-light-text: #334155;
+  --eec-light-muted: #64748b;
+  --eec-light-primary: #2563eb;
+}
+
+/* ================================================================
+   1. PAGE BACKGROUND
+   ================================================================ */
+
+body:not(.eec-dark-mode),
+body:not(.eec-dark-mode) #root {
+  background: var(--eec-light-bg) !important;
+  color: var(--eec-light-heading) !important;
+}
+
+body:not(.eec-dark-mode) main {
+  background: transparent !important;
+  color: var(--eec-light-heading) !important;
+}
+
+/* ================================================================
+   2. ALL HEADINGS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main h1,
+body:not(.eec-dark-mode) main h2,
+body:not(.eec-dark-mode) main h3,
+body:not(.eec-dark-mode) main h4,
+body:not(.eec-dark-mode) main h5,
+body:not(.eec-dark-mode) main h6 {
+  color: #0f172a !important;
+  opacity: 1 !important;
+}
+
+/* Analytics title */
+body:not(.eec-dark-mode) main h1.text-3xl,
+body:not(.eec-dark-mode) main h1.text-2xl {
+  color: #0f172a !important;
+}
+
+/* ================================================================
+   3. NORMAL BODY TEXT
+   ================================================================ */
+
+body:not(.eec-dark-mode) main p:not(.text-white),
+body:not(.eec-dark-mode) main li:not(.text-white) {
+  color: #475569;
+  opacity: 1 !important;
+}
+
+body:not(.eec-dark-mode) main .text-slate-900,
+body:not(.eec-dark-mode) main .text-slate-800,
+body:not(.eec-dark-mode) main .text-gray-900,
+body:not(.eec-dark-mode) main .text-gray-800 {
+  color: #0f172a !important;
+}
+
+body:not(.eec-dark-mode) main .text-slate-700,
+body:not(.eec-dark-mode) main .text-gray-700 {
+  color: #334155 !important;
+}
+
+body:not(.eec-dark-mode) main .text-slate-600,
+body:not(.eec-dark-mode) main .text-gray-600 {
+  color: #475569 !important;
+}
+
+body:not(.eec-dark-mode) main .text-slate-500,
+body:not(.eec-dark-mode) main .text-gray-500 {
+  color: #64748b !important;
+}
+
+/* ================================================================
+   4. WHITE CARDS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main .bg-white {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+body:not(.eec-dark-mode) main .bg-white h1,
+body:not(.eec-dark-mode) main .bg-white h2,
+body:not(.eec-dark-mode) main .bg-white h3,
+body:not(.eec-dark-mode) main .bg-white h4 {
+  color: #0f172a !important;
+}
+
+body:not(.eec-dark-mode) main .bg-white p {
+  color: #475569 !important;
+}
+
+/* Card borders */
+body:not(.eec-dark-mode) main .bg-white.border,
+body:not(.eec-dark-mode) main .bg-white[class*="border"] {
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 6px 24px rgba(15,23,42,.055) !important;
+}
+
+/* ================================================================
+   5. SOFT BACKGROUNDS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main .bg-slate-50,
+body:not(.eec-dark-mode) main .bg-gray-50 {
+  background-color: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) main .bg-slate-100,
+body:not(.eec-dark-mode) main .bg-gray-100 {
+  background-color: #f1f5f9 !important;
+}
+
+/* ================================================================
+   6. ANALYTICS METRIC CARDS
+   ================================================================ */
+
+/* Blue */
+body:not(.eec-dark-mode) main .bg-blue-50 {
+  background-color: #eff6ff !important;
+}
+
+/* Green */
+body:not(.eec-dark-mode) main .bg-green-50 {
+  background-color: #f0fdf4 !important;
+}
+
+/* Emerald */
+body:not(.eec-dark-mode) main .bg-emerald-50 {
+  background-color: #ecfdf5 !important;
+}
+
+/* Red */
+body:not(.eec-dark-mode) main .bg-red-50 {
+  background-color: #fef2f2 !important;
+}
+
+/* Rose */
+body:not(.eec-dark-mode) main .bg-rose-50 {
+  background-color: #fff1f2 !important;
+}
+
+/* Amber */
+body:not(.eec-dark-mode) main .bg-amber-50 {
+  background-color: #fffbeb !important;
+}
+
+/* Yellow */
+body:not(.eec-dark-mode) main .bg-yellow-50 {
+  background-color: #fefce8 !important;
+}
+
+/* Purple */
+body:not(.eec-dark-mode) main .bg-purple-50 {
+  background-color: #faf5ff !important;
+}
+
+/* Indigo */
+body:not(.eec-dark-mode) main .bg-indigo-50 {
+  background-color: #eef2ff !important;
+}
+
+/* ================================================================
+   7. ANALYTICS NUMBERS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main .text-4xl,
+body:not(.eec-dark-mode) main .text-3xl,
+body:not(.eec-dark-mode) main .text-2xl {
+  opacity: 1 !important;
+}
+
+/* Preserve semantic metric colors */
+body:not(.eec-dark-mode) main .text-blue-600 {
+  color: #2563eb !important;
+}
+
+body:not(.eec-dark-mode) main .text-green-600 {
+  color: #16a34a !important;
+}
+
+body:not(.eec-dark-mode) main .text-emerald-600 {
+  color: #059669 !important;
+}
+
+body:not(.eec-dark-mode) main .text-red-600 {
+  color: #dc2626 !important;
+}
+
+body:not(.eec-dark-mode) main .text-rose-600 {
+  color: #e11d48 !important;
+}
+
+body:not(.eec-dark-mode) main .text-amber-600 {
+  color: #d97706 !important;
+}
+
+body:not(.eec-dark-mode) main .text-yellow-600 {
+  color: #ca8a04 !important;
+}
+
+body:not(.eec-dark-mode) main .text-purple-600 {
+  color: #9333ea !important;
+}
+
+body:not(.eec-dark-mode) main .text-indigo-600 {
+  color: #4f46e5 !important;
+}
+
+/* ================================================================
+   8. ANALYTICS ICONS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main .bg-blue-50 svg {
+  color: #2563eb !important;
+  stroke: currentColor !important;
+}
+
+body:not(.eec-dark-mode) main .bg-green-50 svg,
+body:not(.eec-dark-mode) main .bg-emerald-50 svg {
+  color: #16a34a !important;
+  stroke: currentColor !important;
+}
+
+body:not(.eec-dark-mode) main .bg-red-50 svg,
+body:not(.eec-dark-mode) main .bg-rose-50 svg {
+  color: #dc2626 !important;
+  stroke: currentColor !important;
+}
+
+body:not(.eec-dark-mode) main .bg-amber-50 svg,
+body:not(.eec-dark-mode) main .bg-yellow-50 svg {
+  color: #d97706 !important;
+  stroke: currentColor !important;
+}
+
+body:not(.eec-dark-mode) main .bg-purple-50 svg {
+  color: #9333ea !important;
+  stroke: currentColor !important;
+}
+
+body:not(.eec-dark-mode) main .bg-indigo-50 svg {
+  color: #4f46e5 !important;
+  stroke: currentColor !important;
+}
+
+/* Never let icons become transparent/faded */
+body:not(.eec-dark-mode) main svg {
+  opacity: 1 !important;
+}
+
+/* ================================================================
+   9. PROGRESS BARS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main .bg-slate-200,
+body:not(.eec-dark-mode) main .bg-gray-200 {
+  background-color: #e2e8f0 !important;
+}
+
+/* ================================================================
+   10. APPROVAL / REJECTION KPI PANELS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main .text-green-500,
+body:not(.eec-dark-mode) main .text-green-600,
+body:not(.eec-dark-mode) main .text-green-700 {
+  color: #16a34a !important;
+}
+
+body:not(.eec-dark-mode) main .text-red-500,
+body:not(.eec-dark-mode) main .text-red-600,
+body:not(.eec-dark-mode) main .text-red-700 {
+  color: #dc2626 !important;
+}
+
+/* ================================================================
+   11. DOCUMENT TYPE CARDS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main [class*="rounded"] {
+  opacity: 1;
+}
+
+body:not(.eec-dark-mode) main .border-slate-200,
+body:not(.eec-dark-mode) main .border-gray-200 {
+  border-color: #e2e8f0 !important;
+}
+
+/* ================================================================
+   12. TABLES / REQUEST LISTS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main table {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+body:not(.eec-dark-mode) main thead {
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) main th {
+  color: #475569 !important;
+  background: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) main td {
+  color: #334155 !important;
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+body:not(.eec-dark-mode) main tbody tr:hover td {
+  background: #f8fafc !important;
+}
+
+/* ================================================================
+   13. MESSAGES
+   ================================================================ */
+
+body:not(.eec-dark-mode) main .message-bubble,
+body:not(.eec-dark-mode) main [class*="message"] {
+  opacity: 1 !important;
+}
+
+body:not(.eec-dark-mode) main [class*="message"] svg {
+  opacity: 1 !important;
+}
+
+/* ================================================================
+   14. NOTIFICATIONS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main [class*="notification"] {
+  opacity: 1 !important;
+}
+
+body:not(.eec-dark-mode) main [class*="notification"] svg {
+  opacity: 1 !important;
+}
+
+/* ================================================================
+   15. FORMS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main label {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+
+body:not(.eec-dark-mode) main input,
+body:not(.eec-dark-mode) main select,
+body:not(.eec-dark-mode) main textarea {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+body:not(.eec-dark-mode) main input::placeholder,
+body:not(.eec-dark-mode) main textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+body:not(.eec-dark-mode) main input:focus,
+body:not(.eec-dark-mode) main select:focus,
+body:not(.eec-dark-mode) main textarea:focus {
+  border-color: #60a5fa !important;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.10) !important;
+}
+
+/* ================================================================
+   16. FILE UPLOAD
+   ================================================================ */
+
+body:not(.eec-dark-mode) main input[type="file"] {
+  background: #ffffff !important;
+  color: #334155 !important;
+  border-color: #cbd5e1 !important;
+}
+
+body:not(.eec-dark-mode) main input[type="file"]::file-selector-button {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  border: 0 !important;
+}
+
+/* ================================================================
+   17. DROPDOWNS / PROFILE
+   ================================================================ */
+
+body:not(.eec-dark-mode) [role="menu"],
+body:not(.eec-dark-mode) [role="dialog"],
+body:not(.eec-dark-mode) .admin-pro-settings,
+body:not(.eec-dark-mode) .admin-pro-profile-menu,
+body:not(.eec-dark-mode) .admin-pro-dropdown {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+  opacity: 1 !important;
+}
+
+body:not(.eec-dark-mode) [role="menu"] svg,
+body:not(.eec-dark-mode) [role="dialog"] svg {
+  color: #475569 !important;
+  stroke: currentColor !important;
+}
+
+/* ================================================================
+   18. STATUS BADGES
+   ================================================================ */
+
+body:not(.eec-dark-mode) main .bg-green-100,
+body:not(.eec-dark-mode) main .bg-emerald-100 {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+  border-color: #bbf7d0 !important;
+}
+
+body:not(.eec-dark-mode) main .bg-amber-100,
+body:not(.eec-dark-mode) main .bg-yellow-100 {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fde68a !important;
+}
+
+body:not(.eec-dark-mode) main .bg-red-100,
+body:not(.eec-dark-mode) main .bg-rose-100 {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+  border-color: #fecaca !important;
+}
+
+body:not(.eec-dark-mode) main .bg-blue-100 {
+  background: #dbeafe !important;
+  color: #1e40af !important;
+}
+
+/* ================================================================
+   19. LINKS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main a {
+  opacity: 1 !important;
+}
+
+body:not(.eec-dark-mode) main a.text-brand-600,
+body:not(.eec-dark-mode) main a.text-blue-600 {
+  color: #2563eb !important;
+}
+
+/* ================================================================
+   20. BUTTON ICONS
+   ================================================================ */
+
+body:not(.eec-dark-mode) main button svg {
+  opacity: 1 !important;
+}
+
+/* Keep white text/icons on intentionally colored buttons */
+body:not(.eec-dark-mode) main .bg-blue-600,
+body:not(.eec-dark-mode) main .bg-blue-700,
+body:not(.eec-dark-mode) main .bg-brand-600,
+body:not(.eec-dark-mode) main .bg-brand-700 {
+  color: #ffffff !important;
+}
+
+body:not(.eec-dark-mode) main .bg-blue-600 svg,
+body:not(.eec-dark-mode) main .bg-blue-700 svg,
+body:not(.eec-dark-mode) main .bg-brand-600 svg,
+body:not(.eec-dark-mode) main .bg-brand-700 svg {
+  color: #ffffff !important;
+  stroke: currentColor !important;
+}
+
+/* ================================================================
+   21. REMOVE LIGHT-MODE FADE
+   ================================================================ */
+
+body:not(.eec-dark-mode) main .opacity-50,
+body:not(.eec-dark-mode) main .opacity-60,
+body:not(.eec-dark-mode) main .opacity-70,
+body:not(.eec-dark-mode) main .opacity-75 {
+  opacity: 1 !important;
+}
+
+/* ================================================================
+   22. SCROLLBAR
+   ================================================================ */
+
+body:not(.eec-dark-mode) ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+body:not(.eec-dark-mode) ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+body:not(.eec-dark-mode) ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ================================================================
+   DARK MODE IS EXCLUDED FROM EVERYTHING ABOVE.
+   ================================================================ */
+
+
+/* =========================================================
+   ADMIN PROFILE DROPDOWN — DARK MODE FINAL FIX
+   ONLY targets the profile/settings popup.
+   ========================================================= */
+
+body.eec-dark-mode .admin-profile-dropdown,
+body.eec-dark-mode .admin-settings-dropdown,
+body.eec-dark-mode .admin-profile-menu,
+body.eec-dark-mode .profile-dropdown,
+body.eec-dark-mode .profile-menu,
+body.eec-dark-mode .settings-dropdown,
+body.eec-dark-mode [class*="profile-dropdown"],
+body.eec-dark-mode [class*="profile-menu"],
+body.eec-dark-mode [class*="settings-dropdown"] {
+    background: #151d2d !important;
+    background-color: #151d2d !important;
+    color: #f8fafc !important;
+    border: 1px solid #2d3a50 !important;
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, .45),
+        0 0 0 1px rgba(255,255,255,.025) !important;
+}
+
+/* Popup text */
+body.eec-dark-mode .admin-profile-dropdown *,
+body.eec-dark-mode .admin-settings-dropdown *,
+body.eec-dark-mode .admin-profile-menu *,
+body.eec-dark-mode .profile-dropdown *,
+body.eec-dark-mode .profile-menu *,
+body.eec-dark-mode .settings-dropdown *,
+body.eec-dark-mode [class*="profile-dropdown"] *,
+body.eec-dark-mode [class*="profile-menu"] *,
+body.eec-dark-mode [class*="settings-dropdown"] {
+    color: inherit !important;
+}
+
+/* Main name */
+body.eec-dark-mode .admin-profile-dropdown strong,
+body.eec-dark-mode .admin-settings-dropdown strong,
+body.eec-dark-mode .admin-profile-menu strong,
+body.eec-dark-mode .profile-dropdown strong,
+body.eec-dark-mode .profile-menu strong {
+    color: #f8fafc !important;
+}
+
+/* Secondary text */
+body.eec-dark-mode .admin-profile-dropdown small,
+body.eec-dark-mode .admin-settings-dropdown small,
+body.eec-dark-mode .admin-profile-menu small,
+body.eec-dark-mode .profile-dropdown small,
+body.eec-dark-mode .profile-menu small {
+    color: #94a3b8 !important;
+}
+
+/* SETTINGS heading */
+body.eec-dark-mode .admin-profile-dropdown .settings-title,
+body.eec-dark-mode .admin-settings-dropdown .settings-title,
+body.eec-dark-mode .profile-dropdown .settings-title {
+    color: #94a3b8 !important;
+}
+
+/* Divider */
+body.eec-dark-mode .admin-profile-dropdown hr,
+body.eec-dark-mode .admin-settings-dropdown hr,
+body.eec-dark-mode .admin-profile-menu hr,
+body.eec-dark-mode .profile-dropdown hr,
+body.eec-dark-mode .profile-menu hr {
+    border-color: #2d3a50 !important;
+    background: #2d3a50 !important;
+}
+
+/* Settings row */
+body.eec-dark-mode .admin-profile-dropdown button,
+body.eec-dark-mode .admin-settings-dropdown button,
+body.eec-dark-mode .admin-profile-menu button,
+body.eec-dark-mode .profile-dropdown button,
+body.eec-dark-mode .profile-menu button {
+    background: transparent !important;
+    color: #e2e8f0 !important;
+}
+
+/* Dark-mode row */
+body.eec-dark-mode .admin-profile-dropdown .setting-row,
+body.eec-dark-mode .admin-settings-dropdown .setting-row,
+body.eec-dark-mode .profile-dropdown .setting-row,
+body.eec-dark-mode [class*="setting-row"] {
+    background: #1b2537 !important;
+    color: #f8fafc !important;
+    border-color: #2d3a50 !important;
+}
+
+/* Setting icon container */
+body.eec-dark-mode .admin-profile-dropdown .setting-icon,
+body.eec-dark-mode .admin-settings-dropdown .setting-icon,
+body.eec-dark-mode .profile-dropdown .setting-icon {
+    background: #263248 !important;
+    color: #cbd5e1 !important;
+}
+
+/* SVG icons */
+body.eec-dark-mode .admin-profile-dropdown svg,
+body.eec-dark-mode .admin-settings-dropdown svg,
+body.eec-dark-mode .admin-profile-menu svg,
+body.eec-dark-mode .profile-dropdown svg,
+body.eec-dark-mode .profile-menu svg {
+    color: #cbd5e1 !important;
+    stroke: currentColor !important;
+    opacity: 1 !important;
+}
+
+/* Logout */
+body.eec-dark-mode .admin-profile-dropdown .logout,
+body.eec-dark-mode .admin-settings-dropdown .logout,
+body.eec-dark-mode .admin-profile-menu .logout,
+body.eec-dark-mode .profile-dropdown .logout,
+body.eec-dark-mode .profile-menu .logout,
+body.eec-dark-mode button[class*="logout"] {
+    background: rgba(244,63,94,.10) !important;
+    color: #fb7185 !important;
+    border: 1px solid rgba(244,63,94,.08) !important;
+}
+
+body.eec-dark-mode .admin-profile-dropdown .logout svg,
+body.eec-dark-mode .admin-settings-dropdown .logout svg,
+body.eec-dark-mode .profile-dropdown .logout svg,
+body.eec-dark-mode button[class*="logout"] svg {
+    color: #fb7185 !important;
+}
+
+/* Toggle */
+body.eec-dark-mode .admin-profile-dropdown .switch,
+body.eec-dark-mode .admin-settings-dropdown .switch,
+body.eec-dark-mode .profile-dropdown .switch,
+body.eec-dark-mode button[class*="switch"] {
+    background: #334155 !important;
+}
+
+body.eec-dark-mode .admin-profile-dropdown .switch.on,
+body.eec-dark-mode .admin-settings-dropdown .switch.on,
+body.eec-dark-mode .profile-dropdown .switch.on,
+body.eec-dark-mode button[class*="switch"].on {
+    background: #2563eb !important;
+}
+
+/* Avatar */
+body.eec-dark-mode .admin-profile-dropdown .avatar,
+body.eec-dark-mode .admin-settings-dropdown .avatar,
+body.eec-dark-mode .admin-profile-menu .avatar,
+body.eec-dark-mode .profile-dropdown .avatar {
+    background: linear-gradient(135deg,#2563eb,#4f46e5) !important;
+    color: #ffffff !important;
+}
+
+/* Hover */
+body.eec-dark-mode .admin-profile-dropdown button:hover,
+body.eec-dark-mode .admin-settings-dropdown button:hover,
+body.eec-dark-mode .admin-profile-menu button:hover,
+body.eec-dark-mode .profile-dropdown button:hover,
+body.eec-dark-mode .profile-menu button:hover {
+    background: #202b3f !important;
+}
+
+/* =========================================================
+   LIGHT MODE — DO NOTHING
+   ========================================================= */
+
+
+/* =========================================================
+   FINAL ADMIN PROFILE DROPDOWN FIX
+   Dark mode only
+   ========================================================= */
+
+/* Catch the actual popup regardless of its existing class */
+body.eec-dark-mode nav > div > div:last-child > div,
+body.eec-dark-mode nav > div > div:last-child > div[class],
+body.eec-dark-mode nav div[class*="dropdown"],
+body.eec-dark-mode nav div[class*="Dropdown"],
+body.eec-dark-mode nav div[class*="profile"],
+body.eec-dark-mode nav div[class*="Profile"],
+body.eec-dark-mode nav div[class*="menu"],
+body.eec-dark-mode nav div[class*="Menu"] {
+    color: #f8fafc !important;
+}
+
+/* Any popup positioned over the page */
+body.eec-dark-mode nav div[style*="position"],
+body.eec-dark-mode nav div[style*="absolute"],
+body.eec-dark-mode nav div[style*="fixed"] {
+    color: #f8fafc !important;
+}
+
+/* DARK PROFILE PANEL */
+body.eec-dark-mode nav div[class*="dropdown"],
+body.eec-dark-mode nav div[class*="Dropdown"],
+body.eec-dark-mode nav div[class*="profile-menu"],
+body.eec-dark-mode nav div[class*="ProfileMenu"],
+body.eec-dark-mode nav div[class*="profile-dropdown"],
+body.eec-dark-mode nav div[class*="ProfileDropdown"],
+body.eec-dark-mode nav div[class*="settings-menu"],
+body.eec-dark-mode nav div[class*="SettingsMenu"] {
+    background: #111827 !important;
+    background-color: #111827 !important;
+    color: #f8fafc !important;
+    border-color: #263449 !important;
+}
+
+/* REMOVE WHITE PATCHES INSIDE POPUP */
+body.eec-dark-mode nav div[class*="dropdown"] *,
+body.eec-dark-mode nav div[class*="Dropdown"] *,
+body.eec-dark-mode nav div[class*="profile-menu"] *,
+body.eec-dark-mode nav div[class*="ProfileMenu"] *,
+body.eec-dark-mode nav div[class*="profile-dropdown"] *,
+body.eec-dark-mode nav div[class*="ProfileDropdown"] *,
+body.eec-dark-mode nav div[class*="settings-menu"] *,
+body.eec-dark-mode nav div[class*="SettingsMenu"] {
+    border-color: #263449 !important;
+}
+
+/* WHITE CARDS / HEADERS INSIDE PROFILE */
+body.eec-dark-mode nav div[class*="dropdown"] > div,
+body.eec-dark-mode nav div[class*="Dropdown"] > div,
+body.eec-dark-mode nav div[class*="profile-menu"] > div,
+body.eec-dark-mode nav div[class*="ProfileMenu"] > div,
+body.eec-dark-mode nav div[class*="profile-dropdown"] > div,
+body.eec-dark-mode nav div[class*="ProfileDropdown"] > div {
+    background: transparent !important;
+    color: #f8fafc !important;
+}
+
+/* PROFILE TEXT */
+body.eec-dark-mode nav div[class*="dropdown"] strong,
+body.eec-dark-mode nav div[class*="Dropdown"] strong,
+body.eec-dark-mode nav div[class*="profile"] strong,
+body.eec-dark-mode nav div[class*="Profile"] strong {
+    color: #f8fafc !important;
+}
+
+body.eec-dark-mode nav div[class*="dropdown"] small,
+body.eec-dark-mode nav div[class*="Dropdown"] small,
+body.eec-dark-mode nav div[class*="profile"] small,
+body.eec-dark-mode nav div[class*="Profile"] small {
+    color: #94a3b8 !important;
+}
+
+/* SETTINGS LABEL */
+body.eec-dark-mode nav div[class*="dropdown"] label,
+body.eec-dark-mode nav div[class*="Dropdown"] label,
+body.eec-dark-mode nav div[class*="settings"] label,
+body.eec-dark-mode nav div[class*="Settings"] label {
+    color: #94a3b8 !important;
+}
+
+/* BUTTONS */
+body.eec-dark-mode nav div[class*="dropdown"] button,
+body.eec-dark-mode nav div[class*="Dropdown"] button,
+body.eec-dark-mode nav div[class*="profile"] button,
+body.eec-dark-mode nav div[class*="Profile"] button {
+    color: #e5e7eb !important;
+    background: transparent !important;
+}
+
+/* HOVER */
+body.eec-dark-mode nav div[class*="dropdown"] button:hover,
+body.eec-dark-mode nav div[class*="Dropdown"] button:hover,
+body.eec-dark-mode nav div[class*="profile"] button:hover,
+body.eec-dark-mode nav div[class*="Profile"] button:hover {
+    background: #1e293b !important;
+}
+
+/* DIVIDERS */
+body.eec-dark-mode nav div[class*="dropdown"] hr,
+body.eec-dark-mode nav div[class*="Dropdown"] hr,
+body.eec-dark-mode nav div[class*="profile"] hr,
+body.eec-dark-mode nav div[class*="Profile"] hr {
+    border-color: #263449 !important;
+    background: #263449 !important;
+}
+
+/* SVG */
+body.eec-dark-mode nav div[class*="dropdown"] svg,
+body.eec-dark-mode nav div[class*="Dropdown"] svg,
+body.eec-dark-mode nav div[class*="profile"] svg,
+body.eec-dark-mode nav div[class*="Profile"] svg {
+    color: #cbd5e1 !important;
+    stroke: currentColor !important;
+    opacity: 1 !important;
+}
+
+/* LOGOUT */
+body.eec-dark-mode nav button[class*="logout"],
+body.eec-dark-mode nav button[class*="Logout"],
+body.eec-dark-mode nav div[class*="dropdown"] button:last-child {
+    color: #fb7185 !important;
+}
+
+/* TOGGLE */
+body.eec-dark-mode nav input[type="checkbox"] {
+    accent-color: #2563eb !important;
+}
+
+/* =========================================================
+   KILL COMMON LIGHT-MODE TAILWIND BACKGROUNDS
+   ONLY INSIDE NAV POPUPS
+   ========================================================= */
+
+body.eec-dark-mode nav div[class*="dropdown"] .bg-white,
+body.eec-dark-mode nav div[class*="Dropdown"] .bg-white,
+body.eec-dark-mode nav div[class*="profile"] .bg-white,
+body.eec-dark-mode nav div[class*="Profile"] .bg-white,
+body.eec-dark-mode nav div[class*="dropdown"] .bg-slate-50,
+body.eec-dark-mode nav div[class*="Dropdown"] .bg-slate-50,
+body.eec-dark-mode nav div[class*="profile"] .bg-slate-50,
+body.eec-dark-mode nav div[class*="Profile"] .bg-slate-50 {
+    background: #111827 !important;
+}
+
+/* =========================================================
+   IMPORTANT: LIGHT MODE IS NOT MODIFIED
+   ========================================================= */
+

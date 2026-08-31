@@ -1,0 +1,170 @@
+﻿import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Bell,
+  MessageSquare,
+  BarChart3,
+  User,
+  ChevronDown,
+  Moon,
+  Sun,
+  LogOut
+} from "lucide-react";
+
+export default function Navbar() {`r`n  const [darkMode, setDarkMode] = useState(localStorage.getItem("eec-admin-dark-mode") === "true");`r`n`r`n  useEffect(() => {`r`n    document.body.classList.toggle("eec-dark-mode", darkMode);`r`n    localStorage.setItem("eec-admin-dark-mode", String(darkMode));`r`n  }, [darkMode]);
+  const location = useLocation();
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("admin-dark-mode") === "true"
+  );
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("admin-dark-mode", String(darkMode));
+  }, [darkMode]);
+
+  const links = [
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+      icon: LayoutDashboard
+    },
+    {
+      name: "Notifications",
+      path: "/notifications",
+      icon: Bell
+    },
+    {
+      name: "Messages",
+      path: "/messages",
+      icon: MessageSquare
+    },
+    {
+      name: "Analytics",
+      path: "/analytics",
+      icon: BarChart3
+    }
+  ];
+
+  const isActive = (path) => location.pathname === path;
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
+  return (
+    <header className="eec-admin-navbar">
+
+      <div className="eec-admin-brand">
+        <Link to="/dashboard">
+          EEC Admin Portal
+        </Link>
+      </div>
+
+      <nav className="eec-admin-nav">
+
+        {links.map(({ name, path, icon: Icon }) => (
+          <Link
+            key={path}
+            to={path}
+            className={
+              isActive(path)
+                ? "eec-admin-nav-link active"
+                : "eec-admin-nav-link"
+            }
+          >
+            <Icon size={17} strokeWidth={2} />
+            <span>{name}</span>
+          </Link>
+        ))}
+
+        <div className="eec-admin-profile-wrapper">
+
+          <button
+            type="button"
+            className={
+              profileOpen
+                ? "eec-admin-profile open"
+                : "eec-admin-profile"
+            }
+            onClick={() => setProfileOpen(!profileOpen)}
+          >
+            <span className="eec-admin-avatar">
+              A
+            </span>
+
+            <span className="eec-admin-profile-text">
+              <strong>Admin</strong>
+              <small>Admin</small>
+            </span>
+
+            <ChevronDown
+              size={16}
+              className={profileOpen ? "rotate" : ""}
+            />
+          </button>
+
+          {profileOpen && (
+            <div className="eec-admin-settings">
+
+              <div className="eec-admin-settings-user">
+                <span className="eec-admin-avatar large">
+                  A
+                </span>
+
+                <div>
+                  <strong>Admin</strong>
+                  <span>Administrator</span>
+                </div>
+              </div>
+
+              <div className="eec-admin-settings-title">
+                SETTINGS
+              </div>
+
+              <button
+                type="button"
+                className="eec-admin-setting-row"
+                onClick={() => setDarkMode(!darkMode)}
+              >
+                <span className="eec-admin-setting-left">
+                  {darkMode ? (
+                    <Sun size={17} />
+                  ) : (
+                    <Moon size={17} />
+                  )}
+                  {darkMode ? "Light mode" : "Dark mode"}
+                </span>
+
+                <span
+                  className={
+                    darkMode
+                      ? "eec-admin-switch on"
+                      : "eec-admin-switch"
+                  }
+                >
+                  <span />
+                </span>
+              </button>
+
+              <button
+                type="button"
+                className="eec-admin-logout"
+                onClick={logout}
+              >
+                <LogOut size={17} />
+                Logout
+              </button>
+
+            </div>
+          )}
+
+        </div>
+
+      </nav>
+    </header>
+  );
+}
+
