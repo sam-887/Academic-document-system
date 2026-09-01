@@ -1,448 +1,121 @@
-﻿import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import api from "../api/axios";
+import React, { useEffect, useState } from "react";
+import api from "../../api/axios";
+import StatusBadge from "../../components/StatusBadge";
 
 export default function Dashboard() {
-  const [requests, setRequests] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [summary, setSummary] = useState({
+    total: 0,
+    pending: 0,
+    approved: 0,
+    rejected: 0
+  });
+
+  const [recent, setRecent] = useState([]);
 
   useEffect(() => {
-    api.get("/requests")
+    api.get("/requests/dashboard/summary")
       .then((res) => {
-        const data = Array.isArray(res.data)
-          ? res.data
-          : res.data.requests || res.data.data || [];
-        setRequests(data);
+        setSummary(res.data || {});
+        setRecent((res.data?.recent || []).slice(0, 3));
       })
-      .catch(() => setRequests([]))
-      .finally(() => setLoading(false));
+      .catch((err) => {
+        console.error("Failed to load dashboard:", err);
+      });
   }, []);
 
-  const total = requests.length;
-  const pending = requests.filter(r =>
-    ["PENDING", "SUBMITTED"].includes(String(r.status).toUpperCase())
-  ).length;
-
-  const review = requests.filter(r =>
-    ["UNDER_REVIEW", "IN_REVIEW", "REVIEW"].includes(String(r.status).toUpperCase())
-  ).length;
-
-  const approved = requests.filter(r =>
-    ["APPROVED", "COMPLETED"].includes(String(r.status).toUpperCase())
-  ).length;
-
-  const rejected = requests.filter(r =>
-    String(r.status).toUpperCase() === "REJECTED"
-  ).length;
-
-  const approvalRate = total
-    ? Math.round((approved / total) * 100)
-    : 0;
-
-  const stats = [
-    {
-      label: "Total Requests",
-      value: total,
-      icon: "◫",
-      tone: "blue",
-      trend: "All submitted requests"
-    },
-    {
-      label: "Pending",
-      value: pending,
-      icon: "◷",
-      tone: "amber",
-      trend: "Awaiting review"
-    },
-    {
-      label: "Under Review",
-      value: review,
-      icon: "⌕",
-      tone: "violet",
-      trend: "Currently processing"
-    },
-    {
-      label: "Approved",
-      value: approved,
-      icon: "✓",
-      tone: "green",
-      trend: "Approved / completed"
-    },
-    {
-      label: "Rejected",
-      value: rejected,
-      icon: "×",
-      tone: "red",
-      trend: "Needs attention"
-    }
-  ];
-
-  const statusClass = (status) => {
-    const s = String(status || "").toUpperCase();
-
-    if (["APPROVED", "COMPLETED"].includes(s))
-      return "status approved";
-
-    if (s === "REJECTED")
-      return "status rejected";
-
-    if (["UNDER_REVIEW", "IN_REVIEW", "REVIEW"].includes(s))
-      return "status review";
-
-    return "status pending";
-  };
-
   return (
-    <div className="modern-admin-dashboard">
+    <div className="max-w-6xl mx-auto p-6">
 
-      <div className="dashboard-orb orb-one" />
-      <div className="dashboard-orb orb-two" />
+      <h1 className="text-3xl font-bold text-slate-800 mb-2">
+        Student Dashboard
+      </h1>
 
-      <section className="dashboard-hero">
+      <p className="text-slate-500 mb-8">
+        Welcome back. Track your academic document requests here.
+      </p>
 
-        <div>
-          <div className="hero-eyebrow">
-            <span className="live-dot" />
-            ADMIN CONTROL CENTER
-          </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
 
-          <h1>
-            Academic Document
-            <span> Intelligence</span>
-          </h1>
-
-          <p>
-            Monitor requests, approvals and document workflows
-            from one centralized workspace.
+        <div className="bg-slate-100 rounded-2xl p-5">
+          <p className="text-3xl font-bold text-slate-800">
+            {summary.total || 0}
+          </p>
+          <p className="text-sm text-slate-600 mt-1">
+            Total
           </p>
         </div>
 
-        <div className="hero-actions">
-          <Link to="/notifications" className="hero-action">
-            <span>♧</span>
-            Notifications
-          </Link>
-
-          <Link to="/analytics" className="hero-action primary">
-            <span>↗</span>
-            View Analytics
-          </Link>
+        <div className="bg-amber-100 rounded-2xl p-5">
+          <p className="text-3xl font-bold text-amber-700">
+            {summary.pending || 0}
+          </p>
+          <p className="text-sm text-amber-700 mt-1">
+            Pending
+          </p>
         </div>
 
-      </section>
-
-      <section className="stats-grid">
-
-        {stats.map((stat) => (
-          <div className={`stat-card ${stat.tone}`} key={stat.label}>
-
-            <div className="stat-top">
-              <div className="stat-icon">
-                {stat.icon}
-              </div>
-
-              <span className="stat-arrow">↗</span>
-            </div>
-
-            <div className="stat-value">
-              {loading ? "—" : stat.value}
-            </div>
-
-            <div className="stat-label">
-              {stat.label}
-            </div>
-
-            <div className="stat-description">
-              {stat.trend}
-            </div>
-
-          </div>
-        ))}
-
-        <div className="stat-card cyan">
-
-          <div className="stat-top">
-            <div className="stat-icon">%</div>
-            <span className="stat-arrow">↗</span>
-          </div>
-
-          <div className="stat-value">
-            {loading ? "—" : `${approvalRate}%`}
-          </div>
-
-          <div className="stat-label">
-            Approval Rate
-          </div>
-
-          <div className="stat-description">
-            Successful request completion
-          </div>
-
+        <div className="bg-emerald-100 rounded-2xl p-5">
+          <p className="text-3xl font-bold text-emerald-700">
+            {summary.approved || 0}
+          </p>
+          <p className="text-sm text-emerald-700 mt-1">
+            Approved / Completed
+          </p>
         </div>
 
-      </section>
-
-      <section className="dashboard-main-grid">
-
-        <div className="dashboard-panel requests-panel">
-
-          <div className="panel-heading">
-
-            <div>
-              <div className="panel-kicker">
-                WORKFLOW
-              </div>
-
-              <h2>
-                Recent Requests
-              </h2>
-
-              <p>
-                Latest document activity across the system
-              </p>
-            </div>
-
-            <Link
-              to="/requests"
-              className="panel-link"
-            >
-              View all →
-            </Link>
-
-          </div>
-
-          <div className="request-list">
-
-            {loading && (
-              <div className="empty-dashboard">
-                Loading requests...
-              </div>
-            )}
-
-            {!loading && requests.length === 0 && (
-              <div className="empty-dashboard">
-                <div className="empty-icon">◫</div>
-                <strong>No requests yet</strong>
-                <span>New document requests will appear here.</span>
-              </div>
-            )}
-
-            {!loading &&
-              requests.slice(0, 6).map((request, index) => (
-
-                <Link
-                  key={request._id || request.requestId || index}
-                  to={`/requests/${request.requestId}`}
-                  className="modern-request"
-                >
-
-                  <div className="request-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
-
-                  <div className="request-icon">
-                    ◫
-                  </div>
-
-                  <div className="request-information">
-
-                    <strong>
-                      {request.documentType ||
-                       request.documentName ||
-                       "Document Request"}
-                    </strong>
-
-                    <span>
-                      {request.requestId || request._id}
-                    </span>
-
-                    <small>
-                      {request.student?.name ||
-                       request.student?.email ||
-                       "Student request"}
-                    </small>
-
-                  </div>
-
-                  <div className={statusClass(request.status)}>
-                    {String(request.status || "PENDING")
-                      .replaceAll("_", " ")}
-                  </div>
-
-                  <div className="request-chevron">
-                    →
-                  </div>
-
-                </Link>
-
-              ))}
-
-          </div>
-
+        <div className="bg-red-100 rounded-2xl p-5">
+          <p className="text-3xl font-bold text-red-700">
+            {summary.rejected || 0}
+          </p>
+          <p className="text-sm text-red-700 mt-1">
+            Rejected
+          </p>
         </div>
 
-        <div className="side-dashboard">
+      </div>
 
-          <div className="dashboard-panel insight-panel">
+      <div className="bg-white border rounded-2xl p-6">
 
-            <div className="ai-badge">
-              ✦ AI INSIGHT
-            </div>
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-xl font-semibold text-slate-800">
+            Recent Requests
+          </h2>
 
-            <div className="ai-icon">
-              ✦
-            </div>
-
-            <h2>
-              Smart Document
-              <br />
-              Intelligence
-            </h2>
-
-            <p>
-              Use AI validation to identify incomplete,
-              invalid or inconsistent documents before approval.
-            </p>
-
-            <Link
-              to="/ai-validation"
-              className="ai-button"
-            >
-              Open AI Validation
-              <span>→</span>
-            </Link>
-
-          </div>
-
-          <div className="dashboard-panel status-panel">
-
-            <div className="panel-heading compact">
-
-              <div>
-                <div className="panel-kicker">
-                  SYSTEM
-                </div>
-
-                <h2>
-                  Request Status
-                </h2>
-              </div>
-
-              <span className="system-online">
-                ● Live
-              </span>
-
-            </div>
-
-            <div className="status-bars">
-
-              <div className="status-row">
-                <div>
-                  <span>Pending</span>
-                  <b>{pending}</b>
-                </div>
-
-                <div className="bar">
-                  <i
-                    style={{
-                      width: `${total ? (pending / total) * 100 : 0}%`
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="status-row">
-                <div>
-                  <span>Under Review</span>
-                  <b>{review}</b>
-                </div>
-
-                <div className="bar">
-                  <i
-                    style={{
-                      width: `${total ? (review / total) * 100 : 0}%`
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="status-row">
-                <div>
-                  <span>Approved</span>
-                  <b>{approved}</b>
-                </div>
-
-                <div className="bar">
-                  <i
-                    style={{
-                      width: `${total ? (approved / total) * 100 : 0}%`
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="status-row">
-                <div>
-                  <span>Rejected</span>
-                  <b>{rejected}</b>
-                </div>
-
-                <div className="bar">
-                  <i
-                    style={{
-                      width: `${total ? (rejected / total) * 100 : 0}%`
-                    }}
-                  />
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
+          <a
+            href="/student/requests"
+            className="text-sm text-blue-600 hover:underline"
+          >
+            View All
+          </a>
         </div>
 
-      </section>
+        {recent.length === 0 ? (
+          <p className="text-slate-500">
+            No recent requests.
+          </p>
+        ) : (
+          <div className="space-y-3">
+            {recent.map((request) => (
+              <div
+                key={request._id || request.requestId}
+                className="flex items-center justify-between border-b last:border-b-0 pb-3 last:pb-0"
+              >
+                <div>
+                  <p className="font-medium text-slate-800">
+                    {request.documentType || "Document Request"}
+                  </p>
+                  <p className="text-xs text-slate-400">
+                    {request.requestId || request._id}
+                  </p>
+                </div>
 
-      <section className="quick-actions">
-
-        <Link to="/requests">
-          <span>◫</span>
-          <div>
-            <strong>Manage Requests</strong>
-            <small>Review and process documents</small>
+                <StatusBadge status={request.status} />
+              </div>
+            ))}
           </div>
-          <b>→</b>
-        </Link>
+        )}
 
-        <Link to="/notifications">
-          <span>♧</span>
-          <div>
-            <strong>Notifications</strong>
-            <small>System alerts and updates</small>
-          </div>
-          <b>→</b>
-        </Link>
-
-        <Link to="/messages">
-          <span>◌</span>
-          <div>
-            <strong>Messages</strong>
-            <small>Communicate with faculty</small>
-          </div>
-          <b>→</b>
-        </Link>
-
-        <Link to="/analytics">
-          <span>◈</span>
-          <div>
-            <strong>Analytics</strong>
-            <small>Performance and insights</small>
-          </div>
-          <b>→</b>
-        </Link>
-
-      </section>
+      </div>
 
     </div>
   );

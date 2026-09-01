@@ -1,10 +1,44 @@
-import React, { useEffect, useState } from "react";
-import { FileText, CheckCircle2, XCircle, UserSearch, Clock3, Settings2, GraduationCap } from "lucide-react";
+﻿import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  FileText,
+  CheckCircle2,
+  XCircle,
+  Clock3,
+  Search,
+  Activity,
+  TrendingUp,
+  RefreshCw
+} from "lucide-react";
+import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid
+} from "recharts";
 import api from "../api/axios";
 
+
+function PixelRunner() {
+  return (
+    <div className="analytics-pixel-track">
+      <div className="analytics-pixel-runner">
+        <span className="pixel-head"></span>
+        <span className="pixel-body"></span>
+        <span className="pixel-arm"></span>
+        <span className="pixel-leg pixel-leg-one"></span>
+        <span className="pixel-leg pixel-leg-two"></span>
+      </div>
+    </div>
+  );
+}
 export default function Analytics() {
   const [days, setDays] = useState(30);
-
   const [data, setData] = useState({
     total: 0,
     approved: 0,
@@ -26,8 +60,22 @@ export default function Analytics() {
       setLoading(true);
       setError("");
 
-      const res = await api.get(`/analytics/dashboard?days=${days}`);
-      setData(res.data);
+      const res = await api.get(
+        `/analytics/dashboard?days=${days}`
+      );
+
+      setData({
+        total: res.data?.total || 0,
+        approved: res.data?.approved || 0,
+        rejected: res.data?.rejected || 0,
+        underReview: res.data?.underReview || 0,
+        pending: res.data?.pending || 0,
+        generating: res.data?.generating || 0,
+        byType: res.data?.byType || [],
+        approvedByType: res.data?.approvedByType || [],
+        rejectedReasons: res.data?.rejectedReasons || [],
+        timeline: res.data?.timeline || []
+      });
     } catch (err) {
       console.error("Analytics error:", err);
       setError(
@@ -43,21 +91,6 @@ export default function Analytics() {
     loadAnalytics();
   }, [days]);
 
-  const maxType = Math.max(
-    ...data.byType.map((x) => x.count),
-    1
-  );
-
-  const maxReason = Math.max(
-    ...data.rejectedReasons.map((x) => x.count),
-    1
-  );
-
-  const maxTimeline = Math.max(
-    ...data.timeline.map((x) => x.total),
-    1
-  );
-
   const approvalRate =
     data.total > 0
       ? Math.round((data.approved / data.total) * 100)
@@ -68,402 +101,390 @@ export default function Analytics() {
       ? Math.round((data.rejected / data.total) * 100)
       : 0;
 
-  const statusCards = [
+  const cards = [
     {
       title: "Total Requests",
       value: data.total,
       icon: FileText,
-      bg: "bg-slate-100",
-      text: "text-slate-800"
+      className: "analytics-orange"
     },
     {
-      title: "Approved / Issued",
+      title: "Approved",
       value: data.approved,
       icon: CheckCircle2,
-      bg: "bg-emerald-100",
-      text: "text-emerald-700"
+      className: "analytics-green"
     },
     {
       title: "Rejected",
       value: data.rejected,
       icon: XCircle,
-      bg: "bg-red-100",
-      text: "text-red-700"
-    },
-    {
-      title: "Under Review",
-      value: data.underReview,
-      icon: UserSearch,
-      bg: "bg-amber-100",
-      text: "text-amber-700"
+      className: "analytics-red"
     },
     {
       title: "Pending",
       value: data.pending,
       icon: Clock3,
-      bg: "bg-blue-100",
-      text: "text-blue-700"
-    },
-    {
-      title: "Generating",
-      value: data.generating,
-      icon: Settings2,
-      bg: "bg-purple-100",
-      text: "text-purple-700"
+      className: "analytics-blue"
     }
   ];
 
+  const chartData = data.timeline.map((item) => ({
+    date: item._id,
+    requests: item.total
+  }));
+
+  const typeData = data.byType.map((item) => ({
+    name: item._id || "Unknown",
+    count: item.count || 0
+  }));
+
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <main className="premium-analytics">
 
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-
+      {/* HEADER */}
+      <motion.header
+        className="analytics-header"
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <div>
-          <h1 className="text-3xl font-bold text-slate-800">
-            Analytics
-          </h1>
+          <div className="analytics-label">
+            ADMINISTRATION / ANALYTICS
+          </div>
 
-          <p className="text-slate-500 mt-1">
-            Complete academic document request analysis
+          <h1>Analytics Overview</h1>
+
+          <p>
+            Monitor document requests, approvals and academic
+            workflow activity.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
-          {[30, 60, 90, 180, 365].map((value) => (
-            <button
-              key={value}
-              onClick={() => setDays(value)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition ${
-                days === value
-                  ? "bg-slate-900 text-white"
-                  : "bg-white border text-slate-600 hover:bg-slate-50"
-              }`}
-            >
-              {value} Days
-            </button>
-          ))}
-        </div>
+        <div className="analytics-actions">
 
-      </div>
+          <div className="period-selector">
+            {[30, 60, 90, 180, 365].map((value) => (
+              <button
+                key={value}
+                className={days === value ? "selected" : ""}
+                onClick={() => setDays(value)}
+              >
+                {value}D
+              </button>
+            ))}
+          </div>
 
-      {loading && (
-        <div className="bg-white border rounded-2xl p-8 text-center text-slate-500">
-          Loading analytics...
-        </div>
-      )}
-
-      {!loading && error && (
-        <div className="bg-red-50 border border-red-200 rounded-2xl p-6 mb-6">
-          <p className="font-semibold text-red-700">
-            {error}
-          </p>
           <button
+            className="analytics-refresh"
             onClick={loadAnalytics}
-            className="mt-3 px-4 py-2 bg-red-600 text-white rounded-lg"
           >
+            <RefreshCw size={16} />
+            Refresh
+          </button>
+
+        </div>
+      </motion.header>
+
+      {/* ERROR */}
+      {error && (
+        <motion.div
+          className="analytics-error"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <XCircle size={20} />
+          <span>{error}</span>
+          <button onClick={loadAnalytics}>
             Retry
           </button>
-        </div>
+        </motion.div>
       )}
 
-      {!loading && !error && (
-        <>
+      {/* STATS */}
+      <section className="analytics-stats">
 
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
+        {cards.map((card, index) => {
+          const Icon = card.icon;
 
-            {statusCards.map((card) => (
-              <div
-                key={card.title}
-                className={`${card.bg} rounded-2xl p-5`}
-              >
-                <div className="flex justify-between items-start">
-                  <span className="text-2xl">
-                    <card.icon size={30} strokeWidth={2.2} />
-                  </span>
-
-                  <span className={`text-3xl font-bold ${card.text}`}>
-                    {card.value}
-                  </span>
+          return (
+            <motion.div
+              key={card.title}
+              className={`analytics-stat ${card.className}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: index * 0.08,
+                duration: 0.45
+              }}
+              whileHover={{
+                y: -6,
+                scale: 1.015
+              }}
+            >
+              <div className="analytics-stat-top">
+                <div className="analytics-stat-icon">
+                  <Icon size={21} />
                 </div>
 
-                <p className={`text-sm mt-4 font-medium ${card.text}`}>
-                  {card.title}
-                </p>
+                <Activity size={17} />
               </div>
-            ))}
 
+              <div className="analytics-stat-value">
+                {loading ? "—" : card.value}
+              </div>
+
+              <div className="analytics-stat-title">
+                {card.title}
+              </div>
+            </motion.div>
+          );
+        })}
+
+      </section>
+
+      {/* SECONDARY STATS */}
+      <section className="analytics-secondary">
+
+        <motion.div
+          className="analytics-mini-card"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div className="mini-icon green">
+            <TrendingUp size={18} />
           </div>
 
-
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
-
-            <div className="bg-white border rounded-2xl p-6">
-
-              <div className="flex justify-between mb-5">
-                <div>
-                  <h2 className="text-lg font-semibold text-slate-800">
-                    Approval Rate
-                  </h2>
-
-                  <p className="text-sm text-slate-500">
-                    Documents approved / issued
-                  </p>
-                </div>
-
-                <span className="text-2xl font-bold text-emerald-600">
-                  {approvalRate}%
-                </span>
-              </div>
-
-              <div className="h-4 bg-slate-100 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-emerald-500 rounded-full"
-                  style={{ width: `${approvalRate}%` }}
-                />
-              </div>
-
-            </div>
-
-
-            <div className="bg-white border rounded-2xl p-6">
-
-              <div className="flex justify-between mb-5">
-                <div>
-                  <h2 className="text-lg font-semibold text-slate-800">
-                    Rejection Rate
-                  </h2>
-
-                  <p className="text-sm text-slate-500">
-                    Requests rejected
-                  </p>
-                </div>
-
-                <span className="text-2xl font-bold text-red-600">
-                  {rejectionRate}%
-                </span>
-              </div>
-
-              <div className="h-4 bg-slate-100 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-red-500 rounded-full"
-                  style={{ width: `${rejectionRate}%` }}
-                />
-              </div>
-
-            </div>
-
+          <div>
+            <span>Approval Rate</span>
+            <strong>{approvalRate}%</strong>
           </div>
 
+          <div className="mini-progress">
+            <span
+              style={{ width: `${approvalRate}%` }}
+            />
+          </div>
+        </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-6 mb-6">
+        <motion.div
+          className="analytics-mini-card"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.08 }}
+        >
+          <div className="mini-icon red">
+            <XCircle size={18} />
+          </div>
 
-            <div className="bg-white border rounded-2xl p-6">
+          <div>
+            <span>Rejection Rate</span>
+            <strong>{rejectionRate}%</strong>
+          </div>
 
-              <h2 className="text-lg font-semibold text-slate-800">
-                Documents Requested
-              </h2>
+          <div className="mini-progress red-progress">
+            <span
+              style={{ width: `${rejectionRate}%` }}
+            />
+          </div>
+        </motion.div>
 
-              <p className="text-sm text-slate-500 mb-6">
-                Distribution by document type
+        <motion.div
+          className="analytics-mini-card"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.16 }}
+        >
+          <div className="mini-icon orange">
+            <Search size={18} />
+          </div>
+
+          <div>
+            <span>Under Review</span>
+            <strong>{data.underReview}</strong>
+          </div>
+        </motion.div>
+
+      </section>
+
+      {/* CHARTS */}
+      <section className="analytics-chart-grid">
+
+        <motion.div
+          className="analytics-panel analytics-large"
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+        >
+          <div className="panel-title">
+            <div>
+              <h2>Request Activity</h2>
+              <p>
+                Request volume during the selected period
               </p>
-
-              <div className="space-y-5">
-
-                {data.byType.map((item) => (
-                  <div key={item._id}>
-
-                    <div className="flex justify-between mb-2">
-                      <span className="font-medium text-slate-700">
-                        {item._id || "Unknown"}
-                      </span>
-
-                      <span className="font-bold text-slate-800">
-                        {item.count}
-                      </span>
-                    </div>
-
-                    <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-blue-600 rounded-full transition-all"
-                        style={{
-                          width: `${(item.count / maxType) * 100}%`
-                        }}
-                      />
-                    </div>
-
-                  </div>
-                ))}
-
-                {!data.byType.length && (
-                  <p className="text-slate-400">
-                    No request data.
-                  </p>
-                )}
-
-              </div>
-
             </div>
 
+            <span className="live-dot">
+              LIVE
+            </span>
+          </div>
 
-            <div className="bg-white border rounded-2xl p-6">
-
-              <h2 className="text-lg font-semibold text-slate-800">
-                Documents Issued
-              </h2>
-
-              <p className="text-sm text-slate-500 mb-6">
-                Approved / completed documents
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-
-                {["BONAFIDE", "TRANSCRIPT", "RECOMMENDATION"].map((type) => {
-
-                  const found = data.approvedByType.find(
-                    (x) => x._id === type
-                  );
-
-                  const count = found?.count || 0;
-
-                  return (
-                    <div
-                      key={type}
-                      className="border rounded-2xl p-5 text-center bg-slate-50"
+          <div className="chart-container">
+            {chartData.length > 0 ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={chartData}>
+                  <defs>
+                    <linearGradient
+                      id="requestGradient"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
                     >
-                      <div className="text-3xl font-bold text-emerald-600">
-                        {count}
-                      </div>
+                      <stop
+                        offset="0%"
+                        stopColor="#f97316"
+                        stopOpacity={0.35}
+                      />
 
-                      <div className="text-xs font-semibold text-slate-500 mt-2">
-                        {type}
-                      </div>
+                      <stop
+                        offset="100%"
+                        stopColor="#f97316"
+                        stopOpacity={0}
+                      />
+                    </linearGradient>
+                  </defs>
 
-                    </div>
-                  );
-                })}
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div className="bg-white border rounded-2xl p-6 mb-6">
-
-            <div className="flex justify-between items-center mb-6">
-
-              <div>
-                <h2 className="text-lg font-semibold text-slate-800">
-                  Request Timeline
-                </h2>
-
-                <p className="text-sm text-slate-500">
-                  Daily request activity for the selected period
-                </p>
-              </div>
-
-              <span className="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium">
-                Last {days} days
-              </span>
-
-            </div>
-
-            <div className="flex items-end gap-2 h-64 overflow-x-auto">
-
-              {data.timeline.map((item) => (
-                <div
-                  key={item._id}
-                  className="min-w-[38px] flex flex-col items-center justify-end h-full"
-                >
-
-                  <span className="text-[10px] text-slate-500 mb-1">
-                    {item.total}
-                  </span>
-
-                  <div
-                    className="w-7 bg-blue-500 rounded-t-lg"
-                    style={{
-                      height: `${Math.max(
-                        (item.total / maxTimeline) * 180,
-                        6
-                      )}px`
-                    }}
-                    title={`${item._id}: ${item.total} requests`}
+                  <CartesianGrid
+                    stroke="rgba(255,255,255,.05)"
+                    vertical={false}
                   />
 
-                  <span className="text-[9px] text-slate-400 mt-2 rotate-[-45deg] origin-top">
-                    {item._id.slice(5)}
-                  </span>
+                  <XAxis
+                    dataKey="date"
+                    stroke="#64748b"
+                    tick={{ fontSize: 10 }}
+                    tickLine={false}
+                    axisLine={false}
+                  />
 
-                </div>
-              ))}
+                  <YAxis
+                    stroke="#64748b"
+                    tick={{ fontSize: 10 }}
+                    tickLine={false}
+                    axisLine={false}
+                  />
 
+                  <Tooltip
+                    contentStyle={{
+                      background: "#111827",
+                      border: "0",
+                      borderRadius: "12px",
+                      color: "#fff"
+                    }}
+                  />
+
+                  <Area
+                    type="monotone"
+                    dataKey="requests"
+                    stroke="#f97316"
+                    strokeWidth={2.5}
+                    fill="url(#requestGradient)"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="analytics-no-data">
+                No request activity available
+              </div>
+            )}
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="analytics-panel"
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.08 }}
+        >
+          <div className="panel-title">
+            <div>
+              <h2>Documents</h2>
+              <p>Requests by document type</p>
             </div>
-
           </div>
 
+          <div className="chart-container">
+            {typeData.length > 0 ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={typeData}>
+                  <CartesianGrid
+                    stroke="rgba(255,255,255,.05)"
+                    vertical={false}
+                  />
 
-          <div className="bg-white border rounded-2xl p-6">
+                  <XAxis
+                    dataKey="name"
+                    stroke="#64748b"
+                    tick={{ fontSize: 10 }}
+                    tickLine={false}
+                    axisLine={false}
+                  />
 
-            <h2 className="text-lg font-semibold text-slate-800">
-              Rejection Analysis
-            </h2>
+                  <YAxis
+                    stroke="#64748b"
+                    tick={{ fontSize: 10 }}
+                    tickLine={false}
+                    axisLine={false}
+                  />
 
-            <p className="text-sm text-slate-500 mb-6">
-              Most common rejection reasons
-            </p>
+                  <Tooltip
+                    contentStyle={{
+                      background: "#111827",
+                      border: "0",
+                      borderRadius: "12px",
+                      color: "#fff"
+                    }}
+                  />
 
-            <div className="space-y-5">
-
-              {data.rejectedReasons.map((item, index) => (
-                <div key={item._id}>
-
-                  <div className="flex gap-3 items-center mb-2">
-
-                    <span className="w-7 h-7 flex items-center justify-center rounded-full bg-red-100 text-red-700 text-xs font-bold">
-                      {index + 1}
-                    </span>
-
-                    <span className="flex-1 text-sm font-medium text-slate-700">
-                      {item._id}
-                    </span>
-
-                    <span className="text-sm font-bold text-red-600">
-                      {item.count}
-                    </span>
-
-                  </div>
-
-                  <div className="ml-10 h-3 bg-slate-100 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-red-500 rounded-full"
-                      style={{
-                        width: `${(item.count / maxReason) * 100}%`
-                      }}
-                    />
-                  </div>
-
-                </div>
-              ))}
-
-              {!data.rejectedReasons.length && (
-                <div className="text-center py-8 text-slate-400">
-                  No rejection reasons in this period.
-                </div>
-              )}
-
-            </div>
-
+                  <Bar
+                    dataKey="count"
+                    fill="#f97316"
+                    radius={[6, 6, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="analytics-no-data">
+                No document data available
+              </div>
+            )}
           </div>
+        </motion.div>
 
-        </>
-      )}
+      </section>
 
-    </div>
+      {/* STATUS */}
+      <motion.section
+        className="analytics-panel status-panel"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <div className="panel-title">
+          <div className="analytics-pixel-track">
+          <div className="analytics-pixel-runner">
+            <span className="pixel-head"></span>
+            <span className="pixel-body"></span>
+            <span className="pixel-arm"></span>
+            <span className="pixel-leg pixel-leg-one"></span>
+            <span className="pixel-leg pixel-leg-two"></span>
+          </div>
+        </div>
+      </div>    
+      </motion.section>
+
+    </main>
   );
 }
-
 
 
 

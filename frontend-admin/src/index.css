@@ -1,3 +1,730 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* FINAL DARK MODE SAFETY LAYER */
+
+body.eec-dark-mode {
+  background: #080f1f !important;
+  color: #e5e7eb !important;
+}
+
+body.eec-dark-mode #root {
+  background: #080f1f !important;
+  color: #e5e7eb !important;
+}
+
+body.eec-dark-mode .bg-white,
+body.eec-dark-mode [class~="bg-white"] {
+  background: #111827 !important;
+  color: #e5e7eb !important;
+}
+
+body.eec-dark-mode input,
+body.eec-dark-mode textarea,
+body.eec-dark-mode select {
+  background: #0f172a !important;
+  color: #e5e7eb !important;
+  border-color: #334155 !important;
+}
+
+body.eec-dark-mode select option {
+  background: #111827 !important;
+  color: #e5e7eb !important;
+}
+
+body.eec-dark-mode h1,
+body.eec-dark-mode h2,
+body.eec-dark-mode h3,
+body.eec-dark-mode h4,
+body.eec-dark-mode h5,
+body.eec-dark-mode h6 {
+  color: #f1f5f9 !important;
+}
+
+body.eec-dark-mode p,
+body.eec-dark-mode label,
+body.eec-dark-mode small {
+  color: #94a3b8 !important;
+}
+
+ 
+/* =========================================================
+   EEC ADMIN — COMPLETE LIGHT MODE OVERRIDE
+   ========================================================= */
+
+html:not(.eec-dark-mode),
+body:not(.eec-dark-mode) {
+  background: #f6f7fb !important;
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) #root {
+  background: #f6f7fb !important;
+  color: #172033 !important;
+}
+
+/* Theme variables */
+body:not(.eec-dark-mode) {
+  --eec-bg: #f6f7fb !important;
+  --eec-background: #f6f7fb !important;
+  --eec-surface: #ffffff !important;
+  --eec-surface-2: #f8fafc !important;
+  --eec-card: #ffffff !important;
+  --eec-text: #172033 !important;
+  --eec-muted: #64748b !important;
+  --eec-border: #e2e8f0 !important;
+}
+
+/* Main containers */
+body:not(.eec-dark-mode) .analytics-page,
+body:not(.eec-dark-mode) .dashboard-page,
+body:not(.eec-dark-mode) main,
+body:not(.eec-dark-mode) section {
+  color: #172033;
+}
+
+/* Cards and panels */
+body:not(.eec-dark-mode) .analytics-panel,
+body:not(.eec-dark-mode) .analytics-card,
+body:not(.eec-dark-mode) .stat-card,
+body:not(.eec-dark-mode) .card,
+body:not(.eec-dark-mode) .panel,
+body:not(.eec-dark-mode) .dashboard-card,
+body:not(.eec-dark-mode) .chart-card,
+body:not(.eec-dark-mode) .table-card,
+body:not(.eec-dark-mode) .request-card {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Secondary surfaces */
+body:not(.eec-dark-mode) .analytics-panel > *,
+body:not(.eec-dark-mode) .card > *,
+body:not(.eec-dark-mode) .panel > * {
+  color: inherit;
+}
+
+/* Text */
+body:not(.eec-dark-mode) h1,
+body:not(.eec-dark-mode) h2,
+body:not(.eec-dark-mode) h3,
+body:not(.eec-dark-mode) h4,
+body:not(.eec-dark-mode) h5,
+body:not(.eec-dark-mode) h6 {
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) p,
+body:not(.eec-dark-mode) span,
+body:not(.eec-dark-mode) label,
+body:not(.eec-dark-mode) small {
+  color: #475569;
+}
+
+/* Tables */
+body:not(.eec-dark-mode) table {
+  background: #ffffff !important;
+  color: #172033 !important;
+}
+
+body:not(.eec-dark-mode) th {
+  background: #f8fafc !important;
+  color: #334155 !important;
+}
+
+body:not(.eec-dark-mode) td {
+  background: #ffffff !important;
+  color: #475569 !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Inputs */
+body:not(.eec-dark-mode) input,
+body:not(.eec-dark-mode) textarea,
+body:not(.eec-dark-mode) select {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #cbd5e1 !important;
+}
+
+body:not(.eec-dark-mode) input::placeholder,
+body:not(.eec-dark-mode) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Buttons */
+body:not(.eec-dark-mode) button {
+  color: inherit;
+}
+
+/* Common white/dark utility surfaces */
+body:not(.eec-dark-mode) .bg-dark,
+body:not(.eec-dark-mode) .bg-gray-900,
+body:not(.eec-dark-mode) .bg-gray-800,
+body:not(.eec-dark-mode) .bg-slate-900,
+body:not(.eec-dark-mode) .bg-slate-800 {
+  background: #ffffff !important;
+  color: #172033 !important;
+}
+
+/* Borders */
+body:not(.eec-dark-mode) .border,
+body:not(.eec-dark-mode) [class*="border"] {
+  border-color: #e2e8f0;
+}
+
+/* Navbar */
+body:not(.eec-dark-mode) .admin-pro-navbar {
+  background: rgba(255,255,255,.94) !important;
+  color: #172033 !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Smooth theme transition */
+body,
+body * {
+  transition:
+    background-color .25s ease,
+    color .2s ease,
+    border-color .25s ease;
+}
+
+
+/* ===== ANALYTICS LIGHT MODE ===== */
+html:not(.eec-dark-mode) body.eec-admin-app,
+body.eec-admin-app:not(.eec-dark-mode) {
+  background: #f8fafc !important;
+  color: #172033 !important;
+}
+
+html:not(.eec-dark-mode) .premium-analytics {
+  background: #f8fafc !important;
+  color: #172033 !important;
+}
+
+html:not(.eec-dark-mode) .analytics-stat,
+html:not(.eec-dark-mode) .analytics-mini-card,
+html:not(.eec-dark-mode) .analytics-panel {
+  background: #ffffff !important;
+  color: #172033 !important;
+  box-shadow: 0 10px 30px rgba(15,23,42,.08) !important;
+}
+
+html:not(.eec-dark-mode) .analytics-header h1,
+html:not(.eec-dark-mode) .panel-title h2,
+html:not(.eec-dark-mode) .analytics-stat-value,
+html:not(.eec-dark-mode) .analytics-mini-card strong,
+html:not(.eec-dark-mode) .workflow-grid strong {
+  color: #172033 !important;
+}
+
+html:not(.eec-dark-mode) .analytics-header p,
+html:not(.eec-dark-mode) .panel-title p,
+html:not(.eec-dark-mode) .analytics-stat-title,
+html:not(.eec-dark-mode) .analytics-mini-card span,
+html:not(.eec-dark-mode) .workflow-grid span {
+  color: #64748b !important;
+}
+
+html:not(.eec-dark-mode) .period-selector,
+html:not(.eec-dark-mode) .analytics-refresh {
+  background: #ffffff !important;
+  color: #475569 !important;
+  box-shadow: 0 6px 20px rgba(15,23,42,.08) !important;
+}
+
+html:not(.eec-dark-mode) .period-selector button {
+  color: #64748b !important;
+}
+
+html:not(.eec-dark-mode) .period-selector button:hover {
+  color: #172033 !important;
+  background: #f1f5f9 !important;
+}
+
+html:not(.eec-dark-mode) .analytics-mini-card,
+html:not(.eec-dark-mode) .workflow-grid > div {
+  background: #f8fafc !important;
+}
+
+html:not(.eec-dark-mode) .workflow-grid > div:hover {
+  background: #f1f5f9 !important;
+}
+
+html:not(.eec-dark-mode) .mini-progress,
+html:not(.eec-dark-mode) .max-w-7xl .h-4.rounded-full,
+html:not(.eec-dark-mode) .max-w-7xl .h-3.rounded-full {
+  background: #e2e8f0 !important;
+}
+
+html:not(.eec-dark-mode) .analytics-no-data {
+  color: #94a3b8 !important;
+}
+/* ===== FINAL ANALYTICS LIGHT MODE FIX ===== */
+
+html:not(.eec-dark-mode) body.eec-admin-app,
+html:not(.eec-dark-mode) .premium-analytics {
+  background: #f6f7fb !important;
+  color: #172033 !important;
+}
+
+html:not(.eec-dark-mode) .analytics-stat,
+html:not(.eec-dark-mode) .analytics-mini-card,
+html:not(.eec-dark-mode) .analytics-panel,
+html:not(.eec-dark-mode) .workflow-grid > div {
+  background: #ffffff !important;
+  color: #172033 !important;
+  box-shadow: 0 10px 30px rgba(15,23,42,.08) !important;
+}
+
+html:not(.eec-dark-mode) .analytics-header h1,
+html:not(.eec-dark-mode) .analytics-header p,
+html:not(.eec-dark-mode) .panel-title h2,
+html:not(.eec-dark-mode) .panel-title p,
+html:not(.eec-dark-mode) .analytics-stat-value,
+html:not(.eec-dark-mode) .analytics-stat-title,
+html:not(.eec-dark-mode) .analytics-mini-card span,
+html:not(.eec-dark-mode) .analytics-mini-card strong,
+html:not(.eec-dark-mode) .workflow-grid span,
+html:not(.eec-dark-mode) .workflow-grid strong {
+  color: #172033 !important;
+}
+
+html:not(.eec-dark-mode) .analytics-stat-title,
+html:not(.eec-dark-mode) .analytics-mini-card span,
+html:not(.eec-dark-mode) .workflow-grid span,
+html:not(.eec-dark-mode) .analytics-header p,
+html:not(.eec-dark-mode) .panel-title p {
+  color: #64748b !important;
+}
+
+html:not(.eec-dark-mode) .period-selector,
+html:not(.eec-dark-mode) .analytics-refresh {
+  background: #ffffff !important;
+  color: #475569 !important;
+  border-color: #e2e8f0 !important;
+}
+
+html:not(.eec-dark-mode) .period-selector button {
+  color: #64748b !important;
+}
+
+html:not(.eec-dark-mode) .period-selector button:hover {
+  background: #f1f5f9 !important;
+  color: #172033 !important;
+}
+
+html:not(.eec-dark-mode) .mini-progress,
+html:not(.eec-dark-mode) .max-w-7xl .h-4.rounded-full,
+html:not(.eec-dark-mode) .max-w-7xl .h-3.rounded-full {
+  background: #e2e8f0 !important;
+}
+
+html:not(.eec-dark-mode) .analytics-panel .bg-white,
+html:not(.eec-dark-mode) .analytics-panel .bg-slate-900,
+html:not(.eec-dark-mode) .analytics-panel .bg-gray-900 {
+  background: #ffffff !important;
+  color: #172033 !important;
+}
+
+html:not(.eec-dark-mode) .analytics-no-data {
+  color: #94a3b8 !important;
+}
+
+/* Keep orange branding */
+html:not(.eec-dark-mode) .analytics-label,
+html:not(.eec-dark-mode) .analytics-stat-icon {
+  color: #f97316 !important;
+}
+
+/* Don't let global transitions break layout */
+html:not(.eec-dark-mode) .analytics-stat,
+html:not(.eec-dark-mode) .analytics-mini-card,
+html:not(.eec-dark-mode) .analytics-panel {
+  transition: background-color .25s ease, color .2s ease, box-shadow .25s ease !important;
+}
+/* ===== DASHBOARD PREMIUM ANALYTICS THEME ===== */
+
+body:not(.eec-dark-mode) .dashboard-card,
+body:not(.eec-dark-mode) .stat-card,
+body:not(.eec-dark-mode) .request-card,
+body:not(.eec-dark-mode) .card,
+body:not(.eec-dark-mode) .rounded-2xl {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 18px 45px rgba(15,23,42,.08) !important;
+}
+
+body.eec-dark-mode .dashboard-card,
+body.eec-dark-mode .stat-card,
+body.eec-dark-mode .request-card,
+body.eec-dark-mode .card,
+body.eec-dark-mode .rounded-2xl {
+  background: linear-gradient(145deg,#181f2b,#0d121b) !important;
+  color: #f8fafc !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,.28) !important;
+}
+
+body.eec-dark-mode .dashboard-card:hover,
+body.eec-dark-mode .stat-card:hover,
+body.eec-dark-mode .request-card:hover,
+body.eec-dark-mode .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 65px rgba(0,0,0,.4) !important;
+}
+
+body:not(.eec-dark-mode) .dashboard-card:hover,
+body:not(.eec-dark-mode) .stat-card:hover,
+body:not(.eec-dark-mode) .request-card:hover,
+body:not(.eec-dark-mode) .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(15,23,42,.12) !important;
+}
+
+body.eec-dark-mode .dashboard-card h1,
+body.eec-dark-mode .dashboard-card h2,
+body.eec-dark-mode .dashboard-card h3,
+body.eec-dark-mode .stat-card h1,
+body.eec-dark-mode .stat-card h2,
+body.eec-dark-mode .stat-card h3 {
+  color: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) .dashboard-card h1,
+body:not(.eec-dark-mode) .dashboard-card h2,
+body:not(.eec-dark-mode) .dashboard-card h3,
+body:not(.eec-dark-mode) .stat-card h1,
+body:not(.eec-dark-mode) .stat-card h2,
+body:not(.eec-dark-mode) .stat-card h3 {
+  color: #172033 !important;
+}
+
+/* ===== DASHBOARD HIGH-CONTRAST PREMIUM THEME ===== */
+
+body.eec-dark-mode .dashboard-card,
+body.eec-dark-mode .stat-card,
+body.eec-dark-mode .request-card {
+  background: linear-gradient(145deg,#182333,#0d1420) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(249,115,22,.12) !important;
+  box-shadow: 0 18px 45px rgba(0,0,0,.32) !important;
+}
+
+body:not(.eec-dark-mode) .dashboard-card,
+body:not(.eec-dark-mode) .stat-card,
+body:not(.eec-dark-mode) .request-card {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 14px 35px rgba(15,23,42,.09) !important;
+}
+
+/* Numbers */
+body.eec-dark-mode .dashboard-card .text-3xl,
+body.eec-dark-mode .dashboard-card .text-4xl,
+body.eec-dark-mode .stat-card .text-3xl,
+body.eec-dark-mode .stat-card .text-4xl {
+  color: #ffffff !important;
+  font-weight: 850 !important;
+}
+
+body:not(.eec-dark-mode) .dashboard-card .text-3xl,
+body:not(.eec-dark-mode) .dashboard-card .text-4xl,
+body:not(.eec-dark-mode) .stat-card .text-3xl,
+body:not(.eec-dark-mode) .stat-card .text-4xl {
+  color: #172033 !important;
+  font-weight: 850 !important;
+}
+
+/* All important text */
+body.eec-dark-mode .dashboard-card span,
+body.eec-dark-mode .dashboard-card p,
+body.eec-dark-mode .stat-card span,
+body.eec-dark-mode .stat-card p {
+  color: #cbd5e1 !important;
+}
+
+body:not(.eec-dark-mode) .dashboard-card span,
+body:not(.eec-dark-mode) .dashboard-card p,
+body:not(.eec-dark-mode) .stat-card span,
+body:not(.eec-dark-mode) .stat-card p {
+  color: #475569 !important;
+}
+
+/* Headings */
+body.eec-dark-mode .dashboard-card h1,
+body.eec-dark-mode .dashboard-card h2,
+body.eec-dark-mode .dashboard-card h3,
+body.eec-dark-mode .stat-card h1,
+body.eec-dark-mode .stat-card h2,
+body.eec-dark-mode .stat-card h3 {
+  color: #f8fafc !important;
+}
+
+body:not(.eec-dark-mode) .dashboard-card h1,
+body:not(.eec-dark-mode) .dashboard-card h2,
+body:not(.eec-dark-mode) .dashboard-card h3,
+body:not(.eec-dark-mode) .stat-card h1,
+body:not(.eec-dark-mode) .stat-card h2,
+body:not(.eec-dark-mode) .stat-card h3 {
+  color: #172033 !important;
+}
+
+/* Icons */
+body.eec-dark-mode .dashboard-card svg,
+body.eec-dark-mode .stat-card svg {
+  color: #fb923c !important;
+}
+
+body:not(.eec-dark-mode) .dashboard-card svg,
+body:not(.eec-dark-mode) .stat-card svg {
+  color: #f97316 !important;
+}
+
+/* Status colours */
+body.eec-dark-mode .text-green-600,
+body.eec-dark-mode .text-emerald-600 {
+  color: #34d399 !important;
+}
+
+body.eec-dark-mode .text-red-600 {
+  color: #f87171 !important;
+}
+
+body.eec-dark-mode .text-blue-600 {
+  color: #60a5fa !important;
+}
+
+body.eec-dark-mode .text-yellow-600,
+body.eec-dark-mode .text-amber-600 {
+  color: #fbbf24 !important;
+}
+
+/* Light status colours */
+body:not(.eec-dark-mode) .text-green-600,
+body:not(.eec-dark-mode) .text-emerald-600 {
+  color: #059669 !important;
+}
+
+body:not(.eec-dark-mode) .text-red-600 {
+  color: #dc2626 !important;
+}
+
+body:not(.eec-dark-mode) .text-blue-600 {
+  color: #2563eb !important;
+}
+
+body:not(.eec-dark-mode) .text-yellow-600,
+body:not(.eec-dark-mode) .text-amber-600 {
+  color: #d97706 !important;
+}
+
+/* Orange accent */
+body.eec-dark-mode .dashboard-card::after,
+body.eec-dark-mode .stat-card::after,
+body:not(.eec-dark-mode) .dashboard-card::after,
+body:not(.eec-dark-mode) .stat-card::after {
+  content: "";
+  display: block;
+  height: 3px;
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
+  border-radius: 10px;
+  background: linear-gradient(90deg,#f97316,#fb923c);
+}
+
+/* Hover */
+body.eec-dark-mode .dashboard-card:hover,
+body.eec-dark-mode .stat-card:hover,
+body:not(.eec-dark-mode) .dashboard-card:hover,
+body:not(.eec-dark-mode) .stat-card:hover {
+  transform: translateY(-5px);
+  transition: .3s ease;
+}
+
+/* Better buttons */
+body.eec-dark-mode .dashboard-card button {
+  color: #fb923c !important;
+}
+
+body:not(.eec-dark-mode) .dashboard-card button {
+  color: #ea580c !important;
+}
+/* ===== DASHBOARD CARD THEME ===== */
+
+body.eec-dark-mode .max-w-7xl .bg-slate-100,
+body.eec-dark-mode .max-w-7xl .bg-amber-100,
+body.eec-dark-mode .max-w-7xl .bg-emerald-100,
+body.eec-dark-mode .max-w-7xl .bg-red-100 {
+  background: linear-gradient(145deg,#181f2b,#101722) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(249,115,22,.12) !important;
+  box-shadow: 0 14px 35px rgba(0,0,0,.25) !important;
+}
+
+body.eec-dark-mode .max-w-7xl .bg-slate-100 .text-slate-800,
+body.eec-dark-mode .max-w-7xl .bg-amber-100 .text-amber-700,
+body.eec-dark-mode .max-w-7xl .bg-emerald-100 .text-emerald-700,
+body.eec-dark-mode .max-w-7xl .bg-red-100 .text-red-700 {
+  color: #ffffff !important;
+  font-weight: 850 !important;
+}
+
+body:not(.eec-dark-mode) .max-w-7xl .bg-slate-100 {
+  background: linear-gradient(145deg,#ffffff,#f1f5f9) !important;
+}
+
+body:not(.eec-dark-mode) .max-w-7xl .bg-amber-100 {
+  background: linear-gradient(145deg,#fffaf0,#ffedd5) !important;
+}
+
+body:not(.eec-dark-mode) .max-w-7xl .bg-emerald-100 {
+  background: linear-gradient(145deg,#f0fdf4,#dcfce7) !important;
+}
+
+body:not(.eec-dark-mode) .max-w-7xl .bg-red-100 {
+  background: linear-gradient(145deg,#fff5f5,#fee2e2) !important;
+}
+
+body:not(.eec-dark-mode) .max-w-7xl .bg-slate-100 .text-slate-800,
+body:not(.eec-dark-mode) .max-w-7xl .bg-amber-100 .text-amber-700,
+body:not(.eec-dark-mode) .max-w-7xl .bg-emerald-100 .text-emerald-700,
+body:not(.eec-dark-mode) .max-w-7xl .bg-red-100 .text-red-700 {
+  font-weight: 850 !important;
+}
+
+body.eec-dark-mode .max-w-7xl .bg-slate-100:hover,
+body.eec-dark-mode .max-w-7xl .bg-amber-100:hover,
+body.eec-dark-mode .max-w-7xl .bg-emerald-100:hover,
+body.eec-dark-mode .max-w-7xl .bg-red-100:hover,
+body:not(.eec-dark-mode) .max-w-7xl .bg-slate-100:hover,
+body:not(.eec-dark-mode) .max-w-7xl .bg-amber-100:hover,
+body:not(.eec-dark-mode) .max-w-7xl .bg-emerald-100:hover,
+body:not(.eec-dark-mode) .max-w-7xl .bg-red-100:hover {
+  transform: translateY(-4px);
+  transition: .25s ease;
+}
+/* ===== COLORFUL DARK DASHBOARD ===== */
+
+body.eec-dark-mode {
+  background: #0b1120 !important;
+}
+
+/* Dashboard stat cards */
+body.eec-dark-mode .max-w-7xl .bg-slate-100 {
+  background: linear-gradient(145deg,#18243a,#111a2d) !important;
+  border: 1px solid #263653 !important;
+}
+
+body.eec-dark-mode .max-w-7xl .bg-amber-100 {
+  background: linear-gradient(145deg,#3a2514,#211810) !important;
+  border: 1px solid #6b401c !important;
+}
+
+body.eec-dark-mode .max-w-7xl .bg-emerald-100 {
+  background: linear-gradient(145deg,#102d26,#10201d) !important;
+  border: 1px solid #185443 !important;
+}
+
+body.eec-dark-mode .max-w-7xl .bg-red-100 {
+  background: linear-gradient(145deg,#351a22,#21141a) !important;
+  border: 1px solid #682b39 !important;
+}
+
+/* Numbers */
+body.eec-dark-mode .max-w-7xl .bg-slate-100 .text-3xl {
+  color: #60a5fa !important;
+}
+
+body.eec-dark-mode .max-w-7xl .bg-amber-100 .text-3xl {
+  color: #fbbf24 !important;
+}
+
+body.eec-dark-mode .max-w-7xl .bg-emerald-100 .text-3xl {
+  color: #34d399 !important;
+}
+
+body.eec-dark-mode .max-w-7xl .bg-red-100 .text-3xl {
+  color: #fb7185 !important;
+}
+
+/* Card text */
+body.eec-dark-mode .max-w-7xl .bg-slate-100,
+body.eec-dark-mode .max-w-7xl .bg-amber-100,
+body.eec-dark-mode .max-w-7xl .bg-emerald-100,
+body.eec-dark-mode .max-w-7xl .bg-red-100 {
+  color: #f8fafc !important;
+}
+
+/* Card labels */
+body.eec-dark-mode .max-w-7xl .bg-slate-100 p,
+body.eec-dark-mode .max-w-7xl .bg-amber-100 p,
+body.eec-dark-mode .max-w-7xl .bg-emerald-100 p,
+body.eec-dark-mode .max-w-7xl .bg-red-100 p {
+  color: #cbd5e1 !important;
+}
+
+/* Main white dashboard panels */
+body.eec-dark-mode .max-w-7xl .bg-white {
+  background: linear-gradient(145deg,#172235,#101827) !important;
+  color: #f8fafc !important;
+  border: 1px solid #263653 !important;
+}
+
+/* Dashboard inputs */
+body.eec-dark-mode .max-w-7xl input,
+body.eec-dark-mode .max-w-7xl select {
+  background: #111b2e !important;
+  color: #f8fafc !important;
+  border: 1px solid #334766 !important;
+}
+
+/* Request cards */
+body.eec-dark-mode .max-w-7xl .border {
+  border-color: #293952 !important;
+}
+
+/* Request card hover */
+body.eec-dark-mode .max-w-7xl .hover\:bg-slate-50:hover {
+  background: #1b2940 !important;
+}
+
+/* Dashboard headings */
+body.eec-dark-mode .max-w-7xl h1,
+body.eec-dark-mode .max-w-7xl h2,
+body.eec-dark-mode .max-w-7xl h3 {
+  color: #ffffff !important;
+}
+
+/* Dashboard normal text */
+body.eec-dark-mode .max-w-7xl p {
+  color: #b8c4d6;
+}
+
+/* Orange accent */
+body.eec-dark-mode .max-w-7xl .text-orange-500,
+body.eec-dark-mode .max-w-7xl .text-orange-600 {
+  color: #fb923c !important;
+}
+
+/* Better shadows */
+body.eec-dark-mode .max-w-7xl .rounded-2xl {
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+
+/* Hover cards */
+body.eec-dark-mode .max-w-7xl .rounded-2xl:hover {
+  box-shadow:
+    0 24px 55px rgba(0,0,0,.38),
+    0 0 25px rgba(249,115,22,.06) !important;
+}
