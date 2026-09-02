@@ -43,13 +43,13 @@ export function AuthProvider({ children }) {
     });
 
     if (res.data.user?.role !== 'student') {
-      throw {
-        response: {
-          data: {
-            message: 'This portal is for student accounts only.',
-          },
+      const error = new Error('This portal is for student accounts only.');
+      error.response = {
+        data: {
+          message: 'This portal is for student accounts only.',
         },
       };
+      throw error;
     }
 
     sessionStorage.setItem(TOKEN_KEY, res.data.token);
@@ -62,13 +62,13 @@ export function AuthProvider({ children }) {
     const res = await api.post('/auth/register', payload);
 
     if (res.data.user?.role !== 'student') {
-      throw {
-        response: {
-          data: {
-            message: 'Only student accounts can register here.',
-          },
+      const error = new Error('Only student accounts can register here.');
+      error.response = {
+        data: {
+          message: 'Only student accounts can register here.',
         },
       };
+      throw error;
     }
 
     sessionStorage.setItem(TOKEN_KEY, res.data.token);
