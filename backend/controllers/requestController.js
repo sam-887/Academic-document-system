@@ -2,6 +2,7 @@ const Request = require('../models/Request');
 const Student = require('../models/Student');
 const { nextRequestId } = require('../utils/generateId');
 const Notification = require('../models/Notification');
+const LockerDocument = require('../models/LockerDocument');
 
 exports.createRequest = async (req, res, next) => {
   try {
@@ -18,6 +19,41 @@ exports.createRequest = async (req, res, next) => {
       path: `/uploads/${f.filename}`,
       originalName: f.originalname,
     }));
+
+    // Add documents selected from the student's Digital Locker.
+    // Locker documents are verified against the logged-in student.
+    let lockerDocumentIds = [];
+
+    if (req.body.lockerDocumentIds) {
+      try {
+        lockerDocumentIds =
+          typeof req.body.lockerDocumentIds === 'string'
+            ? JSON.parse(req.body.lockerDocumentIds)
+            : req.body.lockerDocumentIds;
+      } catch {
+        lockerDocumentIds = [];
+      }
+    }
+
+    if (!Array.isArray(lockerDocumentIds)) {
+      lockerDocumentIds = [];
+    }
+
+    if (lockerDocumentIds.length > 0) {
+      const lockerDocuments = await LockerDocument.find({
+        _id: { $in: lockerDocumentIds },
+        studentId: req.user._id,
+        personalUpload: true,
+      });
+
+      lockerDocuments.forEach((doc) => {
+        attachments.push({
+          filename: doc.fileUrl.split('/').pop(),
+          path: doc.fileUrl,
+          originalName: doc.title,
+        });
+      });
+    }
 
     const parsedFormData = typeof formData === 'string' ? JSON.parse(formData) : formData || {};
 

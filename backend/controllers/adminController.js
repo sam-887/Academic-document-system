@@ -4,6 +4,7 @@ const Student = require('../models/Student');
 const Document = require('../models/Document');
 const { nextDocumentId } = require('../utils/generateId');
 const { generateDocumentPdf } = require('../utils/generatePdf');
+const { calculatePriority } = require('../services/priorityService');
 
 exports.getAllRequests = async (req, res, next) => {
   try {
@@ -20,7 +21,12 @@ exports.getAllRequests = async (req, res, next) => {
       })
       .sort({ createdAt: -1 });
 
-    res.json(requests);
+    const requestsWithPriority = requests.map((request) => ({
+      ...request.toObject(),
+      priority: calculatePriority(request)
+    }));
+
+    res.json(requestsWithPriority);
   } catch (err) {
     next(err);
   }

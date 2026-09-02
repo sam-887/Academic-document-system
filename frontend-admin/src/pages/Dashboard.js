@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/axios";
 import StatusBadge from "../components/StatusBadge";
@@ -184,7 +184,31 @@ export default function Dashboard() {
                   )}
                 </div>
 
-                <StatusBadge status={request.status} />
+                <div className="flex items-center gap-4">
+
+                  {request.priority && (
+                    <div className="text-right">
+                      <p className="text-xs text-slate-400">
+                        Priority Score
+                      </p>
+
+                      <p
+                        className={
+                          request.priority.level === "HIGH"
+                            ? "font-bold text-red-600"
+                            : request.priority.level === "MEDIUM"
+                            ? "font-bold text-amber-600"
+                            : "font-bold text-emerald-600"
+                        }
+                      >
+                        {request.priority.score} · {request.priority.level}
+                      </p>
+                    </div>
+                  )}
+
+                  <StatusBadge status={request.status} />
+
+                </div>
 
               </Link>
 

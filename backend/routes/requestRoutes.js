@@ -10,7 +10,7 @@ const {
   getDocumentForRequest,
 } = require('../controllers/requestController');
 
-router.post('/', protect, requireRole('student'), upload.array('attachments', 3), createRequest);
+router.post('/', protect, requireRole('student'), upload.array('attachments', 10), createRequest);
 router.get('/', protect, requireRole('student'), getMyRequests);
 router.get('/dashboard/summary', protect, requireRole('student'), getDashboardSummary);
 router.get('/:id', protect, getRequestById);
