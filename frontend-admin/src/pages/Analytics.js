@@ -75,6 +75,7 @@ export default function Analytics() {
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     loadAnalytics();
   }, [days]);
@@ -219,7 +220,7 @@ export default function Analytics() {
               </div>
 
               <div className="analytics-stat-value">
-                {loading ? "â€”" : card.value}
+                {loading ? "Ã¢â‚¬â€" : card.value}
               </div>
 
               <div className="analytics-stat-title">
