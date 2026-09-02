@@ -26,6 +26,7 @@ export default function RequestReview() {
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { load(); }, [id]);
 
   if (!request) return <div className="p-8 text-slate-500">Loading...</div>;
@@ -58,12 +59,12 @@ export default function RequestReview() {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <button onClick={() => navigate(-1)} className="text-sm text-slate-500 mb-4">← Back</button>
+      <button onClick={() => navigate(-1)} className="text-sm text-slate-500 mb-4">â† Back</button>
       <div className="flex items-center justify-between mb-2">
         <h1 className="text-2xl font-bold">{request.requestId}</h1>
         <StatusBadge status={request.status} />
       </div>
-      <p className="text-slate-500 mb-6">{request.documentType} · {request.student?.user?.name} ({request.student?.registerNumber})</p>
+      <p className="text-slate-500 mb-6">{request.documentType} Â· {request.student?.user?.name} ({request.student?.registerNumber})</p>
 
       {error && <div className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md p-2">{error}</div>}
 
@@ -105,7 +106,7 @@ export default function RequestReview() {
             <p><span className="text-slate-500">Matches:</span> {(request.aiValidation.matches || []).join(', ') || 'none'}</p>
             {(request.aiValidation.mismatches || []).length > 0 && (
               <div>
-                <p className="text-amber-700 font-medium">⚠ Mismatches</p>
+                <p className="text-amber-700 font-medium">âš  Mismatches</p>
                 <ul className="list-disc pl-5">
                   {request.aiValidation.mismatches.map((m, i) => (
                     <li key={i}>{m.field}: submitted "{m.submitted}" vs record "{m.onRecord}"</li>
@@ -114,7 +115,7 @@ export default function RequestReview() {
               </div>
             )}
             {request.aiValidation.notes && <p className="text-slate-500 text-xs">{request.aiValidation.notes}</p>}
-            <p className="text-xs text-slate-400 mt-2">AI is assistive only — final approval decision is yours.</p>
+            <p className="text-xs text-slate-400 mt-2">AI is assistive only â€” final approval decision is yours.</p>
           </div>
         ) : (
           <p className="text-sm text-slate-500">Not yet run.</p>
@@ -134,7 +135,7 @@ export default function RequestReview() {
             onChange={(e) => setDraft(e.target.value)}
             rows={10}
             className="w-full border border-slate-300 rounded-md p-3 text-sm"
-            placeholder="Generated draft will appear here — edit as needed before approving."
+            placeholder="Generated draft will appear here â€” edit as needed before approving."
           />
           <button disabled={busy} onClick={saveDraft} className="mt-2 text-xs bg-slate-800 text-white px-3 py-1.5 rounded-md disabled:opacity-60">
             Save Draft
@@ -144,7 +145,7 @@ export default function RequestReview() {
 
       {request.status === 'COMPLETED' && doc && (
         <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 mb-5">
-          <p className="text-sm font-medium text-emerald-800 mb-2">Document generated — sent back to the student portal.</p>
+          <p className="text-sm font-medium text-emerald-800 mb-2">Document generated â€” sent back to the student portal.</p>
           <a
             href={`${process.env.REACT_APP_API_URL?.replace('/api', '')}${doc.filePath}`}
             target="_blank" rel="noreferrer"

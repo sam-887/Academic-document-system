@@ -219,7 +219,7 @@ export default function Analytics() {
               </div>
 
               <div className="analytics-stat-value">
-                {loading ? "—" : card.value}
+                {loading ? "â€”" : card.value}
               </div>
 
               <div className="analytics-stat-title">
