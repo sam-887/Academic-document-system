@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FileText,
@@ -42,7 +42,7 @@ export default function Analytics() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const loadAnalytics = async () => {
+  const loadAnalytics = useCallback(async () => {
     try {
       setLoading(true);
       setError("");
@@ -72,14 +72,11 @@ export default function Analytics() {
     } finally {
       setLoading(false);
     }
-  };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    loadAnalytics();
   }, [days]);
 
+  useEffect(() => {
+    loadAnalytics();
+  }, [loadAnalytics]);
   const approvalRate =
     data.total > 0
       ? Math.round((data.approved / data.total) * 100)
@@ -220,7 +217,7 @@ export default function Analytics() {
               </div>
 
               <div className="analytics-stat-value">
-                {loading ? "Ã¢â‚¬â€" : card.value}
+                {loading ? "ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â" : card.value}
               </div>
 
               <div className="analytics-stat-title">
