@@ -148,8 +148,19 @@ exports.getDashboardSummary = async (req, res, next) => {
 exports.getDocumentForRequest = async (req, res, next) => {
   try {
     const Document = require('../models/Document');
-    const request = await Request.findOne({ requestId: req.params.id });
-    if (!request) return res.status(404).json({ message: 'Request not found' });
+    const request = await Request.findOne({ requestId: req.params.id }).populate('student');
+
+    if (!request) {
+      return res.status(404).json({ message: 'Request not found' });
+    }
+
+    if (req.user.role === 'student') {
+      const student = await Student.findOne({ user: req.user._id });
+
+      if (!student || String(request.student._id) !== String(student._id)) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+    }
 
     const document = await Document.findOne({ request: request._id });
     if (!document) return res.status(404).json({ message: 'Document not yet generated' });
