@@ -1,4 +1,4 @@
-﻿import './ui.css';
+import './ui.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
