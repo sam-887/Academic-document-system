@@ -243,7 +243,7 @@ export default function AIValidation() {
       <div className="bg-white border rounded-2xl p-6">
 
         <h2 className="text-xl font-semibold mb-6">
-          Request Timeline — Past {days} Days
+          Request Timeline ï¿½ Past {days} Days
         </h2>
 
         <div className="flex items-end gap-2 h-64 overflow-x-auto">

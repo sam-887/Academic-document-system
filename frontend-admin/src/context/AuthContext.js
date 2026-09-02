@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     const res = await api.post('/auth/login', { email, password });
     if (!['admin', 'faculty'].includes(res.data.user.role)) {
-      throw { response: { data: { message: 'This portal is for admin/faculty accounts only.' } } };
+      // eslint-disable-next-line no-throw-literal`r`n      throw { response: { data: { message: 'This portal is for admin/faculty accounts only.' } } };
     }
     localStorage.setItem('admin_token', res.data.token);
     setUser(res.data.user);

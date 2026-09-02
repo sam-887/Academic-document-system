@@ -24,19 +24,6 @@ import {
 import api from "../api/axios";
 
 
-function PixelRunner() {
-  return (
-    <div className="analytics-pixel-track">
-      <div className="analytics-pixel-runner">
-        <span className="pixel-head"></span>
-        <span className="pixel-body"></span>
-        <span className="pixel-arm"></span>
-        <span className="pixel-leg pixel-leg-one"></span>
-        <span className="pixel-leg pixel-leg-two"></span>
-      </div>
-    </div>
-  );
-}
 export default function Analytics() {
   const [days, setDays] = useState(30);
   const [data, setData] = useState({
@@ -86,6 +73,7 @@ export default function Analytics() {
       setLoading(false);
     }
   };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     loadAnalytics();
