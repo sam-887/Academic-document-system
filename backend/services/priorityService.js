@@ -40,8 +40,7 @@ function calculatePriority(request) {
     ""
   );
 
-  const result = spawnSync(
-    "java",
+  const result = spawnSync("/opt/java/openjdk/bin/java",
     [
       "-cp",
       javaDirectory,

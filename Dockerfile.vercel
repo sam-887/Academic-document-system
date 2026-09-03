@@ -2,22 +2,30 @@
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y curl && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt-get install -y nodejs && rm -rf /var/lib/apt/lists/*
+# Install Node.js
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
 
+# Copy backend and Java
 COPY backend ./backend
 COPY java ./java
 
-RUN java -version
-RUN javac -version
-
+# Install backend dependencies
 WORKDIR /app/backend
-RUN npm install
+RUN npm install --omit=dev
 
+# Compile Java
 WORKDIR /app/java
 RUN javac SmartRequestPrioritizer.java
 
-RUN java -cp /app/java SmartRequestPrioritizer TRANSCRIPT 4 7 emergency
+# Verify Java works
+RUN /opt/java/openjdk/bin/java -version
+RUN /opt/java/openjdk/bin/java -cp /app/java SmartRequestPrioritizer TRANSCRIPT 4 7 emergency
 
+# Start backend
 WORKDIR /app/backend
 
 ENV NODE_ENV=production
