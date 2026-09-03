@@ -18,15 +18,21 @@ const app = express();
 
 connectDB();
 
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || process.env.CLIENT_URL || '*')
-  .split(',')
-  .map((o) => o.trim())
-  .filter(Boolean);
+const allowedOrigins = [
+  'https://academic-document-system-q4pk.vercel.app',
+  'https://academic-document-system.vercel.app'
+];
 
 app.use(
   cors({
-    origin: true,
-    credentials: true,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true
   })
 );
 app.use(express.json());
