@@ -7,17 +7,21 @@ RUN apt-get update && apt-get install -y curl && curl -fsSL https://deb.nodesour
 COPY backend ./backend
 COPY java ./java
 
+RUN java -version
+RUN javac -version
+
 WORKDIR /app/backend
 RUN npm install
 
 WORKDIR /app/java
 RUN javac SmartRequestPrioritizer.java
 
+RUN java -cp /app/java SmartRequestPrioritizer TRANSCRIPT 4 7 emergency
+
 WORKDIR /app/backend
 
 ENV NODE_ENV=production
 ENV PORT=80
-ENV PATH="/opt/java/openjdk/bin:"
 
 EXPOSE 80
 
