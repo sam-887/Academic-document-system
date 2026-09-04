@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+﻿import React, { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FileText,
@@ -72,11 +72,14 @@ export default function Analytics() {
     } finally {
       setLoading(false);
     }
-  }, [days]);
+  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     loadAnalytics();
-  }, [loadAnalytics]);
+  }, [days]);
+
   const approvalRate =
     data.total > 0
       ? Math.round((data.approved / data.total) * 100)
@@ -217,7 +220,7 @@ export default function Analytics() {
               </div>
 
               <div className="analytics-stat-value">
-                {loading ? "ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â" : card.value}
+                {loading ? "Fetching..." : card.value}
               </div>
 
               <div className="analytics-stat-title">
